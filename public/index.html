@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Index</title>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+</head>
+
+<body>
+    <div ng-app="app">
+        <div ng-controller="ctrl">
+            <button ng-click="currentTpl='/tpl.html'" ng-disabled='true'>template</button>
+            <button onclick="getData()">Pure JS AJAX</button>
+              <button ng-click="getData()">Angular AJAX</button>
+            <div id="tpl-content" ng-include src="currentTpl"></div>
+            <ul>
+                <li ng-repeat="item in myWelcome">{{item | htmlToText}}</li>
+
+            </ul>
+        </div>
+        <!-- template -->
+        <div class="div"></div>
+
+        <script type="text/ng-template" id="/tpl.html">
+            <p>Content of the template.{{temp}}<p>
+        </script>
+    </div><!-- app end -->
+
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/CtrlController.js"></script>
+    <script type"text/javascript" src="js/ajax.js"></script>
+
+
+
+</body>
+
+</html>
