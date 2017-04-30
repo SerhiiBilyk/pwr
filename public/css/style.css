@@ -4,7 +4,8 @@
   border: 1px solid white;
   background-color: purple;
   box-shadow: 1px 1px 5px purple ,25px 25px 0 #084C61;
-  transition: box-shadow 2s; }
+  transition: box-shadow 2s;
+  color: green; }
   .div::after {
     content: "1"; }
   .div:hover {

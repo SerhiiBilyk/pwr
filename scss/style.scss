@@ -24,6 +24,7 @@ $new-list:();
     background-color:purple;
     box-shadow:init($list,5,1);
     transition:box-shadow 2s;
+    color:green;
     &::after{
         content:'#{length($list)}';
     }

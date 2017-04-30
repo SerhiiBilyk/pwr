@@ -1,15 +1,78 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-const goodreads = require('goodreads-api-node');
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+const express = require('express'),
+    app = express(),
+    bodyParser = require('body-parser'),
+    goodreads = require('goodreads-api-node'),
+    mysql = require('mysql'),
+    path=require('path'),
+    jade=require('jade'),
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+    urlencodedParser = bodyParser.urlencoded({
+        extended: false
+    });
+
+    var homeRouter= require('./routes/Home.js');
+    app.use('/home', homeRouter);
 
 
+    /*
+    MYSQL query
+
+    var connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: 'Thomaskit123!',
+        database: 'person'
+    });
+
+    connection.connect();
+
+    connection.query('SELECT*FROM Student', function(error, results, fields) {
+        if (error) throw error;
+        for (var i = 0; i < results.length; i++) {
+            console.log('The solution is: ', results[i].name);
+        }
+
+    });
+
+    connection.end();
+    */
+  /*app use*/
+  //app.use(express.static('public'));
+  app.use(bodyParser.urlencoded({
+      extended: false
+  }));
+  app.use(bodyParser.json());
+  app.use(express.static(path.join(__dirname,'public')));
+  /*app set*/
+  app.set('view engine','jade');
+  app.set('views',__dirname+'/views');
+  /*Routing*/
 
 
+  /*end Routing*/
+  app.get('/jade', function (req, res) {
+     res.render('empty');
+    });
+
+  app.post('/hello', urlencodedParser, function(req, res) {
+      var myName = req.body.name;
+      var result;
+      //console.log('body ' + req.body.name)
+      gr.searchBooks({
+              q: req.body.name
+          })
+          .then(response => {
+              result = response
+              //console.log('searchBooks has been invoked')
+              res.end(JSON.stringify(response));
+          });
+  });
+
+
+  app.get('/', function(req, res) {
+      res.sendFile(__dirname + '/index.html');
+
+  });
 /*app.post('/process_post', urlencodedParser, function (req, res) {
    // Prepare output in JSON format
    response = {
@@ -20,42 +83,40 @@ app.use(bodyParser.json());
    res.end(JSON.stringify(response));
 })*/
 
-var result;
+
 /*Goodreads start*/
 const myCredentials = {
-  key: 'mExu0kDfoVomfHyxT8dIUQ',
-  secret: 'rnY7ZovtfboFixLXVFofiG6gx2ua2uVtvar3KyBhs'
+    key: 'mExu0kDfoVomfHyxT8dIUQ',
+    secret: 'rnY7ZovtfboFixLXVFofiG6gx2ua2uVtvar3KyBhs'
 };
 const gr = goodreads(myCredentials);
-console.log(gr)
 
 
-  gr.getAuthorInfo(18907)
-  .then(response => {
-    result=response;
-     console.log( response)
-   });
+
+/*gr.getGroupInfo(189072)
+    .then(response => {
+        result = response
+
+        //
+        console.log(result)
+    });*/
 
 
-app.use(express.static('public'));
+// returns page 3 of the search results given the query 'programming'
+
+
+
+
+
 /*routing*/
-app.get('/hello', function(req, res) {
-  res.send(result);
-});
-
-
-app.get('/', function (req, res) {
-   res.sendFile(__dirname+'/index.html');
-
-  });
 
 
 
 
 
-var server = app.listen(8081, function () {
+var server = app.listen(8081, function() {
     var host = server.address().address;
     var port = server.address().port;
 
     console.log('Example app listening at http://%s:%s', host, port);
-  });
+});
