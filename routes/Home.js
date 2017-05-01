@@ -1,19 +1,51 @@
 var express = require('express');
 var homeRouter = express.Router();
-var database=require('./../database.js');
-console.log(database.db);
+var mysql = require('./../database.js');
+var bodyParser = require('body-parser');
+var urlencodedParser = bodyParser.urlencoded({
+    extended: false
+});
+
+
+
+
+
 
 homeRouter.get('/', function(req, res) {
-    res.render('empty',{title:database.db})
+    mysql('select*from users', function(err, data) {
+        res.render('empty.pug', {
+            title: data
+        })
+    });
+
+
 })
 homeRouter.get('/contact', function(req, res) {
     res.send('Home contact')
 })
 homeRouter.get('/delete/:id', function(req, res) {
-  //database.remove(req.params.id)
-  database.remove(req.params.id)
+    mysql(`delete from users where id=${req.params.id}`, function(err, data) {
+        res.redirect('/home')
+    })
+})
+homeRouter.post('/create', urlencodedParser, function(req, res) {
+    console.log('name ' + req.body.name, 'surname ' + req.body.surname)
+    var values = {
+        name: req.body.name,
+        surname: req.body.surname
+    }
+    mysql("insert into users set ?", values, function(err, results) {
+        console.log('results ' + results)
+    })
 
-    res.redirect('/Home')
+    res.redirect('/home')
+})
+
+
+homeRouter.get('/test', function(req, res) { //database.remove(req.params.id)
+
+
+    res.send('hello');
 })
 
 

@@ -2,40 +2,20 @@ const express = require('express'),
     app = express(),
     bodyParser = require('body-parser'),
     goodreads = require('goodreads-api-node'),
-    mysql = require('mysql'),
     path=require('path'),
     jade=require('jade'),
-
     urlencodedParser = bodyParser.urlencoded({
         extended: false
     });
-
+    var parser= require('xml2js').Parser({explicitArray:false});
     var homeRouter= require('./routes/Home.js');
+    var http=require('http');
+
     app.use('/home', homeRouter);
 
 
-    /*
-    MYSQL query
 
-    var connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: 'Thomaskit123!',
-        database: 'person'
-    });
 
-    connection.connect();
-
-    connection.query('SELECT*FROM Student', function(error, results, fields) {
-        if (error) throw error;
-        for (var i = 0; i < results.length; i++) {
-            console.log('The solution is: ', results[i].name);
-        }
-
-    });
-
-    connection.end();
-    */
   /*app use*/
   //app.use(express.static('public'));
   app.use(bodyParser.urlencoded({
@@ -91,24 +71,42 @@ const myCredentials = {
 };
 const gr = goodreads(myCredentials);
 
+/*var getBookId=function(id,cb){
+
+  var options={
+    host:'www.goodreads.com',
+    path:'/book/title.xml?author=Arthur+Conan+Doyle&key=St2I3lTMKA7zH3c2oJPFFA&title=Hound+of+the+Baskervilles',
+    secret:'rnY7ZovtfboFixLXVFofiG6gx2ua2uVtvar3KyBhs'
+  }
+  var callback=function(response){
+    var str='';
+    response.on('data',function(chunk){
+      str+=chunk;
+      console.log('str '+str)
+    });
+    response.on(end,function(){
+      parser.parseString(str,function(err,result){
+        console.log('result '+result)
+        cb(null,result);
+        http.request(options,callback).end();
+      })
+    })
+  }
+}
+getBookId(1,function(err,result){
+  console.log(result)
+})
+*/
 
 
-/*gr.getGroupInfo(189072)
+
+gr.getGroupInfo(189072)
     .then(response => {
         result = response
 
-        //
+        
         console.log(result)
-    });*/
-
-
-// returns page 3 of the search results given the query 'programming'
-
-
-
-
-
-/*routing*/
+    });
 
 
 

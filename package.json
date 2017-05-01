@@ -11,7 +11,8 @@
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
-    "goodreads-api-node": "0.0.4"
+    "goodreads-api-node": "0.0.4",
+    "pug": "^2.0.0-beta.12"
   },
   "devDependencies": {
     "gulp": "^3.9.1",

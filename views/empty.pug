@@ -1,0 +1,34 @@
+doctype
+html(lang="en")
+    head
+        title
+        link(rel="stylesheet" type="text/css" href="./css/style.css")
+        script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js")
+        script(src="./js/all.js")
+    body
+        p(class='p') This is paragraph #{title}
+        form(id="", method="post", action="/home/create")
+          label(for="name") Enter your name
+          input(type="text" id="name" name="name")
+          br
+          label(for="surname") Enter your surname
+          input(type="text" id="surname" name="surname")
+          br
+          input(type="submit" value="Create")
+        ul
+          each item in title
+            li #{item.name} #{item.id}              
+              a(href=`home/delete/${item.id}`) delete
+        mixin formElement(ID, textValue,elType,count)
+          #{count}
+          label(for=ID)=textValue
+          br
+          input(type=elType,name=ID, id=ID)
+          br
+            
+        -for (var i=0;i<5;i++){    
+        +formElement('myId','number','email',i)
+        -}
+      
+          
+        

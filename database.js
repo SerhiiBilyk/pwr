@@ -1,20 +1,24 @@
-var database = {
-    id: 0,
-    list: function() {
-        return this.db;
-    },
-    remove: function(id) {
-        this.db.splice(id, 1);
-        console.log(this.db[id])
-    },
-    db: [{
-        name: 'John',
-        surname: 'Doe',
-        id: 0
-    }, {
-        name: 'Bruce',
-        surname: 'Wane',
-        id: 1
-    }]
+var mysql = require('mysql');
+var answer;
+var connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'Thomaskit123!',
+    database: 'person'
+});
+connection.connect();
+function sql_query(query,values,callback) {
+
+
+  connection.query(query, values, function(error, results, fields) {
+
+      if (error) throw error;
+      callback(null,results)
+  });
+
+
+  //connection.end();
 }
-module.exports = database;
+
+
+module.exports = sql_query;
