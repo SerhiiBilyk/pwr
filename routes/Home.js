@@ -17,9 +17,9 @@ homeRouter.get('/', function(req, res) {
             title: data
         })
     });
-
-
 })
+
+
 homeRouter.get('/contact', function(req, res) {
     res.send('Home contact')
 })
@@ -39,6 +39,12 @@ homeRouter.post('/create', urlencodedParser, function(req, res) {
     })
 
     res.redirect('/home')
+});
+
+homeRouter.post('/loadData',urlencodedParser,function(req,res){
+  console.log(req.body);
+
+  res.send('load data')
 })
 
 

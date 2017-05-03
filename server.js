@@ -3,13 +3,16 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     goodreads = require('goodreads-api-node'),
     path=require('path'),
-    jade=require('jade'),
+    jade=require('jade'),/*deprecated*/
+    pug=require('pug'),
     urlencodedParser = bodyParser.urlencoded({
         extended: false
     });
     var parser= require('xml2js').Parser({explicitArray:false});
     var homeRouter= require('./routes/Home.js');
     var http=require('http');
+    var mysql = require('./database.js');
+
 
     app.use('/home', homeRouter);
 
@@ -24,28 +27,49 @@ const express = require('express'),
   app.use(bodyParser.json());
   app.use(express.static(path.join(__dirname,'public')));
   /*app set*/
-  app.set('view engine','jade');
+  app.set('view engine','pug');
   app.set('views',__dirname+'/views');
   /*Routing*/
 
 
   /*end Routing*/
-  app.get('/jade', function (req, res) {
-     res.render('empty');
-    });
+
 
   app.post('/hello', urlencodedParser, function(req, res) {
       var myName = req.body.name;
-      var result;
+
       //console.log('body ' + req.body.name)
-      gr.searchBooks({
-              q: req.body.name
-          })
-          .then(response => {
-              result = response
-              //console.log('searchBooks has been invoked')
-              res.end(JSON.stringify(response));
-          });
+
+        gr.searchBooks({
+                q: req.body.name,
+                page:req.body.page
+            })
+            .then(response => {
+              /*  for(var i=0;i<response.search.results.work.length;i++){
+                  console.log("I: "+response.search.results.work[i].best_book.title)
+                }*/
+                var i=0;
+                if(i==0){
+                var values={
+                  title:response.search.results.work[0].best_book.title,
+                  author:response.search.results.work[0].best_book.author.name,
+                  rating:response.search.results.work[0].average_rating,
+                  img_big:response.search.results.work[0].best_book.image_url,
+                  img_small:response.search.results.work[0].best_book.small_image_url,
+                  rating_count:response.search.results.work[0].ratings_count._
+                }
+                mysql("insert into Books set ?", values, function(err, results) {
+                    console.log('results ' + results)
+                })
+                i=i+1;
+              }
+
+                //console.log('searchBooks has been invoked')
+                res.end(JSON.stringify(response));
+            });
+
+
+
   });
 
 
@@ -100,13 +124,14 @@ getBookId(1,function(err,result){
 
 
 
-gr.getGroupInfo(189072)
+/*gr.getGroupInfo(189072)
     .then(response => {
         result = response
 
-        
+
         console.log(result)
     });
+    */
 
 
 
