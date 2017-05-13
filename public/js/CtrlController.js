@@ -5,7 +5,7 @@ app.controller('ctrl', function ctrl($scope, $http, $log, AppData) {
     $scope.switch = false;
     $scope.wait = false;
     $scope.myArray = [];
-    $scope.myValue = "javascript";
+    $scope.myValue = "java";
     $scope.getData = function(i) {
         if (i < 9) {
             $http.post("http://localhost:8081/hello", {
@@ -30,11 +30,5 @@ app.controller('ctrl', function ctrl($scope, $http, $log, AppData) {
             return 'end'
         }
     }
-    $scope.loadToDatabase=function(){
-      $http.post("http://localhost:8081/home/loadData", {name:'javascript',page:1}).then(function(response) {
 
-
-      })
-
-    }
 })

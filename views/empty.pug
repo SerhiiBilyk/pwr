@@ -15,20 +15,24 @@ html(lang="en")
           input(type="text" id="surname" name="surname")
           br
           input(type="submit" value="Create")
-        ul
-          each item in title
-            li #{item.name} #{item.id}              
-              a(href=`home/delete/${item.id}`) delete
-        mixin formElement(ID, textValue,elType,count)
-          #{count}
-          label(for=ID)=textValue
-          br
-          input(type=elType,name=ID, id=ID)
-          br
+        
+        form(id="login", method="post",action="/auth/login")
+          fieldset
+            legend login
+            label(for="name") Enter your login name
+            input(type="text" id="name" name="name")
+            br
+            label(for="pass") Enter your password
+            input(type="password" id="pass" name="pass")
+            br
+            input(type="submit" value="logIn")
             
-        -for (var i=0;i<5;i++){    
-        +formElement('myId','number','email',i)
-        -}
-      
+    //-      
+              ul
+                each item in title
+                  li  #{item.name} #{item.id}              
+                    a(href=`home/delete/${item.id}`) delete          
+    
+
           
         

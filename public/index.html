@@ -17,7 +17,7 @@
             <button ng-click="currentTpl='/tpl.html'" ng-disabled='true'>template</button>
             <button onclick="PureJS.getData()">Pure JS AJAX</button>
             <button ng-click="getData(1)">Angular AJAX</button>
-            <div id="tpl-content" ng-include src="currentTpl"></div>
+            <div id="tpl-content"  src="currentTpl"></div>
             <form method="post" action="/hello">
 
             </form>
@@ -45,7 +45,7 @@
               </tbody>
 
             </table>
-            <button ng-click="loadToDatabase()">Load Data</button>
+
             <ul ng-init="i=0;">
                 <!--
                 <li ng-repeat="item <!--in myWelcome.books.book track by $index">
@@ -64,6 +64,19 @@
         </div>
         <!-- template -->
         <div class="div"></div>
+        <form method="post" action="/myPost">
+        <div>
+        	<label>Username:</label>
+        	<input type="text" name="username"/><br/>
+        	</div>
+        	<div>
+        	<label>Password:</label>
+        	<input type="password" name="password"/>
+        	</div>
+        	<div>
+        	<input type="submit" value="Submit"/>
+        	</div>
+        </form>
 
         <script type="text/ng-template" id="/tpl.html">
             <p>Content of the template.{{temp}}

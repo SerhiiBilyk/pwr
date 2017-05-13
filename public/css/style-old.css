@@ -1,0 +1,12 @@
+.div {
+  width: 100px;
+  height: 100px;
+  border: 1px solid white;
+  background-color: purple;
+  box-shadow: 1px 1px 5px purple ,25px 25px 0 #084C61;
+  transition: box-shadow 2s;
+  color: green; }
+  .div::after {
+    content: "1"; }
+  .div:hover {
+    box-shadow: 1px 1px 5px purple ,100px 100px 0 #177E89 ,121px 121px 0 #084C61 ,144px 144px 0 #177E89 ,169px 169px 0 #084C61 ,196px 196px 0 #177E89 ,225px 225px 0 #084C61 ,256px 256px 0 #177E89 ,289px 289px 0 #084C61 ,324px 324px 0 #177E89; }

@@ -1,0 +1,61 @@
+@mixin media($min-width,$max-width) {
+     @media (min-width:$min-width) and (max-width:$max-width){
+        @content;
+    }
+}
+@mixin label-corect {
+     @for $j from 1 through 4{
+        .label-#{$j} {
+            position: relative;
+            z-index: 10;
+            margin: 10px;
+        }
+    }
+}
+@mixin slider ($counter) {
+    $list: 0,-1270px,-2540px,-3810px;
+    @for $i from 1 through 4 {
+        .input-#{$i}:checked ~ #dvWirePContainer #dvWireWrapper{
+            left: nth($list,$i);
+        }
+      .input-#{$i}:checked ~  .bottom-label-1 {
+            color:red;
+          }
+
+        input:checked+label{
+          background-color:#f15a25;
+
+
+        }
+
+
+    }
+}
+@mixin transition($property,$duration,$timing-function) {
+    -webkit-transition: $property $duration $timing-function;
+    -moz-transition: $property $duration $timing-function;
+    -o-transition: $property $duration $timing-function;
+    transition: $property $duration $timing-function;
+}
+@mixin img-style {
+    width: 100%;
+    max-width: 707px;
+    padding-top: 15px;
+}
+@mixin switch($show,$hide) {
+    #{$show} {
+        display: block !important;
+    }
+
+    #{$hide} {
+        display: none !important;
+    }
+}
+@mixin WireSectChild($width,$float) {
+    display: block;
+    width: $width;
+    text-align: left;
+    box-sizing: border-box;
+    letter-spacing: 0.08em;
+    float: $float;
+}

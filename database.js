@@ -6,6 +6,10 @@ var connection = mysql.createConnection({
     password: 'Thomaskit123!',
     database: 'person'
 });
+var records = [
+    { id: 1, username: 'jack', password: 'secret', displayName: 'Jack', emails: [ { value: 'jack@example.com' } ] }
+  , { id: 2, username: 'jill', password: 'birthday', displayName: 'Jill', emails: [ { value: 'jill@example.com' } ] }
+];
 connection.connect();
 function sql_query(query,values,callback) {
 
@@ -16,9 +20,18 @@ function sql_query(query,values,callback) {
       callback(null,results)
   });
 
-
-  //connection.end();
+/*
+  connection.end();
+*/
 }
+function findByUserName() {
 
+    for (var i = 0, len = records.length; i < len; i++) {
+      var record = records[i];
+      if (record.username === username) {
+        return cb(null, record);
+      }
+    }
 
+}
 module.exports = sql_query;
