@@ -29,18 +29,22 @@ var db = require('./db');
 
 passport.use(new Strategy(
   function(username, password, cb) {
+
     db.users.findByUsername(username, function(err, user) {
+
       if (err) { return cb(err); }
       if (!user) { return cb(null, false); }
-      if (user.password != password) { return cb(null, false); }
+      if (user.surname != password) { console.log('password incorrect '+password);return cb(null, false); }
       return cb(null, user);
     });
   }));
   passport.serializeUser(function(user, cb) {
+    console.log('serializeUser')
   cb(null, user.id);
 });
 
 passport.deserializeUser(function(id, cb) {
+
   db.users.findById(id, function (err, user) {
     if (err) { return cb(err); }
     cb(null, user);
@@ -57,12 +61,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.post('/myPost',
-  passport.authenticate('local', { failureRedirect: '/auth' }),
+  passport.authenticate('local', { failureRedirect: '/home' }),
   function(req, res) {
     res.redirect('/auth');
   });
 
-
+  app.get('/logout',
+    function(req, res){
+      req.logout();
+      res.redirect('/');
+    });
 
 
 
