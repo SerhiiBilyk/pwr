@@ -28,48 +28,75 @@ var db = require('./db');
 
 
 passport.use(new Strategy(
-  function(username, password, cb) {
+    function(username, password, cb) {
 
-    db.users.findByUsername(username, function(err, user) {
+        db.users.findByUsername(username, function(err, user) {
 
-      if (err) { return cb(err); }
-      if (!user) { return cb(null, false); }
-      if (user.surname != password) { console.log('password incorrect '+password);return cb(null, false); }
-      return cb(null, user);
-    });
-  }));
-  passport.serializeUser(function(user, cb) {
+            if (err) {
+                return cb(err);
+            }
+            if (!user) {
+                return cb(null, false);
+            }
+            if (user.surname != password) {
+                console.log('password incorrect ' + password);
+                return cb(null, false);
+            }
+            return cb(null, user);
+        });
+    }));
+passport.serializeUser(function(user, cb) {
     console.log('serializeUser')
-  cb(null, user.id);
+    cb(null, user.id);
 });
 
 passport.deserializeUser(function(id, cb) {
 
-  db.users.findById(id, function (err, user) {
-    if (err) { return cb(err); }
-    cb(null, user);
-  });
+    db.users.findById(id, function(err, user) {
+        if (err) {
+            return cb(err);
+        }
+        cb(null, user);
+    });
 });
 var app = express();
 
 app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')());
-app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(require('body-parser').urlencoded({
+    extended: true
+}));
+app.use(require('express-session')({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.post('/myPost',
-  passport.authenticate('local', { failureRedirect: '/home' }),
-  function(req, res) {
-    res.redirect('/auth');
-  });
+    passport.authenticate('local', {
+        failureRedirect: '/home',
+        successRedirect: '/auth',
+    })
+  );
 
-  app.get('/logout',
-    function(req, res){
-      req.logout();
-      res.redirect('/');
+app.get('/logout',
+    function(req, res) {
+        req.logout();
+        console.dir(req.session)
+        res.redirect('/');
+    });
+app.get('/profile',
+    require('connect-ensure-login').ensureLoggedIn(),
+    function(req, res) {
+
+
+        res.render('empty.pug', {
+            title:req.user,
+            session:req.session.passport.user
+        });
     });
 
 
@@ -91,6 +118,9 @@ https://github.com/passport/express-4.x-local-example/blob/master/server.js
 https://gist.github.com/manjeshpv/84446e6aa5b3689e8b84
 
 https://scotch.io/tutorials/easy-node-authentication-setup-and-local
+
+Check this passportJs feature -> req.isAuthenticated()
+Also read about sesisons, and store session objects
 */
 
 
