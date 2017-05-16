@@ -78,9 +78,15 @@ app.use(passport.session());
 app.post('/myPost',
     passport.authenticate('local', {
         failureRedirect: '/home',
-        successRedirect: '/auth',
-    })
-  );
+        successRedirect: '/home',
+    }),
+    function(req, res) {
+      console.log('redirect')
+        res.render('/home', {
+            user: req.session.passport.user
+        });
+    });
+
 
 app.get('/logout',
     function(req, res) {
@@ -88,14 +94,24 @@ app.get('/logout',
         console.dir(req.session)
         res.redirect('/');
     });
+
+function isLoggedIn(req, res, next) {
+
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated())
+        return next();
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
 app.get('/profile',
     require('connect-ensure-login').ensureLoggedIn(),
     function(req, res) {
 
 
         res.render('empty.pug', {
-            title:req.user,
-            session:req.session.passport.user
+            title: req.user,
+            session: req.session.passport.user
         });
     });
 

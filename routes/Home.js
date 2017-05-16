@@ -13,7 +13,7 @@ var urlencodedParser = bodyParser.urlencoded({
 
 homeRouter.get('/', function(req, res) {
     mysql('select*from users', function(err, data) {
-        res.render('empty.pug', {
+        res.render('home.pug', {
             title: data
         })
     });

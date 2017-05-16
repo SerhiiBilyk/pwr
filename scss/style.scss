@@ -1,34 +1,35 @@
-$default-size:100px;
-$list:"1px 1px 5px purple";
-$colors:#177E89, #084C61,#DB3A34;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/*navigation*/
+.navigation {
+    //width: 100%;
+    padding: 10px;
+    border: 1px solid red;
+    overflow: hidden;
 
-$new-list:();
+    &-links {
+        display: inline-block;
 
- @function init ($prevList,$n,$q){
-   @if($n%2==0){
-     $color:nth($colors,1) !global;
-   }@else if ($n%2==1) {
-     $color:nth($colors,2) !global;
-   }
-      $new-list:append(unquote($prevList),unquote(',')+$n*$n+px $n*$n+px 0 $color) !global;
-   @if(length($new-list)<$q){
-     @return init($new-list,$n+1,$q)
-   }
-@return unquote($new-list);
- }
-
-.div{
-    width:$default-size;
-    height:$default-size;
-    border:1px solid white;
-    background-color:purple;
-    box-shadow:init($list,5,1);
-    transition:box-shadow 2s;
-    color:green;
-    &::after{
-        content:'#{length($list)}';
+        li {
+            display: inline-block;
+            margin: 0 10px;
+        }
     }
-  &:hover{
-    box-shadow:init($list,10,10);
-  }
+
+    &-block {
+        display: inline-block;
+        float: right;
+        &-search {
+            display: inline-block;
+            input {
+                display: inline-block;
+            }
+        }
+        &-button-login {
+
+        }
+    }
 }
