@@ -77,22 +77,25 @@ app.use(passport.session());
 
 app.post('/myPost',
     passport.authenticate('local', {
-        failureRedirect: '/home',
-        successRedirect: '/home',
+        failureRedirect: '/home'
     }),
     function(req, res) {
-      console.log('redirect')
-        res.render('/home', {
-            user: req.session.passport.user
-        });
+        res.redirect('/home');
     });
+
+    app.post('/login',
+  passport.authenticate('local', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+  });
+
 
 
 app.get('/logout',
     function(req, res) {
         req.logout();
         console.dir(req.session)
-        res.redirect('/');
+        res.redirect('/home');
     });
 
 function isLoggedIn(req, res, next) {
@@ -107,7 +110,6 @@ function isLoggedIn(req, res, next) {
 app.get('/profile',
     require('connect-ensure-login').ensureLoggedIn(),
     function(req, res) {
-
 
         res.render('empty.pug', {
             title: req.user,

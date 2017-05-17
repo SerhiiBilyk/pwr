@@ -1,21 +1,35 @@
-nav(class="navigation")
+header
+  nav(class="navigation")
 
-  ul(class="navigation-links")
-    li
-      a(href="/home") Home
-    li
-      a(href="#") Books
-  span
-    i(class="fa fa-user" aria-hidden="true") #{user}
-  div(class="navigation-block") 
-    form(id="", method="", action="" class="navigation-block-search")
-      input
-      button(type="submit" class="navigation-block-search")
-        i(class="fa fa-search" aria-hidden="true")
-    button(class="navigation-button-login")
-      i(class="fa fa-sign-in" aria-hidden="true")
-    button(class="navigation-button-logout")
-      i(class="fa fa-sign-out" aria-hidden="true")
+    ul(class="navigation-links")
+      li
+        a(href="/home") Home
+      li
+        a(href="#") Books
+      li
+        span
+          -var profile=user||'guest'   
+          i(class="fa fa-user" aria-hidden="true") #{profile}
+  
+    div(class="navigation-block")
+      ul
+        li
+          form(id="", method="", action="" class="navigation-block-search")
+            input
+            button(type="submit" class="navigation-block-search")
+              i(class="fa fa-search" aria-hidden="true")
+        li
+          a(href="/#") Sign in
+            i(class="fa fa-sign-in" aria-hidden="true") 
+        li
+          a(href="/logout")
+            i(class="fa fa-sign-out" aria-hidden="true") 
+        
+                             
+      
+      
+      
+
   
   
       

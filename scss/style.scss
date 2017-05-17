@@ -3,33 +3,5 @@
     padding: 0;
     box-sizing: border-box;
 }
+@import 'header';
 /*navigation*/
-.navigation {
-    //width: 100%;
-    padding: 10px;
-    border: 1px solid red;
-    overflow: hidden;
-
-    &-links {
-        display: inline-block;
-
-        li {
-            display: inline-block;
-            margin: 0 10px;
-        }
-    }
-
-    &-block {
-        display: inline-block;
-        float: right;
-        &-search {
-            display: inline-block;
-            input {
-                display: inline-block;
-            }
-        }
-        &-button-login {
-
-        }
-    }
-}

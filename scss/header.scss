@@ -1,0 +1,48 @@
+.navigation {
+    //width: 100%;
+    overflow:hidden;
+
+
+    background-color:#248888;
+
+    &-links {
+        display: inline-block;
+
+        float:left;
+
+        li {
+            display: inline-block;
+            color:#E6E6E6;
+
+            a{
+              display:block;
+              padding:20px 20px;
+              color: #EFEBD9;
+
+              &:link,&:visited,&:active{
+                text-decoration:none;
+              }
+              &:hover{
+                background-color:red;
+              }
+            }
+
+
+        }
+    }
+
+    &-block {
+      position:absolute;
+      right:0;
+
+        display: inline-block;
+      li{
+        display: inline-block;
+        padding:20px 5px;
+        a{
+          display:block;
+        }
+      }
+
+    }
+}
