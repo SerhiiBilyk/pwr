@@ -12,9 +12,12 @@ function sql_query(query,values,callback) {
 
 
   connection.query(query, values, function(error, results, fields) {
-
-      if (error) throw error;
+      if (error){
+        console.log('database error')
+      }else{
       callback(null,results)
+      }
+
   });
 
 /*

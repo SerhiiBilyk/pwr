@@ -1,48 +1,76 @@
-.navigation {
-    //width: 100%;
-    overflow:hidden;
+header {
+    background-color: black;
 
+    .navigation {
+        //width: 100%;
+        overflow: hidden;
 
-    background-color:#248888;
-
-    &-links {
-        display: inline-block;
-
-        float:left;
-
-        li {
+        &-links {
             display: inline-block;
-            color:#E6E6E6;
+            float: left;
 
-            a{
-              display:block;
-              padding:20px 20px;
-              color: #EFEBD9;
+            li {
+                display: inline-block;
+                color: white;
 
-              &:link,&:visited,&:active{
-                text-decoration:none;
-              }
-              &:hover{
-                background-color:red;
+                a {
+                    display: block;
+                    padding: 20px;
+                    color: white;
+                    transition: all 1s ease;
+                    background-color: transparent;
+
+                    &:active,
+                    &:link,
+                    &:visited {
+                        text-decoration: none;
+                    }
+
+                    &:hover {
+                        background-color: red;
+                    }
+                }
+            }
+        }
+
+        &-block {
+            position: absolute;
+            right: 0;
+            display: inline-block;
+            &-search{
+              input[type='text']{
+                border-radius:3px;
+                border:none;
+                font-size:20px;
+                &+button[type='submit']{
+                  width:23px;
+                  height:23px;
+                  position:absolute;
+                  right:160px;
+                  border:none;
+                  background-color:transparent;
+                }
               }
             }
 
+            ul {
+                li {
+                    display: inline-block;
+                    padding: 20px 5px;
 
+                    a {
+                        display: block;
+                        text-decoration: none;
+                        color: white;
+
+                        &:active,
+                        &:hover,
+                        &:visited {
+                            color: white;
+                        }
+                    }
+                }
+            }
         }
-    }
-
-    &-block {
-      position:absolute;
-      right:0;
-
-        display: inline-block;
-      li{
-        display: inline-block;
-        padding:20px 5px;
-        a{
-          display:block;
-        }
-      }
-
     }
 }

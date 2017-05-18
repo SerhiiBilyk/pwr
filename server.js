@@ -77,17 +77,14 @@ app.use(passport.session());
 
 app.post('/myPost',
     passport.authenticate('local', {
-        failureRedirect: '/home'
+        failureRedirect: '/',
+        failureFlash: 'Invalid username or password.'
     }),
     function(req, res) {
         res.redirect('/home');
     });
 
-    app.post('/login',
-  passport.authenticate('local', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
-  });
+
 
 
 
@@ -95,7 +92,7 @@ app.get('/logout',
     function(req, res) {
         req.logout();
         console.dir(req.session)
-        res.redirect('/home');
+        res.redirect('/');
     });
 
 function isLoggedIn(req, res, next) {

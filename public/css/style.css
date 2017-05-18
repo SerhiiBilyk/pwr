@@ -3,29 +3,49 @@
   padding: 0;
   box-sizing: border-box; }
 
-.navigation {
-  overflow: hidden;
-  background-color: #248888; }
-  .navigation-links {
-    display: inline-block;
-    float: left; }
-    .navigation-links li {
+header {
+  background-color: black; }
+  header .navigation {
+    overflow: hidden; }
+    header .navigation-links {
       display: inline-block;
-      color: #E6E6E6; }
-      .navigation-links li a {
-        display: block;
-        padding: 20px 20px;
-        color: #EFEBD9; }
-        .navigation-links li a:link, .navigation-links li a:visited, .navigation-links li a:active {
-          text-decoration: none; }
-        .navigation-links li a:hover {
-          background-color: red; }
-  .navigation-block {
-    position: absolute;
-    right: 0;
-    display: inline-block; }
-    .navigation-block li {
-      display: inline-block;
-      padding: 20px 5px; }
+      float: left; }
+      header .navigation-links li {
+        display: inline-block;
+        color: white; }
+        header .navigation-links li a {
+          display: block;
+          padding: 20px;
+          color: white;
+          transition: all 1s ease;
+          background-color: transparent; }
+          header .navigation-links li a:active, header .navigation-links li a:link, header .navigation-links li a:visited {
+            text-decoration: none; }
+          header .navigation-links li a:hover {
+            background-color: red; }
+    header .navigation-block {
+      position: absolute;
+      right: 0;
+      display: inline-block; }
+      header .navigation-block-search input[type='text'] {
+        border-radius: 3px;
+        border: none;
+        font-size: 20px; }
+        header .navigation-block-search input[type='text'] + button[type='submit'] {
+          width: 23px;
+          height: 23px;
+          position: absolute;
+          right: 160px;
+          border: none;
+          background-color: transparent; }
+      header .navigation-block ul li {
+        display: inline-block;
+        padding: 20px 5px; }
+        header .navigation-block ul li a {
+          display: block;
+          text-decoration: none;
+          color: white; }
+          header .navigation-block ul li a:active, header .navigation-block ul li a:hover, header .navigation-block ul li a:visited {
+            color: white; }
 
 /*navigation*/
