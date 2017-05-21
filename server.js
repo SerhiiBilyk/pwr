@@ -64,7 +64,7 @@ passport.deserializeUser(function(id, cb) {
     });
 });
 var app = express();
-//app.locals.mysql= require('./database.js');
+app.locals.mysql= require('./database.js');
 
 app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')());
@@ -136,9 +136,11 @@ https://scotch.io/tutorials/easy-node-authentication-setup-and-local
 Check this passportJs feature -> req.isAuthenticated()
 Also read about sesisons, and store session objects
 
+//TO DO LIST
 #Separation css files of different components
-#flash.message
+
 #add babel compilator
+#add authentication for all admin panel routes http://expressjs.com/en/api.html#app.locals  app.all('*')
 */
 
 
