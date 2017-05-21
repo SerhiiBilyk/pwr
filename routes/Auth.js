@@ -16,8 +16,9 @@ authRouter.get('/', function(req, res) {
 
 
 authRouter.get('/login', function(req, res) {
-console.log('flash message '+req.flash)
-    res.render('login.pug',{message:req.flash.message});
+console.log(req.session.flash)
+
+    res.render('login.pug',{message:req.session.flash});
 });
 
 

@@ -10,13 +10,15 @@ html(lang="en")
         div(class="login")
           form(id="form" class="login-form" method="post" action="/myPost")
             div(class="login-form-field")
-              label(for="userName") Enter your name
+              -var result=message||""
+              label(for="userName") Enter your name #{result.error}
               br
               input(type="text" id="userName" name="username")
             div(class="login-form-field")
-              label(for="userPassword") Enter your password #{message}
+              label(for="userPassword") Enter your password 
               br
               input(type="password" id="userPassword" name="password")
             div(class="login-form-field")
               input(type="submit" value="Log in")
+              a(href="/home") Enter as a guest
             

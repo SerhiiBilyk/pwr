@@ -15,6 +15,7 @@ homeRouter.get('/', function(req, res) {
   var user;/*=req.user.name ||'guest';*/
   if(req.hasOwnProperty('user')){
      user=req.user.name;
+     req.session.flash="";
   }else{
     user="guest"
   }
