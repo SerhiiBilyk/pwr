@@ -1,0 +1,37 @@
+body{
+  background-color:#DADCDB;
+}
+.container-login{
+  width:300px;
+  margin:200px auto 0 auto;
+
+  .login{
+    background-color:white;
+    box-shadow:2px 2px 2px gray;
+      border-radius:3px;
+
+    &-form{
+      width:100%;
+      display:inline-block;
+      padding:15px;
+      &-field{
+        margin:5px 0;
+        label{
+          display:inline-block;
+        }
+        input[type='text'], input[type="password"]{
+          font-size:20px;
+          border-radius:3px;
+          border:1px solid rgba(128, 128, 128, 0.5);
+        }
+        input[type="submit"]{
+          background-color: #9A9FB6;
+          border:none;
+          border-radius:2px;
+          padding:7px;
+
+        }
+      }
+    }
+  }
+}

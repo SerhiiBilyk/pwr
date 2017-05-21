@@ -18,13 +18,14 @@ header
             input(type="text")
             button(type="submit")
               i(class="fa fa-search" aria-hidden="true")
-            
-        li
-          a(href="/#") Sign in 
-            i(class="fa fa-sign-in" aria-hidden="true") 
-        li
-          a(href="/logout") Sign out 
-            i(class="fa fa-sign-out" aria-hidden="true") 
+        if !profile||profile=='guest'    
+          li
+            a(href="/auth/login") Sign in 
+              i(class="fa fa-sign-in" aria-hidden="true") 
+        else
+          li
+            a(href="/logout") Sign out 
+              i(class="fa fa-sign-out" aria-hidden="true") 
         
                              
       

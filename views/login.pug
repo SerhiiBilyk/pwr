@@ -1,0 +1,22 @@
+doctype
+html(lang="en")
+    head
+        title
+        link(rel="stylesheet" type="text/css" href="../css/style.css")
+        script(src="./login.js")
+        //-angular
+    body
+      div(class="container-login")
+        div(class="login")
+          form(id="form" class="login-form" method="post" action="/myPost")
+            div(class="login-form-field")
+              label(for="userName") Enter your name
+              br
+              input(type="text" id="userName" name="username")
+            div(class="login-form-field")
+              label(for="userPassword") Enter your password #{message}
+              br
+              input(type="password" id="userPassword" name="password")
+            div(class="login-form-field")
+              input(type="submit" value="Log in")
+            

@@ -1,8 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box; }
-
 header {
   background-color: black; }
   header .navigation {
@@ -27,17 +22,19 @@ header {
       position: absolute;
       right: 0;
       display: inline-block; }
-      header .navigation-block-search input[type='text'] {
-        border-radius: 3px;
-        border: none;
-        font-size: 20px; }
-        header .navigation-block-search input[type='text'] + button[type='submit'] {
-          width: 23px;
-          height: 23px;
-          position: absolute;
-          right: 160px;
+      header .navigation-block-search {
+        position: relative; }
+        header .navigation-block-search input[type='text'] {
+          border-radius: 3px;
           border: none;
-          background-color: transparent; }
+          font-size: 20px; }
+          header .navigation-block-search input[type='text'] + button[type='submit'] {
+            width: 23px;
+            height: 23px;
+            position: absolute;
+            right: 0;
+            border: none;
+            background-color: transparent; }
       header .navigation-block ul li {
         display: inline-block;
         padding: 20px 5px; }
@@ -47,5 +44,38 @@ header {
           color: white; }
           header .navigation-block ul li a:active, header .navigation-block ul li a:hover, header .navigation-block ul li a:visited {
             color: white; }
+
+body {
+  background-color: #DADCDB; }
+
+.container-login {
+  width: 300px;
+  margin: 200px auto 0 auto; }
+  .container-login .login {
+    background-color: white;
+    box-shadow: 2px 2px 2px gray;
+    border-radius: 3px; }
+    .container-login .login-form {
+      width: 100%;
+      display: inline-block;
+      padding: 15px; }
+      .container-login .login-form-field {
+        margin: 5px 0; }
+        .container-login .login-form-field label {
+          display: inline-block; }
+        .container-login .login-form-field input[type='text'], .container-login .login-form-field input[type="password"] {
+          font-size: 20px;
+          border-radius: 3px;
+          border: 1px solid rgba(128, 128, 128, 0.5); }
+        .container-login .login-form-field input[type="submit"] {
+          background-color: #9A9FB6;
+          border: none;
+          border-radius: 2px;
+          padding: 7px; }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
 
 /*navigation*/

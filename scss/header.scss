@@ -38,6 +38,7 @@ header {
             right: 0;
             display: inline-block;
             &-search{
+              position:relative;
               input[type='text']{
                 border-radius:3px;
                 border:none;
@@ -46,7 +47,7 @@ header {
                   width:23px;
                   height:23px;
                   position:absolute;
-                  right:160px;
+                  right:0;
                   border:none;
                   background-color:transparent;
                 }

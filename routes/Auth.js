@@ -16,8 +16,8 @@ authRouter.get('/', function(req, res) {
 
 
 authRouter.get('/login', function(req, res) {
-
-    res.redirect('/auth');
+console.log('flash message '+req.flash)
+    res.render('login.pug',{message:req.flash.message});
 });
 
 

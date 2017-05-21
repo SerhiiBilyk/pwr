@@ -20,6 +20,7 @@ var mysql = require('./database.js');
 var session = require('express-session') //('client-sessions');
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
+var flash = require('connect-flash');
 
 var db = require('./db');
 
@@ -36,11 +37,11 @@ passport.use(new Strategy(
                 return cb(err);
             }
             if (!user) {
-                return cb(null, false);
+                return cb(null, false,{message:'Please enter correct user name'});
             }
             if (user.surname != password) {
                 console.log('password incorrect ' + password);
-                return cb(null, false);
+                return cb(null, false,{message:'Please enter correct password'});
             }
             return cb(null, user);
         });
@@ -71,14 +72,14 @@ app.use(require('express-session')({
     resave: false,
     saveUninitialized: false
 }));
-
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.post('/myPost',
     passport.authenticate('local', {
-        failureRedirect: '/',
-        failureFlash: 'Invalid username or password.'
+        failureRedirect: '/auth/login',
+        failureFlash : true
     }),
     function(req, res) {
         res.redirect('/home');
@@ -92,7 +93,7 @@ app.get('/logout',
     function(req, res) {
         req.logout();
         console.dir(req.session)
-        res.redirect('/');
+        res.redirect('/home');
     });
 
 function isLoggedIn(req, res, next) {
@@ -136,6 +137,9 @@ https://scotch.io/tutorials/easy-node-authentication-setup-and-local
 
 Check this passportJs feature -> req.isAuthenticated()
 Also read about sesisons, and store session objects
+
+#Separation css files of different components
+#flash.message
 */
 
 

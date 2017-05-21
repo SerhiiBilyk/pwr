@@ -22,17 +22,19 @@ header {
       position: absolute;
       right: 0;
       display: inline-block; }
-      header .navigation-block-search input[type='text'] {
-        border-radius: 3px;
-        border: none;
-        font-size: 20px; }
-        header .navigation-block-search input[type='text'] + button[type='submit'] {
-          width: 23px;
-          height: 23px;
-          position: absolute;
-          right: 160px;
+      header .navigation-block-search {
+        position: relative; }
+        header .navigation-block-search input[type='text'] {
+          border-radius: 3px;
           border: none;
-          background-color: transparent; }
+          font-size: 20px; }
+          header .navigation-block-search input[type='text'] + button[type='submit'] {
+            width: 23px;
+            height: 23px;
+            position: absolute;
+            right: 0;
+            border: none;
+            background-color: transparent; }
       header .navigation-block ul li {
         display: inline-block;
         padding: 20px 5px; }

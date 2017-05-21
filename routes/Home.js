@@ -12,7 +12,12 @@ var urlencodedParser = bodyParser.urlencoded({
 
 
 homeRouter.get('/', function(req, res) {
-  var user=req.user.name ||'guest';
+  var user;/*=req.user.name ||'guest';*/
+  if(req.hasOwnProperty('user')){
+     user=req.user.name;
+  }else{
+    user="guest"
+  }
     mysql('select*from users', function(err, data) {
         res.render('home.pug', {
              user: user
