@@ -1,28 +1,31 @@
 const express = require('express'),
-
+    /*Basic tools*/
     bodyParser = require('body-parser'),
     goodreads = require('goodreads-api-node'),
     path = require('path'),
-    jade = require('jade'),
-    /*deprecated*/
     pug = require('pug'),
     urlencodedParser = bodyParser.urlencoded({
         extended: false
-    });
-var parser = require('xml2js').Parser({
-    explicitArray: false
-});
-var homeRouter = require('./routes/Home.js');
-var authRouter = require('./routes/Auth.js');
-var http = require('http');
-var mysql = require('./database.js');
-/*Authentication*/
-var session = require('express-session') //('client-sessions');
-var passport = require('passport');
-var Strategy = require('passport-local').Strategy;
-var flash = require('connect-flash');
+    }),
+    http = require('http'),
+    parser = require('xml2js').Parser({
+        explicitArray: false
+    }),
+    /*Routing*/
+    homeRouter = require('./routes/Home.js'),
+    authRouter = require('./routes/Auth.js'),
+    /*Database*/
+  //  mysql = require('./database.js'),
+    /*Authentication*/
+    session = require('express-session'),
+    passport = require('passport'),
+    verification = require('./settings/user_verification'),
+    Strategy = require('passport-local').Strategy,
+    flash = require('connect-flash'),
+    /*Emails*/
+    transporter = require('./settings/mail');
 
-var db = require('./db');
+
 
 
 
@@ -30,30 +33,30 @@ var db = require('./db');
 
 passport.use(new Strategy(
     function(username, password, cb) {
-
-        db.users.findByUsername(username, function(err, user) {
-
+        verification.users.findByUsername(username, function(err, user) {
             if (err) {
                 return cb(err);
             }
             if (!user) {
-                return cb(null, false,{message:'Please enter correct user name'});
+                return cb(null, false, {
+                  /*@param flash message*/
+                    message: 'Please enter correct user name'
+                });
             }
             if (user.surname != password) {
-                console.log('password incorrect ' + password);
-                return cb(null, false,{message:'Please enter correct password'});
+                return cb(null, false, {
+                    message: 'Please enter correct password'
+                });
             }
             return cb(null, user);
         });
     }));
 passport.serializeUser(function(user, cb) {
-    console.log('serializeUser')
     cb(null, user.id);
 });
 
 passport.deserializeUser(function(id, cb) {
-
-    db.users.findById(id, function(err, user) {
+    verification.users.findById(id, function(err, user) {
         if (err) {
             return cb(err);
         }
@@ -61,6 +64,7 @@ passport.deserializeUser(function(id, cb) {
     });
 });
 var app = express();
+//app.locals.mysql= require('./database.js');
 
 app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')());
@@ -70,7 +74,8 @@ app.use(require('body-parser').urlencoded({
 app.use(require('express-session')({
     secret: 'keyboard cat',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: { maxAge: 60000 }
 }));
 app.use(flash());
 app.use(passport.initialize());
@@ -79,22 +84,13 @@ app.use(passport.session());
 app.post('/myPost',
     passport.authenticate('local', {
         failureRedirect: '/auth/login',
-        failureFlash : true
+        failureFlash: true
     }),
     function(req, res) {
         res.redirect('/home');
     });
 
 
-
-
-
-app.get('/logout',
-    function(req, res) {
-        req.logout();
-        console.dir(req.session)
-        res.redirect('/home');
-    });
 
 function isLoggedIn(req, res, next) {
 
@@ -122,6 +118,8 @@ app.get('/profile',
 
 app.use('/home', homeRouter);
 app.use('/auth', authRouter);
+
+
 /*Authentication*/
 
 /*
@@ -140,6 +138,7 @@ Also read about sesisons, and store session objects
 
 #Separation css files of different components
 #flash.message
+#add babel compilator
 */
 
 
@@ -182,7 +181,7 @@ app.post('/hello', urlencodedParser, function(req, res) {
                 id_2: response.search.results.work[i].id._
             }
             mysql("insert into Books set ?", values, function(err, results) {
-                console.log('results ' + results)
+
             })
             res.end(JSON.stringify(response));
         });
@@ -203,32 +202,7 @@ const myCredentials = {
 };
 const gr = goodreads(myCredentials);
 
-/*var getBookId=function(id,cb){
 
-  var options={
-    host:'www.goodreads.com',
-    path:'/book/title.xml?author=Arthur+Conan+Doyle&key=St2I3lTMKA7zH3c2oJPFFA&title=Hound+of+the+Baskervilles',
-    secret:'rnY7ZovtfboFixLXVFofiG6gx2ua2uVtvar3KyBhs'
-  }
-  var callback=function(response){
-    var str='';
-    response.on('data',function(chunk){
-      str+=chunk;
-      console.log('str '+str)
-    });
-    response.on(end,function(){
-      parser.parseString(str,function(err,result){
-        console.log('result '+result)
-        cb(null,result);
-        http.request(options,callback).end();
-      })
-    })
-  }
-}
-getBookId(1,function(err,result){
-  console.log(result)
-})
-*/
 
 
 
@@ -240,9 +214,27 @@ getBookId(1,function(err,result){
         console.log(result)
     });
     */
+/*MAIL*/
 
 
+// setup e-mail data
+var mailOptions = {
+    from: '"Our Code World " <sergiybiluk@gmail.com>', // sender address (who sends)
+    to: 'sergiybiluk@gmail.com', // list of receivers (who receives)
+    subject: 'Hello', // Subject line
+    text: 'Hello world ', // plaintext body
+    html: '<b>Hello world </b><br> This is the first email sent with Nodemailer in Node.js' // html body
+};
 
+/* send mail with defined transport object
+transporter.sendMail(mailOptions, function(error, info){
+    if(error){
+        return console.log(error);
+    }
+
+    console.log('Message sent: ' + info.response);
+});
+*/
 
 
 var server = app.listen(8081, function() {

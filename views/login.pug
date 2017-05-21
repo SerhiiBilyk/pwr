@@ -11,13 +11,16 @@ html(lang="en")
           form(id="form" class="login-form" method="post" action="/myPost")
             div(class="login-form-field")
               -var result=message||""
-              label(for="userName") Enter your name #{result.error}
+              label(for="userName") Enter your name 
+            
               br
               input(type="text" id="userName" name="username")
             div(class="login-form-field")
-              label(for="userPassword") Enter your password 
+              label(for="userPassword") Enter your password
+               
               br
               input(type="password" id="userPassword" name="password")
+              p(class="error-message") #{result}
             div(class="login-form-field")
               input(type="submit" value="Log in")
               a(href="/home") Enter as a guest

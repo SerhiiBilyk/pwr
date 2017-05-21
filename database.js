@@ -21,17 +21,9 @@ function sql_query(query,values,callback) {
   });
 
 /*
-  connection.end();
+* read node mysql documentation about  connection.end();
+* if you uncomment this line, every second mysql query will cause an error
 */
 }
-function findByUserName() {
 
-    for (var i = 0, len = records.length; i < len; i++) {
-      var record = records[i];
-      if (record.username === username) {
-        return cb(null, record);
-      }
-    }
-
-}
 module.exports = sql_query;

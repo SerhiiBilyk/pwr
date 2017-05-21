@@ -9,16 +9,28 @@ var urlencodedParser = bodyParser.urlencoded({
 var app = express();
 
 authRouter.get('/', function(req, res) {
-
-    res.render('empty.pug' /*,{user:req.user}*/ );
+    res.render('empty.pug');
 });
 
-
+authRouter.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/home');
+});
 
 authRouter.get('/login', function(req, res) {
-console.log(req.session.flash)
+    /**
+     * @param {array} req.session.flash
+     *when we create new message, this message is pushed to existing array,
+     *so, we need always to store  only one value
+     *
+     */
+    var flash_message;
+    req.session.flash ?
+        flash_message = req.session.flash.error.pop() : false;
+    res.render('login.pug', {
+        message: flash_message
+    });
 
-    res.render('login.pug',{message:req.session.flash});
 });
 
 
