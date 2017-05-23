@@ -48,6 +48,15 @@ homeRouter.post('/create', urlencodedParser, function(req, res) {
 
     res.redirect('/home')
 });
+homeRouter.post('/loadData', urlencodedParser, function(req, res) {
+console.log('Serhii Bilyk '+req.body)
+
+   mysql("select*from users", function(err, results) {
+   console.log(results)
+  })
+
+    res.redirect('/home')
+});
 
 homeRouter.post('/loadData',urlencodedParser,function(req,res){
   res.send('load data')

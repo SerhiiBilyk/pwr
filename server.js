@@ -137,10 +137,10 @@ Check this passportJs feature -> req.isAuthenticated()
 Also read about sesisons, and store session objects
 
 //TO DO LIST
-#Separation css files of different components
 
-#add babel compilator
+
 #add authentication for all admin panel routes http://expressjs.com/en/api.html#app.locals  app.all('*')
+# finish 'search-input component' , SearchController, Home.js, home.pug
 */
 
 

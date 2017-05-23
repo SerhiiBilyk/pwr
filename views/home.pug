@@ -1,2 +1,8 @@
 include includes/html_header.pug
 include includes/navigation.pug
+section(class="container-search" ng-app="app" ng-controller="search")
+  input(type="text"  ng-model="userBook" )
+  button(ng-click="loadBooks()") Get Data
+  p {{test}}
+  ul(ng-repeat="item in arr")
+    li {{item}}

@@ -20,7 +20,7 @@ gulp.task('sass', function() {
 })
 
 
-gulp.task('watch',['hello','sass','scripts'], function(){
-  gulp.watch('./scss/style.scss', ['sass']);
+gulp.task('watch',['sass','scripts'], function(){
+  gulp.watch('./scss/**/*.scss', ['sass']);
   // Other watchers
 })
