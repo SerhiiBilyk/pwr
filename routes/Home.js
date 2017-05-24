@@ -5,24 +5,27 @@ var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({
     extended: false
 });
-
+homeRouter.use(bodyParser.urlencoded({
+    extended: false
+}));
+homeRouter.use(bodyParser.json());
 
 
 
 
 homeRouter.get('/', function(req, res) {
-  console.log('flash '+ req.session.flash);
-  var user;/*=req.user.name ||'guest';*/
-  if(req.hasOwnProperty('user')){
-     user=req.user.name;
+    console.log('flash ' + req.session.flash);
+    var user; /*=req.user.name ||'guest';*/
+    if (req.hasOwnProperty('user')) {
+        user = req.user.name;
 
-  }else{
-    user="guest"
-  }
+    } else {
+        user = "guest"
+    }
 
     mysql('select*from users', function(err, data) {
         res.render('home.pug', {
-             user: user
+            user: user
         })
     });
 })
@@ -49,18 +52,21 @@ homeRouter.post('/create', urlencodedParser, function(req, res) {
     res.redirect('/home')
 });
 homeRouter.post('/loadData', urlencodedParser, function(req, res) {
-console.log('Serhii Bilyk '+req.body)
+    console.dir(req.body.name);
+    var query = "select*from Books where title like '%" + req.body.name + "%' limit 10 ";
+    console.log(query)
+    mysql(query, function(err, results) {
+        console.log(results);
+        /*res.render('home.pug', {
+            books: results
+        })*/
+        res.end(JSON.stringify(results));
+    })
 
-   mysql("select*from users", function(err, results) {
-   console.log(results)
-  })
 
-    res.redirect('/home')
 });
 
-homeRouter.post('/loadData',urlencodedParser,function(req,res){
-  res.send('load data')
-})
+
 
 
 homeRouter.get('/test', function(req, res) { //database.remove(req.params.id)

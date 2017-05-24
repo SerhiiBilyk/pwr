@@ -1,8 +1,20 @@
 include includes/html_header.pug
 include includes/navigation.pug
-section(class="container-search" ng-app="app" ng-controller="search")
-  input(type="text"  ng-model="userBook" )
-  button(ng-click="loadBooks()") Get Data
+section(class="container-search" ng-app="app" ng-controller="search" ng-init="i=0")
+  input(type="text" ng-change="loadBooks()"  ng-model="userBook" )
+  button( ng-click="loadBooks()") Get Data
   p {{test}}
-  ul(ng-repeat="item in arr")
-    li {{item}}
+  ul( class="book-list" ng-repeat="item in books[0] track by $index")
+    li(class="container")
+      div(class="container-image")
+        img(ng-src="{{item.img_small}}")
+      div(class="container-text")
+        p {{item.title}}
+        p author: {{item.author}}
+        p rating: {{item.rating}}
+        
+        
+  //-  li {{item.title}} 
+      span 
+        
+   

@@ -8,12 +8,20 @@
     border-bottom:1px solid black;
     font-size:30px;
     background-color:#DADCDB;
-
-
     &:focus{
       outline:none;
     }
-
-
+  }
+  .book-list{
+    list-style-type:none;
+    .container{
+      display:block;
+      clear:left;
+      &-image,&-text{
+        display:inline-block;
+        float:left;
+        border:1px solid red;
+      }
+    }
   }
 }

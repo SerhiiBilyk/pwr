@@ -159,7 +159,11 @@ app.set('views', __dirname + '/views');
 
 
 /*end Routing*/
+/*
+* @param req.body.name
 
+
+*/
 
 app.post('/hello', urlencodedParser, function(req, res) {
     var myName = req.body.name;

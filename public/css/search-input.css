@@ -10,3 +10,12 @@
     background-color: #DADCDB; }
     .container-search input[type="text"]:focus {
       outline: none; }
+  .container-search .book-list {
+    list-style-type: none; }
+    .container-search .book-list .container {
+      display: block;
+      clear: left; }
+      .container-search .book-list .container-image, .container-search .book-list .container-text {
+        display: inline-block;
+        float: left;
+        border: 1px solid red; }
