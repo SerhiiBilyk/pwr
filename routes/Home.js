@@ -5,24 +5,23 @@ var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({
     extended: false
 });
-homeRouter.use(bodyParser.urlencoded({
-    extended: false
-}));
+
 homeRouter.use(bodyParser.json());
 
 
 
-
+/**
+*@param {user} if user exist, his name will apear on nav background-color
+* else , name of {user} will be 'guest'
+*/
 homeRouter.get('/', function(req, res) {
     console.log('flash ' + req.session.flash);
     var user; /*=req.user.name ||'guest';*/
     if (req.hasOwnProperty('user')) {
         user = req.user.name;
-
     } else {
         user = "guest"
     }
-
     mysql('select*from users', function(err, data) {
         res.render('home.pug', {
             user: user
@@ -51,28 +50,20 @@ homeRouter.post('/create', urlencodedParser, function(req, res) {
 
     res.redirect('/home')
 });
+/**
+*@param {req.body.name} book title, SearchController
+*/
 homeRouter.post('/loadData', urlencodedParser, function(req, res) {
     console.dir(req.body.name);
     var query = "select*from Books where title like '%" + req.body.name + "%' limit 10 ";
     console.log(query)
     mysql(query, function(err, results) {
         console.log(results);
-        /*res.render('home.pug', {
-            books: results
-        })*/
         res.end(JSON.stringify(results));
     })
 
 
 });
-
-
-
-
-homeRouter.get('/test', function(req, res) { //database.remove(req.params.id)
-    res.send('hello');
-})
-
 
 
 module.exports = homeRouter;

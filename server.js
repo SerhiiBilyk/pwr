@@ -15,7 +15,7 @@ const express = require('express'),
     homeRouter = require('./routes/Home.js'),
     authRouter = require('./routes/Auth.js'),
     /*Database*/
-  //  mysql = require('./database.js'),
+    //  mysql = require('./database.js'),
     /*Authentication*/
     session = require('express-session'),
     passport = require('passport'),
@@ -30,7 +30,10 @@ const express = require('express'),
 
 
 
-
+/**
+*@param {username} name of input field views/login.pug
+*@param {password} name of input field views/login.pug
+*/
 passport.use(new Strategy(
     function(username, password, cb) {
         verification.users.findByUsername(username, function(err, user) {
@@ -39,7 +42,7 @@ passport.use(new Strategy(
             }
             if (!user) {
                 return cb(null, false, {
-                  /*@param flash message*/
+                    /*@param flash message*/
                     message: 'Please enter correct user name'
                 });
             }
@@ -64,7 +67,7 @@ passport.deserializeUser(function(id, cb) {
     });
 });
 var app = express();
-app.locals.mysql= require('./database.js');
+app.locals.mysql = require('./database.js');
 
 app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')());
@@ -75,7 +78,9 @@ app.use(require('express-session')({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 60000 }
+    cookie: {
+        maxAge: 60000
+    }
 }));
 app.use(flash());
 app.use(passport.initialize());
@@ -93,11 +98,9 @@ app.post('/myPost',
 
 
 function isLoggedIn(req, res, next) {
-
     // if user is authenticated in the session, carry on
     if (req.isAuthenticated())
         return next();
-
     // if they aren't redirect them to the home page
     res.redirect('/');
 }
@@ -110,11 +113,6 @@ app.get('/profile',
             session: req.session.passport.user
         });
     });
-
-
-
-
-
 
 app.use('/home', homeRouter);
 app.use('/auth', authRouter);
@@ -140,36 +138,32 @@ Also read about sesisons, and store session objects
 
 
 #add authentication for all admin panel routes http://expressjs.com/en/api.html#app.locals  app.all('*')
-# finish 'search-input component' , SearchController, Home.js, home.pug
+# add 'Forgot password functionality'
 */
 
 
 
-/*app use*/
-//app.use(express.static('public'));
+
 app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
-/*app set*/
+
 app.set('view engine', 'pug');
 app.set('views', __dirname + '/views');
-/*Routing*/
 
 
-/*end Routing*/
-/*
-* @param req.body.name
 
 
-*/
-
+/** Main database generator
+ * @param {req.body.name} ->book title
+ * @param {req.body.page} ->Goodreads API page
+ * do request on start page localhost:8081
+ * {CtrlController} responsible for AJAX post request
+ */
 app.post('/hello', urlencodedParser, function(req, res) {
     var myName = req.body.name;
-
-
-
     gr.searchBooks({
             q: req.body.name,
             page: req.body.page
@@ -195,9 +189,7 @@ app.post('/hello', urlencodedParser, function(req, res) {
 
 
 app.get('/', function(req, res) {
-
     res.sendFile(__dirname + '/index.html');
-
 });
 
 
@@ -215,8 +207,6 @@ const gr = goodreads(myCredentials);
 /*gr.getGroupInfo(189072)
     .then(response => {
         result = response
-
-
         console.log(result)
     });
     */
