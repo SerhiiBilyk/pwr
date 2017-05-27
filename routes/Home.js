@@ -55,10 +55,10 @@ homeRouter.post('/create', urlencodedParser, function(req, res) {
 */
 homeRouter.post('/loadData', urlencodedParser, function(req, res) {
     console.dir(req.body.name);
-    var query = "select*from Books where title like '%" + req.body.name + "%' limit 10 ";
+    var query = "select*from Books where title like '%" + req.body.name + "%' order by rating desc  ";
     console.log(query)
     mysql(query, function(err, results) {
-        console.log(results);
+        console.log(results.length);
         res.end(JSON.stringify(results));
     })
 

@@ -2,19 +2,26 @@ include includes/html_header.pug
 include includes/navigation.pug
 section(class="container-search" ng-app="app" ng-controller="search" ng-init="i=0")
   input(type="text" ng-change="loadBooks()"  ng-model="userBook" )
-  button( ng-click="loadBooks()") Get Data
+  
+  button( ng-click="nextPage(10)" ng-show="showNext") Next page 
+  button( ng-click="nextPage(-10)" ng-show="showPrev") Previous page 
+  p page: {{page/10+1}}/{{pageQuantity |number :0}}   
+  label(for="select") Order by:
+  select(id="select" ng-model="sort")
+      option(value="-rating") Rating
+      option(value="title") Title
+      option(value="author") Author
+      option(value="-rating_count") Feedbacks
+   
   p {{test}}
-  ul( class="book-list" ng-repeat="item in books[0] track by $index")
-    li(class="container")
+  ul( class="book-list" )
+    li(class="container" ng-repeat="item in books[0] |limitTo:10:page| orderBy:sort")
       div(class="container-image")
         img(ng-src="{{item.img_small}}")
       div(class="container-text")
         p {{item.title}}
         p author: {{item.author}}
         p rating: {{item.rating}}
+        p feedback: {{item.rating_count}}
         
         
-  //-  li {{item.title}} 
-      span 
-        
-   
