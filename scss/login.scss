@@ -1,6 +1,4 @@
-body{
-  background-color:#DADCDB;
-}
+
 .container-login{
   width:300px;
   margin:200px auto 0 auto;
@@ -9,6 +7,8 @@ body{
     background-color:white;
     box-shadow:2px 2px 2px gray;
       border-radius:3px;
+      min-width:300px;
+      min-height:185px;
 
     &-form{
       width:100%;

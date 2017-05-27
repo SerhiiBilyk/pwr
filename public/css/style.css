@@ -45,16 +45,15 @@ header {
           header .navigation-block ul li a:active, header .navigation-block ul li a:hover, header .navigation-block ul li a:visited {
             color: white; }
 
-body {
-  background-color: #DADCDB; }
-
 .container-login {
   width: 300px;
   margin: 200px auto 0 auto; }
   .container-login .login {
     background-color: white;
     box-shadow: 2px 2px 2px gray;
-    border-radius: 3px; }
+    border-radius: 3px;
+    min-width: 300px;
+    min-height: 185px; }
     .container-login .login-form {
       width: 100%;
       display: inline-block;
@@ -81,19 +80,32 @@ body {
     height: 30px;
     border: none;
     border-bottom: 1px solid black;
-    font-size: 30px;
-    background-color: #DADCDB; }
+    font-size: 30px; }
     .container-search input[type="text"]:focus {
       outline: none; }
   .container-search .book-list {
-    list-style-type: none; }
+    list-style-type: none;
+    perspective: 50px; }
     .container-search .book-list .container {
       display: block;
-      clear: left; }
+      clear: left;
+      overflow: hidden;
+      margin: 10px 0;
+      padding: 5px;
+      transition: all 0.5s ease-in;
+      background-color: #F5F5F5;
+      border-radius: 5px;
+      box-shadow: 2px 2px 2px gray; }
+      .container-search .book-list .container:hover {
+        box-shadow: 2px 2px 2px #FF7C5E; }
       .container-search .book-list .container-image, .container-search .book-list .container-text {
         display: inline-block;
-        float: left;
-        border: 1px solid red; }
+        float: left; }
+      .container-search .book-list .container-image {
+        font-size: 0;
+        margin-right: 10px; }
+      .container-search .book-list .container-text {
+        font-size: 14px; }
 
 * {
   margin: 0;

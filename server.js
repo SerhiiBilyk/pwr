@@ -214,23 +214,8 @@ const gr = goodreads(myCredentials);
 
 
 // setup e-mail data
-var mailOptions = {
-    from: '"Our Code World " <sergiybiluk@gmail.com>', // sender address (who sends)
-    to: 'sergiybiluk@gmail.com', // list of receivers (who receives)
-    subject: 'Hello', // Subject line
-    text: 'Hello world ', // plaintext body
-    html: '<b>Hello world </b><br> This is the first email sent with Nodemailer in Node.js' // html body
-};
 
-/* send mail with defined transport object
-transporter.sendMail(mailOptions, function(error, info){
-    if(error){
-        return console.log(error);
-    }
 
-    console.log('Message sent: ' + info.response);
-});
-*/
 
 
 var server = app.listen(8081, function() {

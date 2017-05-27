@@ -1,0 +1,26 @@
+doctype
+html(lang="en")
+    head
+        title
+        link(rel="stylesheet" type="text/css" href="../css/style.css")
+        script(src="./login.js")
+        //-angular
+    body
+      -var confirm=show
+      if !confirm
+       div(class="container-login")
+         div(class="login")      
+           form(id="form" class="login-form" method="post" action="/home/forgot")
+             div(class="login-form-field")
+               label(for="recoveryName") Enter your name            
+               br
+               input(type="text" id="recoveryName" name="recoveryName")
+             div(class="login-form-field")
+               input(type="submit" value="Send me my password")            
+      else 
+       div(class="container-login")
+         div(class="login")  
+           p Please check your email
+           a(href="/auth/login") Back to the login page
+          
+              

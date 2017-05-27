@@ -1,13 +1,12 @@
-body {
-  background-color: #DADCDB; }
-
 .container-login {
   width: 300px;
   margin: 200px auto 0 auto; }
   .container-login .login {
     background-color: white;
     box-shadow: 2px 2px 2px gray;
-    border-radius: 3px; }
+    border-radius: 3px;
+    min-width: 300px;
+    min-height: 185px; }
     .container-login .login-form {
       width: 100%;
       display: inline-block;

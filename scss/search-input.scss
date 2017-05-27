@@ -7,20 +7,38 @@
     border:none;
     border-bottom:1px solid black;
     font-size:30px;
-    background-color:#DADCDB;
     &:focus{
       outline:none;
     }
   }
   .book-list{
     list-style-type:none;
+    perspective:50px;
     .container{
       display:block;
       clear:left;
+      overflow:hidden;
+      margin:10px 0;
+      padding:5px;
+      transition:all 0.5s ease-in;
+      background-color:#F5F5F5;
+      border-radius:5px;
+      box-shadow:2px 2px 2px gray;
+      &:hover{
+        box-shadow:2px 2px 2px #FF7C5E;
+      }
+      //&:nth-child(odd){background-color:#D5E1DD;}
       &-image,&-text{
         display:inline-block;
         float:left;
-        border:1px solid red;
+      }
+      &-image{
+        font-size:0;
+        margin-right:10px;
+      }
+      &-text{
+        font-size:14px;
+
       }
     }
   }
