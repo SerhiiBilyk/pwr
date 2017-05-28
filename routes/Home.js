@@ -3,17 +3,17 @@ var homeRouter = express.Router();
 var mysql = require('./../database.js');
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({
-    extended: false
-}),
-  transporter = require('../settings/mail');
+        extended: false
+    }),
+    transporter = require('../settings/mail');
 homeRouter.use(bodyParser.json());
 
 
 
 /**
-*@param {user} if user exist, his name will apear on nav background-color
-* else , name of {user} will be 'guest'
-*/
+ *@param {user} if user exist, his name will apear on nav background-color
+ * else , name of {user} will be 'guest'
+ */
 homeRouter.get('/', function(req, res) {
     console.log('flash ' + req.session.flash);
     var user; /*=req.user.name ||'guest';*/
@@ -51,8 +51,8 @@ homeRouter.post('/create', urlencodedParser, function(req, res) {
     res.redirect('/home')
 });
 /**
-*@param {req.body.name} book title, SearchController
-*/
+ *@param {req.body.name} book title, SearchController
+ */
 homeRouter.post('/loadData', urlencodedParser, function(req, res) {
     console.dir(req.body.name);
     var query = "select*from Books where title like '%" + req.body.name + "%' order by rating desc  ";
@@ -65,31 +65,49 @@ homeRouter.post('/loadData', urlencodedParser, function(req, res) {
 
 });
 homeRouter.get('/forgot', function(req, res) {
-    res.render('login-forgot.pug',{show:false})
+    res.render('login-forgot.pug', {
+        show: false
+    })
 })
+/**
+*@param {results} MySQL query result, if user exist, we send email to him with password
+* else we 'Please check your user name'
+*{view} login-forgot.pug
+*/
 homeRouter.post('/forgot', function(req, res) {
+    var query = "select*from users where name='" + req.body.recoveryName + "'";
+    mysql(query, function(err, results) {
 
-  console.log('test: '+req.body.recoveryName)
-  var query = "select email from users where name='" + req.body.recoveryName+"'" ;
-  console.log(query)
-  mysql(query, function(err, results) {
-    var mailOptions = {
-        from: '"Our Code World " <sergiybiluk@gmail.com>', // sender address (who sends)
-        to: 'sergiybiluk@gmail.com', // list of receivers (who receives)
-        subject: 'Hello', // Subject line
-        text: 'Hello world ', // plaintext body
-        html: '<b>Hello world </b><br> This is the first email sent with Nodemailer in Node.js' // html body
-    };
-    transporter.sendMail(mailOptions, function(error, info){
-        if(error){
-            return console.log(error);
+        if (results[0] != undefined) {
+            console.log(results[0])
+            var mailOptions = {
+                from: '"Our Code World " <sergiybiluk@gmail.com>',
+                to: results[0].email,
+                subject: 'Hello',
+                text: results[0].password,
+                html: 'Hello, your password is: ' + results[0].password
+            };
+
+            transporter.sendMail(mailOptions, function(error, info) {
+                if (error) {
+                    return console.log(error);
+                }
+            });
+
+            res.render('login-forgot.pug', {
+                show: true
+            })
+        } else if (results[0] == undefined) {
+
+            res.render('login-forgot.pug', {
+                show: false,
+                user: 'Please check your user name'
+            })
         }
 
-    });
-  console.log(results[0].email)
-    res.render('login-forgot.pug',{show:true})
-  })
+    })
 })
+
 
 
 module.exports = homeRouter;

@@ -46,7 +46,7 @@ passport.use(new Strategy(
                     message: 'Please enter correct user name'
                 });
             }
-            if (user.surname != password) {
+            if (user.password != password) {
                 return cb(null, false, {
                     message: 'Please enter correct password'
                 });
@@ -95,8 +95,6 @@ app.post('/myPost',
         res.redirect('/home');
     });
 
-
-
 function isLoggedIn(req, res, next) {
     // if user is authenticated in the session, carry on
     if (req.isAuthenticated())
@@ -138,7 +136,7 @@ Also read about sesisons, and store session objects
 
 
 #add authentication for all admin panel routes http://expressjs.com/en/api.html#app.locals  app.all('*')
-# add 'Forgot password functionality'
+#
 */
 
 

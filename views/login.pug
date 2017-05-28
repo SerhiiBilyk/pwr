@@ -3,7 +3,7 @@ html(lang="en")
     head
         title
         link(rel="stylesheet" type="text/css" href="../css/style.css")
-        script(src="./login.js")
+        
         //-angular
     body
       div(class="container-login")
@@ -20,9 +20,11 @@ html(lang="en")
                
               br
               input(type="password" id="userPassword" name="password")
-              p(class="error-message") #{result}
+              p(class="message-error")  #{result}
             div(class="login-form-field")
               input(type="submit" value="Log in")
-              a(href="/home") Enter as a guest
-              a(href="/home/forgot") Forgot your password?
+              p
+                a(href="/home") Enter as a guest
+              p
+                a(href="/home/forgot") Forgot your password?
             

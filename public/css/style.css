@@ -1,76 +1,85 @@
-header {
-  background-color: black; }
-  header .navigation {
-    overflow: hidden; }
-    header .navigation-links {
+header .navigation {
+  overflow: hidden; }
+  header .navigation-links {
+    display: inline-block;
+    float: left; }
+    header .navigation-links li {
       display: inline-block;
-      float: left; }
-      header .navigation-links li {
-        display: inline-block;
-        color: white; }
-        header .navigation-links li a {
-          display: block;
-          padding: 20px;
-          color: white;
-          transition: all 1s ease;
-          background-color: transparent; }
-          header .navigation-links li a:active, header .navigation-links li a:link, header .navigation-links li a:visited {
-            text-decoration: none; }
-          header .navigation-links li a:hover {
-            background-color: red; }
-    header .navigation-block {
-      position: absolute;
-      right: 0;
-      display: inline-block; }
-      header .navigation-block-search {
-        position: relative; }
-        header .navigation-block-search input[type='text'] {
-          border-radius: 3px;
+      color: white; }
+      header .navigation-links li a {
+        display: block;
+        padding: 20px;
+        color: white;
+        transition: all 1s ease;
+        background-color: transparent; }
+        header .navigation-links li a:active, header .navigation-links li a:link, header .navigation-links li a:visited {
+          text-decoration: none; }
+        header .navigation-links li a:hover {
+          background-color: red; }
+  header .navigation-block {
+    position: absolute;
+    right: 0;
+    display: inline-block; }
+    header .navigation-block-search {
+      position: relative; }
+      header .navigation-block-search input[type='text'] {
+        border-radius: 3px;
+        border: none;
+        font-size: 20px; }
+        header .navigation-block-search input[type='text'] + button[type='submit'] {
+          width: 23px;
+          height: 23px;
+          position: absolute;
+          right: 0;
           border: none;
-          font-size: 20px; }
-          header .navigation-block-search input[type='text'] + button[type='submit'] {
-            width: 23px;
-            height: 23px;
-            position: absolute;
-            right: 0;
-            border: none;
-            background-color: transparent; }
-      header .navigation-block ul li {
-        display: inline-block;
-        padding: 20px 5px; }
-        header .navigation-block ul li a {
-          display: block;
-          text-decoration: none;
+          background-color: transparent; }
+    header .navigation-block ul li {
+      display: inline-block;
+      padding: 20px 5px; }
+      header .navigation-block ul li a {
+        display: block;
+        text-decoration: none;
+        color: white; }
+        header .navigation-block ul li a:active, header .navigation-block ul li a:hover, header .navigation-block ul li a:visited {
           color: white; }
-          header .navigation-block ul li a:active, header .navigation-block ul li a:hover, header .navigation-block ul li a:visited {
-            color: white; }
 
 .container-login {
   width: 300px;
-  margin: 200px auto 0 auto; }
+  margin: 200px auto 0; }
   .container-login .login {
-    background-color: white;
+    background-color: #343d46;
     box-shadow: 2px 2px 2px gray;
-    border-radius: 3px;
+    border-radius: 8px;
     min-width: 300px;
-    min-height: 185px; }
+    min-height: 185px;
+    padding: 15px; }
     .container-login .login-form {
       width: 100%;
-      display: inline-block;
-      padding: 15px; }
+      display: inline-block; }
       .container-login .login-form-field {
         margin: 5px 0; }
+        .container-login .login-form-field .message {
+          color: #b0f37b; }
+          .container-login .login-form-field .message-error {
+            color: #f5a2a2; }
+        .container-login .login-form-field a:active, .container-login .login-form-field a:hover, .container-login .login-form-field a:link, .container-login .login-form-field a:visited {
+          color: white; }
         .container-login .login-form-field label {
-          display: inline-block; }
-        .container-login .login-form-field input[type='text'], .container-login .login-form-field input[type="password"] {
+          display: inline-block;
+          color: white; }
+        .container-login .login-form-field input[type="password"],
+        .container-login .login-form-field input[type='text'] {
           font-size: 20px;
           border-radius: 3px;
-          border: 1px solid rgba(128, 128, 128, 0.5); }
+          border: 1px solid rgba(128, 128, 128, 0.5);
+          background-color: #e7eaef; }
         .container-login .login-form-field input[type="submit"] {
           background-color: #9A9FB6;
           border: none;
           border-radius: 2px;
           padding: 7px; }
+          .container-login .login-form-field input[type="submit"]:hover {
+            background-color: #e7eaef; }
 
 .container-search {
   width: 80%;
@@ -106,6 +115,12 @@ header {
         margin-right: 10px; }
       .container-search .book-list .container-text {
         font-size: 14px; }
+
+:root {
+  background-color: #e7eaef; }
+
+header {
+  background-color: #343d46; }
 
 * {
   margin: 0;

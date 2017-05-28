@@ -1,37 +1,62 @@
+.container-login {
+    width: 300px;
+    margin: 200px auto 0;
 
-.container-login{
-  width:300px;
-  margin:200px auto 0 auto;
+    .login {
+        background-color: #343d46;
+        box-shadow: 2px 2px 2px gray;
+        border-radius: 8px;
+        min-width: 300px;
+        min-height: 185px;
+        padding: 15px;
 
-  .login{
-    background-color:white;
-    box-shadow:2px 2px 2px gray;
-      border-radius:3px;
-      min-width:300px;
-      min-height:185px;
+        &-form {
+            width: 100%;
+            display: inline-block;
 
-    &-form{
-      width:100%;
-      display:inline-block;
-      padding:15px;
-      &-field{
-        margin:5px 0;
-        label{
-          display:inline-block;
+            &-field {
+                margin: 5px 0;
+                .message{
+                  color:#b0f37b;
+                  &-error{
+                    color:#f5a2a2;
+                  }
+
+                }
+
+                a {
+                    &:active,
+                    &:hover,
+                    &:link,
+                    &:visited {
+                        color: white;
+                    }
+                }
+
+                label {
+                    display: inline-block;
+                    color: white;
+                }
+
+                input[type="password"],
+                input[type='text'] {
+                    font-size: 20px;
+                    border-radius: 3px;
+                    border: 1px solid rgba(128, 128, 128, 0.5);
+                    background-color: #e7eaef;
+                }
+
+                input[type="submit"] {
+                    background-color: #9A9FB6;
+                    border: none;
+                    border-radius: 2px;
+                    padding: 7px;
+
+                    &:hover {
+                        background-color: #e7eaef;
+                    }
+                }
+            }
         }
-        input[type='text'], input[type="password"]{
-          font-size:20px;
-          border-radius:3px;
-          border:1px solid rgba(128, 128, 128, 0.5);
-        }
-        input[type="submit"]{
-          background-color: #9A9FB6;
-          border:none;
-          border-radius:2px;
-          padding:7px;
-
-        }
-      }
     }
-  }
 }

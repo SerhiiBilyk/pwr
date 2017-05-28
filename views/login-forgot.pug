@@ -15,12 +15,15 @@ html(lang="en")
                label(for="recoveryName") Enter your name            
                br
                input(type="text" id="recoveryName" name="recoveryName")
+               p #{user}
              div(class="login-form-field")
                input(type="submit" value="Send me my password")            
-      else 
+      else if confirm==true
        div(class="container-login")
          div(class="login")  
-           p Please check your email
+          div(class="login-form-field")
+           p(class="message") Please check your email
            a(href="/auth/login") Back to the login page
+    
           
               
