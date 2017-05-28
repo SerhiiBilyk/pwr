@@ -10,12 +10,12 @@ html(lang="en")
       if !confirm
        div(class="container-login")
          div(class="login")      
-           form(id="form" class="login-form" method="post" action="/home/forgot")
+           form(id="form" class="login-form" method="post" action="/auth/forgot")
              div(class="login-form-field")
                label(for="recoveryName") Enter your name            
                br
                input(type="text" id="recoveryName" name="recoveryName")
-               p #{user}
+               p(class="message") #{user}
              div(class="login-form-field")
                input(type="submit" value="Send me my password")            
       else if confirm==true

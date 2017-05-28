@@ -8,7 +8,7 @@ html(lang="en")
     body
       div(class="container-login")
         div(class="login")
-          form(id="form" class="login-form" method="post" action="/myPost")
+          form(id="form" class="login-form" method="post" action="/authentication")
             div(class="login-form-field")
               -var result=message||""
               label(for="userName") Enter your name 
@@ -26,5 +26,5 @@ html(lang="en")
               p
                 a(href="/home") Enter as a guest
               p
-                a(href="/home/forgot") Forgot your password?
+                a(href="/auth/forgot") Forgot your password?
             

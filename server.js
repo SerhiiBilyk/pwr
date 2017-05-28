@@ -25,11 +25,6 @@ const express = require('express'),
     /*Emails*/
     transporter = require('./settings/mail');
 
-
-
-
-
-
 /**
 *@param {username} name of input field views/login.pug
 *@param {password} name of input field views/login.pug
@@ -86,7 +81,7 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.post('/myPost',
+app.post('/authentication',
     passport.authenticate('local', {
         failureRedirect: '/auth/login',
         failureFlash: true
@@ -102,6 +97,7 @@ function isLoggedIn(req, res, next) {
     // if they aren't redirect them to the home page
     res.redirect('/');
 }
+/*for future profile routing*/
 app.get('/profile',
     require('connect-ensure-login').ensureLoggedIn(),
     function(req, res) {
@@ -123,20 +119,19 @@ http://passportjs.org/docs
 https://app.pluralsight.com/player?course=nodejs-express-web-applications&author=jonathan-mills&name=nodejs-express-web-applications-m7&clip=3&mode=live
 https://app.pluralsight.com/player?course=expressjs&author=hadi-hariri&name=expressjs-m5&clip=4&mode=live
 
-main exmples
+main examples
 https://github.com/passport/express-4.x-local-example/blob/master/server.js
 https://gist.github.com/manjeshpv/84446e6aa5b3689e8b84
 
 https://scotch.io/tutorials/easy-node-authentication-setup-and-local
 
-Check this passportJs feature -> req.isAuthenticated()
 Also read about sesisons, and store session objects
 
 //TO DO LIST
 
 
 #add authentication for all admin panel routes http://expressjs.com/en/api.html#app.locals  app.all('*')
-#
+# add profile routing
 */
 
 
@@ -185,7 +180,7 @@ app.post('/hello', urlencodedParser, function(req, res) {
         });
 });
 
-
+/*in future this path will redirect to /home*/
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html');
 });
@@ -197,24 +192,12 @@ const myCredentials = {
     secret: 'rnY7ZovtfboFixLXVFofiG6gx2ua2uVtvar3KyBhs'
 };
 const gr = goodreads(myCredentials);
-
-
-
-
-
 /*gr.getGroupInfo(189072)
     .then(response => {
         result = response
         console.log(result)
     });
     */
-/*MAIL*/
-
-
-// setup e-mail data
-
-
-
 
 var server = app.listen(8081, function() {
     var host = server.address().address;

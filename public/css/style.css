@@ -43,6 +43,27 @@ header .navigation {
         header .navigation-block ul li a:active, header .navigation-block ul li a:hover, header .navigation-block ul li a:visited {
           color: white; }
 
+@media all and (max-width: 520px) and (min-width: 0) {
+  header .navigation-links {
+    display: block;
+    float: none; }
+    header .navigation-links li {
+      display: block;
+      text-align: center; }
+      header .navigation-links li span {
+        display: block;
+        padding: 20px; }
+  header .navigation-block {
+    position: relative;
+    width: 100%; }
+    header .navigation-block ul li {
+      display: block;
+      padding: 20px;
+      margin: 0;
+      text-align: center; }
+      header .navigation-block ul li:nth-child(1) {
+        display: none; } }
+
 .container-login {
   width: 300px;
   margin: 200px auto 0; }

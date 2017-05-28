@@ -35,21 +35,24 @@ header {
             position: absolute;
             right: 0;
             display: inline-block;
-            &-search{
-              position:relative;
-              input[type='text']{
-                border-radius:3px;
-                border:none;
-                font-size:20px;
-                &+button[type='submit']{
-                  width:23px;
-                  height:23px;
-                  position:absolute;
-                  right:0;
-                  border:none;
-                  background-color:transparent;
+
+            &-search {
+                position: relative;
+
+                input[type='text'] {
+                    border-radius: 3px;
+                    border: none;
+                    font-size: 20px;
+
+                    &+button[type='submit'] {
+                        width: 23px;
+                        height: 23px;
+                        position: absolute;
+                        right: 0;
+                        border: none;
+                        background-color: transparent;
+                    }
                 }
-              }
             }
 
             ul {
@@ -67,6 +70,43 @@ header {
                         &:visited {
                             color: white;
                         }
+                    }
+                }
+            }
+        }
+    }
+}
+@media all and (max-width: 520px) and (min-width: 0) {
+    header {
+        .navigation {
+            &-links {
+                display: block;
+                float: none;
+
+                li {
+                    display: block;
+                    text-align: center;
+
+                    span {
+                        display: block;
+                        padding: 20px;
+                    }
+                }
+            }
+
+            &-block {
+                position: relative;
+                width: 100%;
+
+                ul {
+                    li {
+                        &:nth-child(1) {
+                            display: none;
+                        }
+                        display: block;
+                        padding: 20px;
+                        margin: 0;
+                        text-align: center;
                     }
                 }
             }

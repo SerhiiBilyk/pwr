@@ -1,12 +1,12 @@
-var express = require('express');
-var authRouter = express.Router();
-var mysql = require('./../database.js');
-var bodyParser = require('body-parser');
-var urlencodedParser = bodyParser.urlencoded({
-    extended: false
-});
-
-var app = express();
+var express = require('express'),
+    authRouter = express.Router(),
+    mysql = require('./../database.js'),
+    bodyParser = require('body-parser'),
+    urlencodedParser = bodyParser.urlencoded({
+        extended: false
+    }),
+    transporter = require('../settings/mail'),
+    app = express();
 
 authRouter.get('/', function(req, res) {
     res.render('empty.pug');
@@ -27,11 +27,56 @@ authRouter.get('/login', function(req, res) {
     var flash_message;
     req.session.flash ?
         flash_message = req.session.flash.error.pop() : false;
-    res.render('login.pug', {
+    res.render('login/login.pug', {
         message: flash_message
     });
 
 });
+authRouter.get('/forgot', function(req, res) {
+    res.render('login/login-forgot.pug', {
+        show: false
+    })
+})
+/**
+ *@param {results} MySQL query result, if user exist, we send email to him with password
+ * else we 'Please check your user name'
+ *@param {show} defines one of two states of recovery block.
+ *{view} login-forgot.pug
+ */
+authRouter.post('/forgot', function(req, res) {
+    var query = "select*from users where name='" + req.body.recoveryName + "'";
+    mysql(query, function(err, results) {
+        /*if name-> req.body.recoveryName exist in database*/
+        if (results[0] != undefined) {
+            console.log(results[0])
+            var mailOptions = {
+                from: '"Our Code World " <sergiybiluk@gmail.com>',
+                to: results[0].email,
+                subject: 'Hello',
+                text: results[0].password,
+                html: 'Hello, your password is: ' + results[0].password
+            };
+            /*sending email to user with his password*/
+            transporter.sendMail(mailOptions, function(error, info) {
+                if (error) {
+                    return console.log(error);
+                }
+            });
+
+            res.render('login/login-forgot.pug', {
+                show: true
+            })
+            /*if name does not exist in database*/
+        } else if (results[0] == undefined) {
+
+            res.render('login/login-forgot.pug', {
+                show: false,
+                user: 'Please check your user name'
+            })
+        }
+
+    })
+})
 
 
 

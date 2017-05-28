@@ -12,8 +12,7 @@ section(class="container-search" ng-app="app" ng-controller="search" ng-init="i=
       option(value="title") Title
       option(value="author") Author
       option(value="-rating_count") Feedbacks
-   
-  p {{test}}
+
   ul( class="book-list" )
     li(class="container" ng-repeat="item in books[0] |limitTo:10:page| orderBy:sort")
       div(class="container-image")
