@@ -132,6 +132,7 @@ Also read about sesisons, and store session objects
 
 #add authentication for all admin panel routes http://expressjs.com/en/api.html#app.locals  app.all('*')
 # add profile routing
+# finisf 'register user' component, Auth.js routing
 */
 
 

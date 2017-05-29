@@ -1,0 +1,15 @@
+.container-sign-up {
+  width: 500px;
+  min-height: 200px;
+  background-color: #343d46;
+  box-shadow: 2px 2px 2px gray;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 100px auto 0; }
+  .container-sign-up .sign-up-form legend {
+    text-align: center;
+    color: white; }
+  .container-sign-up .sign-up-form-field label {
+    color: white; }
+  .container-sign-up .sign-up-form-field input {
+    display: block; }

@@ -77,6 +77,23 @@ authRouter.post('/forgot', function(req, res) {
 
     })
 })
+authRouter.get('/signUp', function(req, res) {
+    res.render('login/sign-up.pug')
+})
+authRouter.post('/signUp', urlencodedParser, function(req, res) {
+    var values = {
+        name: req.body.username,
+        surname: req.body.surname,
+        country:req.body.country,
+        email:req.body.email,
+        password:req.body.password
+    }
+    mysql("insert into users set ?", values, function(err, results) {
+      console.log('inserted')
+    })
+
+    res.redirect('/home')
+});
 
 
 
