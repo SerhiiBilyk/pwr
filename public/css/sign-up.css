@@ -6,10 +6,29 @@
   padding: 15px;
   border-radius: 8px;
   margin: 100px auto 0; }
-  .container-sign-up .sign-up-form legend {
-    text-align: center;
-    color: white; }
-  .container-sign-up .sign-up-form-field label {
-    color: white; }
-  .container-sign-up .sign-up-form-field input {
-    display: block; }
+  .container-sign-up .sign-up-form fieldset {
+    border: none; }
+    .container-sign-up .sign-up-form fieldset legend {
+      text-align: center;
+      color: white; }
+  .container-sign-up .sign-up-form-field {
+    margin: 5px 0; }
+    .container-sign-up .sign-up-form-field label {
+      color: white; }
+    .container-sign-up .sign-up-form-field input[type="text"],
+    .container-sign-up .sign-up-form-field input[type="email"],
+    .container-sign-up .sign-up-form-field input[type="password"] {
+      display: block;
+      font-size: 20px;
+      border-radius: 3px;
+      border: 1px solid rgba(128, 128, 128, 0.5);
+      background-color: #e7eaef; }
+    .container-sign-up .sign-up-form-field input[type="submit"] {
+      background-color: #9A9FB6;
+      border: none;
+      border-radius: 2px;
+      padding: 7px; }
+      .container-sign-up .sign-up-form-field input[type="submit"]:hover {
+        background-color: #e7eaef; }
+    .container-sign-up .sign-up-form-field .message-error {
+      color: #f5a2a2; }

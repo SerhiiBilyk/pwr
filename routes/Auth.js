@@ -7,6 +7,7 @@ var express = require('express'),
     }),
     transporter = require('../settings/mail'),
     app = express();
+    authRouter.use(bodyParser.json());
 
 authRouter.get('/', function(req, res) {
     res.render('empty.pug');
@@ -88,11 +89,40 @@ authRouter.post('/signUp', urlencodedParser, function(req, res) {
         email:req.body.email,
         password:req.body.password
     }
+
     mysql("insert into users set ?", values, function(err, results) {
       console.log('inserted')
     })
 
     res.redirect('/home')
+});
+authRouter.post('/signUp', urlencodedParser, function(req, res) {
+    var values = {
+        name: req.body.username,
+        surname: req.body.surname,
+        country:req.body.country,
+        email:req.body.email,
+        password:req.body.password
+    }
+
+    mysql("insert into users set ?", values, function(err, results) {
+      console.log('inserted')
+    })
+
+    res.redirect('/home')
+});
+authRouter.post('/emailCheck', urlencodedParser, function(req, res) {
+console.log(req.body.userEmail)
+    var query = "select*from users where email='"+req.body.userEmail+"'";
+
+    mysql(query, function(err, results) {
+
+      var state;
+      results.length>0
+      ?state=true
+      :state=false
+        res.end(JSON.stringify(results));
+    })
 });
 
 

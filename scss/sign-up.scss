@@ -7,16 +7,40 @@
   border-radius:8px;
   margin:100px auto 0;
   .sign-up-form{
-    legend{
-      text-align:center;
-      color:white;
+    fieldset{
+      border:none;
+      legend{
+        text-align:center;
+        color:white;
+      }
     }
+
     &-field{
+        margin: 5px 0;
       label{
         color:white;
       }
-      input{
+      input[type="text"],
+      input[type="email"],
+      input[type="password"]{
         display:block;
+        font-size: 20px;
+        border-radius: 3px;
+        border: 1px solid rgba(128, 128, 128, 0.5);
+        background-color: #e7eaef;
+      }
+      input[type="submit"]{
+        background-color: #9A9FB6;
+        border: none;
+        border-radius: 2px;
+        padding: 7px;
+
+        &:hover {
+            background-color: #e7eaef;
+        }
+      }
+      .message-error{
+          color:#f5a2a2;
       }
     }
   }
