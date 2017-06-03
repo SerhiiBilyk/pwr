@@ -18,9 +18,11 @@ section(class="container-search" ng-app="app" ng-controller="search" ng-init="i=
       div(class="container-image")
         img(ng-src="{{item.img_small}}")
       div(class="container-text")
-        p {{item.title}}
+        p 
+          a(href="/home/book/{{item.id}}") {{item.title}}
         p author: {{item.author}}
         p rating: {{item.rating}}
         p feedback: {{item.rating_count}}
+        p id: {{item.id}}
         
         

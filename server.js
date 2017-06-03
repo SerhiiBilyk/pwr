@@ -64,7 +64,10 @@ passport.deserializeUser(function(id, cb) {
 var app = express();
 app.locals.mysql = require('./database.js');
 
+
+/*What is this?
 app.use(require('morgan')('combined'));
+*/
 app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({
     extended: true
@@ -132,7 +135,7 @@ Also read about sesisons, and store session objects
 
 #add authentication for all admin panel routes http://expressjs.com/en/api.html#app.locals  app.all('*')
 # add profile routing
-# finisf 'register user' component, Auth.js routing
+# add send email function when user create new account, add message when register succesfully, finish this component
 */
 
 

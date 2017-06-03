@@ -1,5 +1,6 @@
 .container-sign-up {
-  width: 500px;
+  min-width: 300px;
+  width: 20%;
   min-height: 200px;
   background-color: #343d46;
   box-shadow: 2px 2px 2px gray;
@@ -15,6 +16,8 @@
     margin: 5px 0; }
     .container-sign-up .sign-up-form-field label {
       color: white; }
+      .container-sign-up .sign-up-form-field label .required {
+        color: red; }
     .container-sign-up .sign-up-form-field input[type="text"],
     .container-sign-up .sign-up-form-field input[type="email"],
     .container-sign-up .sign-up-form-field input[type="password"] {

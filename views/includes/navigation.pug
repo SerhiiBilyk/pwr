@@ -6,10 +6,10 @@ header
         a(href="/home") Home
       li
         a(href="#") Books
-      li
+      li(class="user")
         span
-          -var profile=user||'guest'   
-          i(class="fa fa-user" aria-hidden="true") #{profile}
+          -var profile=user||'guest'
+            a(href="/home/user") #{profile}
   
     div(class="navigation-block")
       ul
@@ -26,7 +26,7 @@ header
             a(href="/auth/signUp") Sign Up
         else
           li
-            a(href="auth/logout") Sign out 
+            a(href="/auth/logout") Sign out 
               i(class="fa fa-sign-out" aria-hidden="true") 
         
                              

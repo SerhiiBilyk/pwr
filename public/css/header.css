@@ -43,7 +43,7 @@ header .navigation {
         header .navigation-block ul li a:active, header .navigation-block ul li a:hover, header .navigation-block ul li a:visited {
           color: white; }
 
-@media all and (max-width: 520px) and (min-width: 0) {
+@media all and (max-width: 620px) and (min-width: 0) {
   header .navigation-links {
     display: block;
     float: none; }
@@ -51,8 +51,7 @@ header .navigation {
       display: block;
       text-align: center; }
       header .navigation-links li span {
-        display: block;
-        padding: 20px; }
+        display: block; }
   header .navigation-block {
     position: relative;
     width: 100%; }

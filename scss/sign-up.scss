@@ -1,5 +1,6 @@
 .container-sign-up{
-  width:500px;
+  min-width: 300px;
+width: 20%;
   min-height:200px;
   background-color: #343d46;
   box-shadow: 2px 2px 2px gray;
@@ -19,6 +20,9 @@
         margin: 5px 0;
       label{
         color:white;
+        .required{
+          color:red;
+        }
       }
       input[type="text"],
       input[type="email"],

@@ -6,7 +6,7 @@ app.controller('search', function search($scope, $http, $log) {
     $scope.dataLength = 0;
     $scope.showNext = false;
     $scope.showPrev = false;
-    $scope.pageQuantity=0;
+    $scope.pageQuantity = 0;
     $scope.nextPage = function(items) {
         $scope.page = $scope.page + items;
 
@@ -28,16 +28,17 @@ app.controller('search', function search($scope, $http, $log) {
      *which is rendered in views/home.pug
      */
     $scope.loadBooks = function() {
-  
+
         $http.post("http://localhost:8081/home/loadData", {
             name: $scope.userBook
         }).then(function(response) {
-            $scope.page=0;
+            $scope.page = 0;
             $scope.books = [];
             $scope.books.push(response.data);
-            $scope.showNext=true;
+            $scope.showNext = true;
             $scope.dataLength = response.data.length;
-$scope.pageQuantity=response.data.length/10;
+            $scope.pageQuantity = response.data.length / 10;
+            $log.log($scope.books[0])
         })
 
     }
