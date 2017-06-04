@@ -3,4 +3,4 @@ include includes/navigation.pug
 -var users=data
 ul
   each item in users
-    li=item
+    li #{item.id}, #{item.name}

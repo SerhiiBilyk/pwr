@@ -100,8 +100,6 @@ app.post('/authentication',
         failureFlash: true
     }),
     function(req, res) {
-        req.user.name == 'admin' ?
-            res.redirect('/home/admin') :
             res.redirect('/home');
     });
 
@@ -147,8 +145,8 @@ Also read about sesisons, and store session objects
 
 
 #add authentication for all admin panel routes http://expressjs.com/en/api.html#app.locals  app.all('*')
-# add profile routing
-# add send email function when user create new account, add message when register succesfully, finish this component
+# finish admin routing, add functionality: add/delete user, change user category (user,admin,manager)
+#
 */
 
 
