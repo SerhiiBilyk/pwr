@@ -1,11 +1,12 @@
 include includes/html_header.pug
 include includes/navigation.pug
 section(class="container-search" ng-app="app" ng-controller="search" ng-init="i=0")
-  input(type="text" ng-change="loadBooks()"  ng-model="userBook" )
+  input(type="text" ng-change="loadBooks()"  ng-model="userBook" placeholder="Search field" )
   
-  button( ng-click="nextPage(10)" ng-show="showNext") Next page 
-  button( ng-click="nextPage(-10)" ng-show="showPrev") Previous page 
-  p page: {{page/10+1}}/{{pageQuantity |number :0}}   
+  button( class="controls-next" ng-click="nextPage(10)" ng-show="showNext") &gt;
+  button( class="controls-prev" ng-click="nextPage(-10)" ng-show="showPrev") &lt;
+  p(class="page-quantity") {{page/10+1}}/{{pageQuantity |number :0}}
+     
   label(for="select") Order by:
   select(id="select" ng-model="sort")
       option(value="-rating") Rating

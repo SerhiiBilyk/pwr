@@ -73,8 +73,16 @@ homeRouter.get('/user', isLoggedIn, function(req, res) {
             data: results[0]
         })
     })
-
-
+})
+homeRouter.get('/admin', isLoggedIn, function(req, res) {
+    req.user.name == 'admin' ?
+        mysql(`select*from users`, function(err, results) {
+            res.render('admin.pug', {
+                user: user,
+                data:results[0]
+            })
+        }) :
+        res.render('home.pug');
 
 })
 homeRouter.get('/book/:id', function(req, res) {

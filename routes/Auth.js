@@ -109,7 +109,7 @@ authRouter.post('/signUp', urlencodedParser, function(req, res) {
         }
     });
 
-    res.redirect('/home')
+    res.render('login/login.pug',{name:req.body.username,password:req.body.password})
 });
 
 authRouter.post('/emailCheck', urlencodedParser, function(req, res) {

@@ -11,15 +11,17 @@ html(lang="en")
           form(id="form" class="login-form" method="post" action="/authentication")
             div(class="login-form-field")
               -var result=message||""
-              label(for="userName") Enter your name 
+              -var test=name||""
+              -var pass=password||""
+              label(for="userName") Enter your name #{test}
             
               br
-              input(type="text" id="userName" name="username")
+              input(type="text" id="userName" name="username" value=test)
             div(class="login-form-field")
               label(for="userPassword") Enter your password
                
               br
-              input(type="password" id="userPassword" name="password")
+              input(type="password" id="userPassword" name="password" value=pass)
               p(class="message-error")  #{result}
             div(class="login-form-field")
               input(type="submit" value="Log in")

@@ -14,6 +14,7 @@ const express = require('express'),
     /*Routing*/
     homeRouter = require('./routes/Home.js'),
     authRouter = require('./routes/Auth.js'),
+  //  adminRouter = require('./routes/Admin.js'),
     /*Database*/
     //  mysql = require('./database.js'),
     /*Authentication*/
@@ -26,9 +27,9 @@ const express = require('express'),
     transporter = require('./settings/mail');
 
 /**
-*@param {username} name of input field views/login.pug
-*@param {password} name of input field views/login.pug
-*/
+ *@param {username} name of input field views/login.pug
+ *@param {password} name of input field views/login.pug
+ */
 passport.use(new Strategy(
     function(username, password, cb) {
         verification.users.findByUsername(username, function(err, user) {
@@ -63,6 +64,14 @@ passport.deserializeUser(function(id, cb) {
 });
 var app = express();
 app.locals.mysql = require('./database.js');
+app.locals.isLoggedIn = function(req, res, next) {
+
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated())
+        return next();
+    // if they aren't redirect them to the home page
+    res.redirect('/home');
+}
 
 
 /*What is this?
@@ -76,6 +85,7 @@ app.use(require('express-session')({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: false,
+
     cookie: {
         maxAge: 60000
     }
@@ -90,7 +100,9 @@ app.post('/authentication',
         failureFlash: true
     }),
     function(req, res) {
-        res.redirect('/home');
+        req.user.name == 'admin' ?
+            res.redirect('/home/admin') :
+            res.redirect('/home');
     });
 
 function isLoggedIn(req, res, next) {
@@ -113,6 +125,7 @@ app.get('/profile',
 
 app.use('/home', homeRouter);
 app.use('/auth', authRouter);
+//app.use('/admin', authRouter);
 
 
 /*Authentication*/

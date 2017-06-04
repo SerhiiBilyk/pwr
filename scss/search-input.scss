@@ -1,45 +1,88 @@
-.container-search{
-  width:80%;
-  margin:40px auto 0 auto;
-  input[type="text"]{
-    width:100%;
-    height:30px;
-    border:none;
-    border-bottom:1px solid black;
-    font-size:30px;
-    &:focus{
-      outline:none;
-    }
-  }
-  .book-list{
-    list-style-type:none;
-    perspective:50px;
-    .container{
-      display:block;
-      clear:left;
-      overflow:hidden;
-      margin:10px 0;
-      padding:5px;
-      transition:all 0.5s ease-in;
-      background-color:#F5F5F5;
-      border-radius:5px;
-      box-shadow:2px 2px 2px gray;
-      &:hover{
-        box-shadow:2px 2px 2px #FF7C5E;
-      }
-      //&:nth-child(odd){background-color:#D5E1DD;}
-      &-image,&-text{
-        display:inline-block;
-        float:left;
-      }
-      &-image{
-        font-size:0;
-        margin-right:10px;
-      }
-      &-text{
-        font-size:14px;
+@mixin controls($left,$right) {
+    position: fixed;
+    top: 50%;
+    right: $right;
+    left: $left;
+    border: none;
+    background-color: #343d46;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    color: white;
 
-      }
+    &:hover {
+        border: 1px solid #343d46;
+        color: black;
+        background-color: white;
     }
-  }
+}
+
+.container-search {
+    width: 80%;
+    margin: 40px auto 0;
+
+    .page-quantity{
+      color:#ff8f00;
+      text-align:center;
+      font-size:22px;
+      font-weight:900;
+
+    }
+
+    .controls-next {
+        @include controls(auto,10px)
+    }
+
+    .controls-prev {
+        @include controls(10px,auto)
+    }
+
+    input[type="text"] {
+        width: 100%;
+        height: 40px;
+        border: none;
+        border-bottom: 1px solid black;
+        font-size: 40px;
+        text-align:center;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .book-list {
+        list-style-type: none;
+        perspective: 50px;
+
+        .container {
+            display: block;
+            clear: left;
+            overflow: hidden;
+            margin: 10px 0;
+            padding: 5px;
+            transition: all 0.5s ease-in;
+            background-color: #F5F5F5;
+            border-radius: 5px;
+            box-shadow: 2px 2px 2px gray;
+
+            &:hover {
+                box-shadow: 2px 2px 2px #FF7C5E;
+            }
+            //&:nth-child(odd){background-color:#D5E1DD;}
+            &-image,
+            &-text {
+                display: inline-block;
+                float: left;
+            }
+
+            &-image {
+                font-size: 0;
+                margin-right: 10px;
+            }
+
+            &-text {
+                font-size: 14px;
+            }
+        }
+    }
 }

@@ -1,12 +1,48 @@
 .container-search {
   width: 80%;
-  margin: 40px auto 0 auto; }
+  margin: 40px auto 0; }
+  .container-search .page-quantity {
+    color: #ff8f00;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 900; }
+  .container-search .controls-next {
+    position: fixed;
+    top: 50%;
+    right: 10px;
+    left: auto;
+    border: none;
+    background-color: #343d46;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    color: white; }
+    .container-search .controls-next:hover {
+      border: 1px solid #343d46;
+      color: black;
+      background-color: white; }
+  .container-search .controls-prev {
+    position: fixed;
+    top: 50%;
+    right: auto;
+    left: 10px;
+    border: none;
+    background-color: #343d46;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    color: white; }
+    .container-search .controls-prev:hover {
+      border: 1px solid #343d46;
+      color: black;
+      background-color: white; }
   .container-search input[type="text"] {
     width: 100%;
-    height: 30px;
+    height: 40px;
     border: none;
     border-bottom: 1px solid black;
-    font-size: 30px; }
+    font-size: 40px;
+    text-align: center; }
     .container-search input[type="text"]:focus {
       outline: none; }
   .container-search .book-list {
