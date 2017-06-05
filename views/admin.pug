@@ -1,6 +1,26 @@
 include includes/html_header.pug
 include includes/navigation.pug
 -var users=data
-ul
-  each item in users
-    li #{item.id}, #{item.name}
+table
+  theader
+    th Id
+    th Name
+    th Surname 
+    th Country 
+    th Email 
+    th Password
+    th User category
+    th Options
+  tbody
+    each item in users
+      tr      
+        td #{item.id}
+        td #{item.name} 
+        td #{item.surname}
+        td #{item.country}
+        td #{item.email}
+        td #{item.password}
+        td #{item.category}
+        td
+          a(href='/home/user/'+item.id+'/delete') delete 
+        

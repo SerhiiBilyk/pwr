@@ -68,19 +68,24 @@ function isLoggedIn(req, res, next) {
 }
 homeRouter.get('/user/:name', isLoggedIn, function(req, res, next) {
     //req.user.name == 'admin' ? next() :
-        mysql(`select*from users where name='${req.user.name}'`, function(err, results) {
-
-            results[0].category=='administrator' ? next():
+    mysql(`select*from users where name='${req.user.name}'`, function(err, results) {
+        results[0].category == 'administrator' ? next() :
             res.render('user.pug', {
                 user: user,
                 data: results[0]
             })
-        })
+    })
+})
+homeRouter.get('/user/:id/delete', urlencodedParser, function(req, res, next) {
+    mysql(`delete from users where id=${req.params.id}`, function(err, results) {
+        res.redirect('/home/user/' + req.user.name)
+    })
+
 })
 /*this path only if user has category='administrator'*/
 homeRouter.get('/user/:name', isLoggedIn, function(req, res) {
-    mysql(`select*from users`, function(err, results) {
-      console.dir(results)
+    mysql(`select*from users where not(name='${req.user.name}')`, function(err, results) {
+        console.dir(results)
         res.render('admin.pug', {
             user: user,
             data: results
@@ -95,9 +100,17 @@ homeRouter.get('/book/:id', function(req, res) {
             data: results[0]
         })
     })
-
-
-
+});
+homeRouter.get('/book/add/:id', function(req, res) {
+    mysql(`select*from users where name='${req.user.name}'`, function(err, results) {
+        var values = {
+            book_id: req.params.id,
+            user_id:results[0].id
+        }
+        mysql("insert into user_books set ?", values, function(err, results) {
+          res.redirect('/home');
+        })
+    })
 })
 
 module.exports = homeRouter;

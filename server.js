@@ -87,7 +87,7 @@ app.use(require('express-session')({
     saveUninitialized: false,
 
     cookie: {
-        maxAge: 60000
+        maxAge: 60000*1000
     }
 }));
 app.use(flash());
@@ -145,8 +145,9 @@ Also read about sesisons, and store session objects
 
 
 #add authentication for all admin panel routes http://expressjs.com/en/api.html#app.locals  app.all('*')
-# finish admin routing, add functionality: add/delete user, change user category (user,admin,manager)
-#
+# show all user's books from table user_books, this functional already works (two foreign keys), home.pug
+# ->only add to routing other one mysql request and render it with two objects
+# also there are cant be two same names, fix it
 */
 
 
