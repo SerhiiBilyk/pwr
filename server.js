@@ -14,6 +14,7 @@ const express = require('express'),
     /*Routing*/
     homeRouter = require('./routes/Home.js'),
     authRouter = require('./routes/Auth.js'),
+    bookRouter = require('./routes/Book.js'),
   //  adminRouter = require('./routes/Admin.js'),
     /*Database*/
     //  mysql = require('./database.js'),
@@ -123,6 +124,7 @@ app.get('/profile',
 
 app.use('/home', homeRouter);
 app.use('/auth', authRouter);
+app.use('/book', bookRouter);
 //app.use('/admin', authRouter);
 
 
@@ -145,9 +147,7 @@ Also read about sesisons, and store session objects
 
 
 #add authentication for all admin panel routes http://expressjs.com/en/api.html#app.locals  app.all('*')
-# show all user's books from table user_books, this functional already works (two foreign keys), home.pug
-# ->only add to routing other one mysql request and render it with two objects
-# also there are cant be two same names, fix it
+# extend view of user
 */
 
 

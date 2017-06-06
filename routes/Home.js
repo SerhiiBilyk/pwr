@@ -67,13 +67,24 @@ function isLoggedIn(req, res, next) {
     res.redirect('/home');
 }
 homeRouter.get('/user/:name', isLoggedIn, function(req, res, next) {
-    //req.user.name == 'admin' ? next() :
-    mysql(`select*from users where name='${req.user.name}'`, function(err, results) {
-        results[0].category == 'administrator' ? next() :
-            res.render('user.pug', {
-                user: user,
-                data: results[0]
+console.log('name '+user)
+    mysql(`select*from users where name='${req.user.name}'`, function(err, profile) {
+      console.log('profile '+profile[0])
+        profile[0].category == 'administrator' ? next() :
+            mysql(`select books.title,user_books.id
+          from books
+          inner join user_books on books.id=user_books.book_id where user_books.user_id=${profile[0].id};`, function(err, results) {
+
+                res.render('user.pug', {
+                    user: user,
+                    profile:profile[0],
+                    data: results
+                })
             })
+        /*  res.render('user.pug', {
+              user: user,
+              data: results[0]
+          }) */
     })
 })
 homeRouter.get('/user/:id/delete', urlencodedParser, function(req, res, next) {
@@ -92,25 +103,6 @@ homeRouter.get('/user/:name', isLoggedIn, function(req, res) {
         })
     })
 })
-homeRouter.get('/book/:id', function(req, res) {
-    mysql(`select*from books where id=${req.params.id}`, function(err, results) {
-        console.dir(results[0])
-        res.render('book.pug', {
-            user: user,
-            data: results[0]
-        })
-    })
-});
-homeRouter.get('/book/add/:id', function(req, res) {
-    mysql(`select*from users where name='${req.user.name}'`, function(err, results) {
-        var values = {
-            book_id: req.params.id,
-            user_id:results[0].id
-        }
-        mysql("insert into user_books set ?", values, function(err, results) {
-          res.redirect('/home');
-        })
-    })
-})
+
 
 module.exports = homeRouter;

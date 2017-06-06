@@ -1,7 +1,16 @@
 include includes/html_header.pug
 include includes/navigation.pug
--var profile=data
-  p Name #{profile.name}
-  p Email #{profile.email}
-  p Password #{profile.password}
+-var person=profile
+p #{person}
+  -var books=data
+  table
+    theader
+      th Title 
+    tbody
+      each item in books
+        tr      
+          td #{item.title} 
+        
+
+          
         
