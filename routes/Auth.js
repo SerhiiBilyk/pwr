@@ -113,7 +113,18 @@ authRouter.post('/signUp', urlencodedParser, function(req, res) {
 });
 
 authRouter.post('/emailCheck', urlencodedParser, function(req, res) {
+  console.log('init')
     var query = "select*from users where email='" + req.body.userEmail + "'";
+    mysql(query, function(err, results) {
+        var state;
+        results.length > 0 ?
+            state = true :
+            state = false
+        res.end(JSON.stringify(results));
+    })
+});
+authRouter.post('/nameCheck', urlencodedParser, function(req, res) {
+    var query = "select*from users where name='" + req.body.userName + "'";
     mysql(query, function(err, results) {
         var state;
         results.length > 0 ?

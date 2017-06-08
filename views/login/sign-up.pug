@@ -14,7 +14,8 @@ html(lang="en")
             div(class="sign-up-form-field")
               label(for="username") Name
                 span(class="required") *
-              input(type="text" id="username" name="username" required="required")
+              input(type="text" id="username" name="username"  ng-change="checkName()"  ng-model="userName"  required="required")
+              p(class="message-error" ng-show="name_state") Please try other name  
             div(class="sign-up-form-field")
               label(for="surname") Surname
               input(type="text" id="surname" name="surname")
@@ -25,13 +26,13 @@ html(lang="en")
               label(for="email") Email 
                 span(class="required") *
               input(type="text" id="email" name="email" ng-change="checkEmail()"  ng-model="userEmail" required="required" ) 
-              p(class="message-error" ng-show="state") Please try other email          
+              p(class="message-error" ng-show="email_state") Please try other email          
             div(class="sign-up-form-field")
               label(for="pass") Password
                 span(class="required") *
               input(type="password" id="pass" name="password")
             div(class="sign-up-form-field")            
-              input(type="submit" value="Register" ng-disabled="state")
+              input(type="submit" value="Register" ng-disabled="email_state||name_state")
             
         
         

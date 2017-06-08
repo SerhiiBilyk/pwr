@@ -53,10 +53,21 @@ homeRouter.post('/loadData', urlencodedParser, function(req, res) {
 
     var query = "select*from Books where title like '%" + req.body.name + "%' order by rating desc  ";
 
-    mysql(query, function(err, results) {
+mysql(query,function(err,results){
+    res.end(JSON.stringify(results));
+})
 
-        res.end(JSON.stringify(results));
+
+
     })
+
+homeRouter.post('/compare', urlencodedParser, function(req, res) {
+      mysql(`select * from user_books left outer join books
+        on user_books.book_id=books.id where user_books.user_id=${req.session.passport.user};`, function(err, results) {
+console.log('sdf' +results)
+          res.end(JSON.stringify(results));
+      })
+
 });
 
 function isLoggedIn(req, res, next) {
@@ -67,9 +78,9 @@ function isLoggedIn(req, res, next) {
     res.redirect('/home');
 }
 homeRouter.get('/user/:name', isLoggedIn, function(req, res, next) {
-console.log('name '+user)
+
     mysql(`select*from users where name='${req.user.name}'`, function(err, profile) {
-      console.log('profile '+profile[0])
+
         profile[0].category == 'administrator' ? next() :
             mysql(`select books.title,user_books.id
           from books

@@ -147,7 +147,8 @@ Also read about sesisons, and store session objects
 
 
 #add authentication for all admin panel routes http://expressjs.com/en/api.html#app.locals  app.all('*')
-# extend view of user
+# OUTER JOIN, home.pug must select all books with aliases if this books has been already added
+reduce code (check user name and user email, SignUpController)
 */
 
 

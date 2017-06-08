@@ -34,12 +34,21 @@ app.controller('search', function search($scope, $http, $log) {
         }).then(function(response) {
             $scope.page = 0;
             $scope.books = [];
+
             $scope.books.push(response.data);
             $scope.showNext = true;
             $scope.dataLength = response.data.length;
             $scope.pageQuantity = response.data.length / 10;
             $log.log($scope.books[0])
-        })
+        });
+        $http.post("http://localhost:8081/home/compare", {
+name:'12'
+        }).then(function(response) {
+
+            $log.log(response)
+
+        });
+
 
     }
 
