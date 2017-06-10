@@ -51,8 +51,8 @@ homeRouter.post('/create', urlencodedParser, function(req, res) {
  */
 homeRouter.post('/loadData', urlencodedParser, function(req, res) {
 
-    var query = "select*from Books where title like '%" + req.body.name + "%' order by rating desc  ";
-
+    //var query = "select*from Books where title like '%" + req.body.name + "%' order by rating desc  ";
+    var query =`select*from books left outer join user_books on books.id=user_books.book_id where books.title like '%${req.body.name}%'`;
 mysql(query,function(err,results){
     res.end(JSON.stringify(results));
 })
