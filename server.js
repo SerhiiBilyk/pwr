@@ -145,10 +145,11 @@ Also read about sesisons, and store session objects
 
 //TO DO LIST
 
-
-#add authentication for all admin panel routes http://expressjs.com/en/api.html#app.locals  app.all('*')
-# OUTER JOIN, home.pug must select all books with aliases if this books has been already added
-reduce code (check user name and user email, SignUpController)
+# start with testing tools (JS,NODE)
+# try to optimize code
+#add more features to profile (foto, change password)
+# add posibility for comments to books
+# add book page (foto, title, comments, rating...)
 */
 
 

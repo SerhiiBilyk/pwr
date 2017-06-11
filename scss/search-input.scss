@@ -64,6 +64,11 @@
             background-color: #F5F5F5;
             border-radius: 5px;
             box-shadow: 2px 2px 2px gray;
+            &-added{
+              font-size:20px;
+              background-color:green;
+              
+            }
 
             &:hover {
                 box-shadow: 2px 2px 2px #FF7C5E;

@@ -50,25 +50,19 @@ homeRouter.post('/create', urlencodedParser, function(req, res) {
  *@param {req.body.name} book title, SearchController
  */
 homeRouter.post('/loadData', urlencodedParser, function(req, res) {
-
-    //var query = "select*from Books where title like '%" + req.body.name + "%' order by rating desc  ";
-    var query =`select*from books left outer join user_books on books.id=user_books.book_id where books.title like '%${req.body.name}%'`;
-mysql(query,function(err,results){
-    res.end(JSON.stringify(results));
-})
+    var query;
+req.user?
+  query= `select * from books left outer join user_books on books.id=user_books.book_id and user_books.user_id=${req.session.passport.user} where books.title like '%${req.body.name}%'`:
+  query = "select*from Books where title like '%" + req.body.name + "%' order by rating desc ";
 
 
-
+    mysql(query, function(err, results) {
+      console.log(results)
+        res.end(JSON.stringify(results));
     })
 
-homeRouter.post('/compare', urlencodedParser, function(req, res) {
-      mysql(`select * from user_books left outer join books
-        on user_books.book_id=books.id where user_books.user_id=${req.session.passport.user};`, function(err, results) {
-console.log('sdf' +results)
-          res.end(JSON.stringify(results));
-      })
+})
 
-});
 
 function isLoggedIn(req, res, next) {
     // if user is authenticated in the session, carry on
@@ -82,13 +76,13 @@ homeRouter.get('/user/:name', isLoggedIn, function(req, res, next) {
     mysql(`select*from users where name='${req.user.name}'`, function(err, profile) {
 
         profile[0].category == 'administrator' ? next() :
-            mysql(`select books.title,user_books.id
+            mysql(`select books.title,user_books.id_ub
           from books
           inner join user_books on books.id=user_books.book_id where user_books.user_id=${profile[0].id};`, function(err, results) {
 
                 res.render('user.pug', {
                     user: user,
-                    profile:profile[0],
+                    profile: profile[0],
                     data: results
                 })
             })

@@ -41,13 +41,14 @@ app.controller('search', function search($scope, $http, $log) {
             $scope.pageQuantity = response.data.length / 10;
             $log.log($scope.books[0])
         });
-        $http.post("http://localhost:8081/home/compare", {
+    /*    $http.post("http://localhost:8081/home/compare", {
 name:'12'
         }).then(function(response) {
 
             $log.log(response)
 
         });
+        */
 
 
     }

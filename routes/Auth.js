@@ -18,13 +18,13 @@ authRouter.get('/logout', function(req, res) {
     res.redirect('/home');
 });
 
+/**
+ * @param {array} req.session.flash
+ *when we create new message, this message is pushed to existing array,
+ *so, we need always to store  only one value
+ *
+ */
 authRouter.get('/login', function(req, res) {
-    /**
-     * @param {array} req.session.flash
-     *when we create new message, this message is pushed to existing array,
-     *so, we need always to store  only one value
-     *
-     */
     var flash_message;
     req.session.flash ?
         flash_message = req.session.flash.error.pop() : false;
@@ -112,22 +112,18 @@ authRouter.post('/signUp', urlencodedParser, function(req, res) {
     res.render('login/login.pug',{name:req.body.username,password:req.body.password})
 });
 
-authRouter.post('/emailCheck', urlencodedParser, function(req, res) {
-  console.log('init')
-    var query = "select*from users where email='" + req.body.userEmail + "'";
+/**
+*@param {string} req.body.check type of checking credentials (name,email etc.)
+*@param {string} req.body.data form  input type value
+*/
+authRouter.post('/check', urlencodedParser, function(req, res) {
+
+    var query = "select*from users where "+req.body.check+"='"+req.body.data+"'";
+    console.log(query)
     mysql(query, function(err, results) {
+      console.log('mysql '+results)
         var state;
-        results.length > 0 ?
-            state = true :
-            state = false
-        res.end(JSON.stringify(results));
-    })
-});
-authRouter.post('/nameCheck', urlencodedParser, function(req, res) {
-    var query = "select*from users where name='" + req.body.userName + "'";
-    mysql(query, function(err, results) {
-        var state;
-        results.length > 0 ?
+        results.length  ?
             state = true :
             state = false
         res.end(JSON.stringify(results));

@@ -58,6 +58,9 @@
       background-color: #F5F5F5;
       border-radius: 5px;
       box-shadow: 2px 2px 2px gray; }
+      .container-search .book-list .container-added {
+        font-size: 20px;
+        background-color: green; }
       .container-search .book-list .container:hover {
         box-shadow: 2px 2px 2px #FF7C5E; }
       .container-search .book-list .container-image, .container-search .book-list .container-text {

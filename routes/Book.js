@@ -25,6 +25,7 @@ bookRouter.get('/:id', function(req, res) {
     })
 });
 bookRouter.get('/add/:id', function(req, res) {
+  req.user?
     mysql(`select*from users where name='${req.user.name}'`, function(err, results) {
         var values = {
             book_id: req.params.id,
@@ -33,7 +34,8 @@ bookRouter.get('/add/:id', function(req, res) {
         mysql("insert into user_books set ?", values, function(err, results) {
           res.redirect('/home/user/'+req.user.name);
         })
-    })
+    }):
+    res.redirect('/auth/login');
 })
 
 module.exports = bookRouter;

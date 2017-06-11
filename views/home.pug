@@ -15,19 +15,22 @@ section(class="container-search" ng-app="app" ng-controller="search" ng-init="i=
       option(value="-rating_count") Feedbacks
 
   ul( class="book-list" )
-    li(class="container" ng-repeat="item in books[0] |limitTo:10:page| orderBy:sort")
+    li(class="container" ng-repeat="item in books[0] |limitTo:10:page| orderBy:sort ")
       div(class="container-image")
         img(ng-src="{{item.img_small}}")
       div(class="container-text")
         p 
-          a(href="/home/book/{{item.id}}") {{item.title}}
+          a(href="/book/{{item.id}}") {{item.title }}
         p author: {{item.author}}
         p rating: {{item.rating}}
         p feedback: {{item.rating_count}}
         p id: {{item.id}}
         p test {{item.user_books}}
         p
-          a(href="/book/add/{{item.id}}") add
+          span(ng-if="!item.book_id")
+            a(href="/book/add/{{item.id}}") add 
+          span(ng-if="item.book_id")
+            span(class="container-added") already added
           
       
         
