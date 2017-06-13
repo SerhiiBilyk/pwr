@@ -3,13 +3,17 @@ include includes/navigation.pug
 -var person=profile
 p #{person}
   -var books=data
-  table
-    theader
-      th Title 
-    tbody
-      each item in books
-        tr      
-          td #{item.title} 
+  ul
+    each item in books
+      li(class="book-container")    
+        div(class="book-img") 
+          img(src=item.img_big width="100" height="130")
+          div(class="book-pop_up")
+            p=item.title
+            p=item.author
+        
+        
+
         
 
           

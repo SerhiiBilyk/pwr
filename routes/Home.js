@@ -76,7 +76,7 @@ homeRouter.get('/user/:name', isLoggedIn, function(req, res, next) {
     mysql(`select*from users where name='${req.user.name}'`, function(err, profile) {
 
         profile[0].category == 'administrator' ? next() :
-            mysql(`select books.title,user_books.id_ub
+            mysql(`select books.title,books.img_big,books.author,user_books.id_ub
           from books
           inner join user_books on books.id=user_books.book_id where user_books.user_id=${profile[0].id};`, function(err, results) {
 

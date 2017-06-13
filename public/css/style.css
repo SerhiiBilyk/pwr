@@ -155,15 +155,38 @@ header .navigation {
       display: block;
       clear: left;
       overflow: hidden;
+      position: relative;
       margin: 10px 0;
       padding: 5px;
       transition: all 0.5s ease-in;
       background-color: #F5F5F5;
       border-radius: 5px;
       box-shadow: 2px 2px 2px gray; }
-      .container-search .book-list .container-added {
-        font-size: 20px;
-        background-color: green; }
+      .container-search .book-list .container-flag {
+        width: 30px;
+        height: 50px;
+        padding-top: 15px;
+        position: relative;
+        background: #bb0b0b;
+        color: white;
+        font-size: 11px;
+        letter-spacing: 0.2em;
+        text-align: center;
+        text-transform: uppercase;
+        position: absolute;
+        top: -5px;
+        right: 20px;
+        box-shadow: 2px -3px 2px 0px black; }
+        .container-search .book-list .container-flag:after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 0;
+          height: 0;
+          border-bottom: 20px solid #f5f5f5;
+          border-left: 15px solid transparent;
+          border-right: 15px solid transparent; }
       .container-search .book-list .container:hover {
         box-shadow: 2px 2px 2px #FF7C5E; }
       .container-search .book-list .container-image, .container-search .book-list .container-text {
@@ -215,6 +238,29 @@ header {
         background-color: #e7eaef; }
     .container-sign-up .sign-up-form-field .message-error {
       color: #f5a2a2; }
+
+.book-container {
+  display: inline-block;
+  margin: 10px;
+  position: relative;
+  width: 100px;
+  height: 130px; }
+
+.book-img img:hover + .book-pop_up {
+  display: block; }
+
+.book-pop_up {
+  display: none;
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  border: 2px solid brown;
+  top: 0;
+  left: 100px;
+  z-index: 10;
+  background-color: white; }
+  .book-pop_up:hover {
+    display: block; }
 
 * {
   margin: 0;

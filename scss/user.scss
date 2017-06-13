@@ -1,0 +1,32 @@
+.book {
+    &-container {
+        display: inline-block;
+        margin: 10px;
+        position: relative;
+        width:100px;
+        height:130px;
+    }
+
+    &-img {
+        img {
+            &:hover + .book-pop_up {
+                display: block;
+            }
+        }
+    }
+
+    &-pop_up {
+        display: none;
+        position: absolute;
+        width: 300px;
+        height: 200px;
+        border: 2px solid brown;
+        top: 0;
+        left:100px;
+        z-index:10;
+        background-color:white;
+        &:hover{
+          display:block;
+        }
+    }
+}

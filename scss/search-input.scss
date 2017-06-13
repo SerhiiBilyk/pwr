@@ -21,12 +21,11 @@
     width: 80%;
     margin: 40px auto 0;
 
-    .page-quantity{
-      color:#ff8f00;
-      text-align:center;
-      font-size:22px;
-      font-weight:900;
-
+    .page-quantity {
+        color: #ff8f00;
+        text-align: center;
+        font-size: 22px;
+        font-weight: 900;
     }
 
     .controls-next {
@@ -43,7 +42,7 @@
         border: none;
         border-bottom: 1px solid black;
         font-size: 40px;
-        text-align:center;
+        text-align: center;
 
         &:focus {
             outline: none;
@@ -58,16 +57,41 @@
             display: block;
             clear: left;
             overflow: hidden;
+            position:relative;
             margin: 10px 0;
             padding: 5px;
             transition: all 0.5s ease-in;
             background-color: #F5F5F5;
             border-radius: 5px;
             box-shadow: 2px 2px 2px gray;
-            &-added{
-              font-size:20px;
-              background-color:green;
-              
+
+            &-flag {
+                width: 30px;
+                height: 50px;
+                padding-top: 15px;
+                position: relative;
+                background: #bb0b0b;
+                color: white;
+                font-size: 11px;
+                letter-spacing: 0.2em;
+                text-align: center;
+                text-transform: uppercase;
+                position:absolute;
+                top:-5px;
+                right:20px;
+                box-shadow:2px -3px 2px 0px black;
+
+                &:after {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    width: 0;
+                    height: 0;
+                    border-bottom: 20px solid #f5f5f5;
+                    border-left: 15px solid transparent;
+                    border-right: 15px solid transparent;
+                }
             }
 
             &:hover {

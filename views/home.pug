@@ -27,10 +27,9 @@ section(class="container-search" ng-app="app" ng-controller="search" ng-init="i=
         p id: {{item.id}}
         p test {{item.user_books}}
         p
-          span(ng-if="!item.book_id")
-            a(href="/book/add/{{item.id}}") add 
-          span(ng-if="item.book_id")
-            span(class="container-added") already added
+        span(ng-if="!item.book_id")
+          a(href="/book/add/{{item.id}}") add   
+      div(class="container-flag" ng-if="item.book_id") 
           
       
         
