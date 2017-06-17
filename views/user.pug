@@ -3,14 +3,20 @@ include includes/navigation.pug
 -var person=profile
 p #{person}
   -var books=data
-  ul
+p My books
+div(class="book-filter")
+
+div(class="book-wrapper")  
+  ul(class="book" ng-app="app"  ng-controller="user" ng-init="loadData()")
     each item in books
       li(class="book-container")    
-        div(class="book-img") 
-          img(src=item.img_big width="100" height="130")
-          div(class="book-pop_up")
+        div(class="book-img" ng-click="popUp"+item.id+"=true" ng-mouseleave="popUp"+item.id+"=false")
+          a(href="/book/"+item.id ) {{p}}
+            img(src=item.img_big width="100" height="130")    
+          div(class="book-pop_up" ng-show="popUp"+item.id)
             p=item.title
-            p=item.author
+            p=item.author         
+    
         
         
 

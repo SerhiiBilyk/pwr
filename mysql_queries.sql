@@ -30,3 +30,13 @@ create table user_books (
     id_2 int(20) not null,
     primary key(id)
   );
+
+  create table book_coments(
+     id int(6) not null auto_increment,
+     book_id int(6),
+     user_id int(6),
+     comment varchar(255),
+     primary key (id),
+     foreign key (book_id) references books(id),
+     foreign key (user_id) references users(id)
+   );

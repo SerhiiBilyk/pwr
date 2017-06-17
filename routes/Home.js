@@ -76,7 +76,7 @@ homeRouter.get('/user/:name', isLoggedIn, function(req, res, next) {
     mysql(`select*from users where name='${req.user.name}'`, function(err, profile) {
 
         profile[0].category == 'administrator' ? next() :
-            mysql(`select books.title,books.img_big,books.author,user_books.id_ub
+            mysql(`select books.id, books.title,books.img_big,books.author,user_books.id_ub
           from books
           inner join user_books on books.id=user_books.book_id where user_books.user_id=${profile[0].id};`, function(err, results) {
 
@@ -91,6 +91,11 @@ homeRouter.get('/user/:name', isLoggedIn, function(req, res, next) {
               data: results[0]
           }) */
     })
+})
+homeRouter.post('user/:name',isLoggedIn,function(req,res){
+   var results='done!';
+   console.log(results)
+    res.end(JSON.stringify(results));
 })
 homeRouter.get('/user/:id/delete', urlencodedParser, function(req, res, next) {
     mysql(`delete from users where id=${req.params.id}`, function(err, results) {

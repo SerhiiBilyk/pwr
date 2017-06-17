@@ -1,6 +1,13 @@
 include includes/html_header.pug
 include includes/navigation.pug
 -var book=data
+div( ng-app="app" ng-controller="user" ng-init="load()")
   p Title #{book.title}
   ul
-    li
+    li(ng-repeat="item in b")
+      p {{item.name}} {{item.comment}}
+
+
+  textarea(maxlength="100" ng-model="test") 
+  p {{test}}
+  button(ng-click="load()") Click     
