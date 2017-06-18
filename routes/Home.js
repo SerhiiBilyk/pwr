@@ -57,7 +57,7 @@ req.user?
 
 
     mysql(query, function(err, results) {
-      console.log(results)
+
         res.end(JSON.stringify(results));
     })
 
@@ -94,11 +94,12 @@ homeRouter.get('/user/:name', isLoggedIn, function(req, res, next) {
 })
 homeRouter.post('user/:name',isLoggedIn,function(req,res){
    var results='done!';
-   console.log(results)
+
     res.end(JSON.stringify(results));
 })
 homeRouter.get('/user/:id/delete', urlencodedParser, function(req, res, next) {
     mysql(`delete from users where id=${req.params.id}`, function(err, results) {
+      console.log(       ' delete  '   )
         res.redirect('/home/user/' + req.user.name)
     })
 
@@ -106,7 +107,7 @@ homeRouter.get('/user/:id/delete', urlencodedParser, function(req, res, next) {
 /*this path only if user has category='administrator'*/
 homeRouter.get('/user/:name', isLoggedIn, function(req, res) {
     mysql(`select*from users where not(name='${req.user.name}')`, function(err, results) {
-        console.dir(results)
+
         res.render('admin.pug', {
             user: user,
             data: results
