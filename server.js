@@ -148,8 +148,9 @@ Also read about sesisons, and store session objects
 # start with testing tools (JS,NODE)
 # try to optimize code
 #add more features to profile (foto, change password)
-# add posibility for comments to books
-# add book page (foto, title, comments, rating...)
+# if user dont register and add coment redirect to sign in page
+# add better css layout to book page (with coments)
+# add posibility to delete coment in admin panel and add notification for admin if coment added
 */
 
 

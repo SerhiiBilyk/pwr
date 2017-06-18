@@ -1,2 +1,43 @@
 textarea {
   resize: vertical; }
+  textarea:invalid {
+    outline: 1px solid red;
+    background-color: rgba(255, 0, 0, 0.1); }
+
+.feedback-item {
+  border: 1px solid black;
+  margin: 10px; }
+
+.feedback-header {
+  width: 100%; }
+
+.feedback-name {
+  float: left; }
+
+.feedback-date {
+  float: right; }
+
+.feedback-body {
+  clear: left; }
+
+.feedback-add {
+  border: 1px solid black;
+  margin: 10px; }
+  .feedback-add textarea {
+    width: 70%;
+    margin: 10px; }
+
+label {
+  color: gray; }
+
+input[type="radio"]:checked + label.like {
+  color: green; }
+
+input[type="radio"]:checked + label.dis-like {
+  color: red; }
+
+p.like {
+  color: green; }
+
+p.dislike {
+  color: red; }

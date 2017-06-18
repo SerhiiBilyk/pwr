@@ -10,7 +10,9 @@ html(lang="en")
       div(class="container-sign-up")
         form(id="" class="sign-up-form" method="post" action="/auth/signUp"  ng-app="app" ng-controller="signUp")
           fieldset
-            legend Registration form                          
+            legend Registration form
+            div(class="sign-up-form-field")
+              input(type='file' name='image')                                        
             div(class="sign-up-form-field")
               label(for="username") Name
                 span(class="required") *

@@ -17,7 +17,7 @@ bookRouter.use('/*', function(req, res, next) {
 
 bookRouter.get('/:id', function(req, res) {
     mysql(`select*from books where id=${req.params.id}`, function(err, results) {
-        console.dir(results[0])
+
         res.render('book.pug', {
             user: user,
             data: results[0]
@@ -25,17 +25,24 @@ bookRouter.get('/:id', function(req, res) {
     })
 });
 bookRouter.post('/:id', urlencodedParser, function(req, res) {
+
     if (req.body.coment.length > 10) {
+console.log('length more than 10')
         var values = {
-          book_id:req.params.id,
-          user_id:req.session.passport.user,
-          comment: req.body.coment
+            book_id: req.params.id,
+            user_id: req.session.passport.user,
+            comment: req.body.coment,
+            cur_date: new Date(),
+            feedback:req.body.feedback
         }
-        mysql("insert into book_coments set ?", values, function(err, results) {})
+        console.dir(values)
+        mysql("insert into book_coments set ?", values, function(err, results) {
+          console.log('inserted')
+        })
     }
-    mysql(`select book_coments.comment, users.name from book_coments join users on book_coments.user_id=users.id and book_coments.book_id=${req.params.id};`, function(err, results) {
-        console.log('book post')
-        console.dir(results[0])
+    mysql(`select book_coments.comment,book_coments.feedback,  date_format(book_coments.cur_date,'%d/%m/%Y') as cur_date, users.name from book_coments join users on book_coments.user_id=users.id and book_coments.book_id=${req.params.id};`, function(err, results) {
+
+
         res.end(JSON.stringify(results));
     })
 });

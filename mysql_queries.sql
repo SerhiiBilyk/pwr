@@ -36,6 +36,7 @@ create table user_books (
      book_id int(6),
      user_id int(6),
      comment varchar(255),
+     cur_date datetime,
      primary key (id),
      foreign key (book_id) references books(id),
      foreign key (user_id) references users(id)

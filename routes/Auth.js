@@ -6,7 +6,8 @@ var express = require('express'),
         extended: false
     }),
     transporter = require('../settings/mail'),
-    app = express();
+    app = express(),
+    fs = require('fs');
 authRouter.use(bodyParser.json());
 
 authRouter.get('/', function(req, res) {
@@ -79,7 +80,10 @@ authRouter.post('/forgot', function(req, res) {
 authRouter.get('/signUp', function(req, res) {
     res.render('login/sign-up.pug')
 })
+
 authRouter.post('/signUp', urlencodedParser, function(req, res) {
+
+
     var values = {
         name: req.body.username,
         surname: req.body.surname,
@@ -88,7 +92,9 @@ authRouter.post('/signUp', urlencodedParser, function(req, res) {
         password: req.body.password
     }
 
+
     mysql("insert into users set ?", values, function(err, results) {
+
 
     })
     var mailOptions = {
@@ -102,9 +108,12 @@ authRouter.post('/signUp', urlencodedParser, function(req, res) {
         <p>Your password is ${req.body.password}</p>
         <p>Please don't answer on this email</p>`
     };
+
     /*sending email to user with his password*/
     transporter.sendMail(mailOptions, function(error, info) {
+
         if (error) {
+
             return console.log(error);
         }
     });
@@ -118,10 +127,11 @@ authRouter.post('/signUp', urlencodedParser, function(req, res) {
 */
 authRouter.post('/check', urlencodedParser, function(req, res) {
 
+
     var query = "select*from users where "+req.body.check+"='"+req.body.data+"'";
-    console.log(query)
+
     mysql(query, function(err, results) {
-      console.log('mysql '+results)
+
         var state;
         results.length  ?
             state = true :

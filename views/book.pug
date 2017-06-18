@@ -3,11 +3,26 @@ include includes/navigation.pug
 -var book=data
 div( ng-app="app" ng-controller="user" ng-init="load()")
   p Title #{book.title}
-  ul
-    li(ng-repeat="item in b")
-      p {{item.name}} {{item.comment}}
+  ul(class="feedback")
+    li(ng-repeat="item in b" class="feedback-item")
+      div(class="feedback-header")
+        p(class="feedback-name") {{item.name}}
+        p(class="feedback-date") {{item.cur_date}}
+      div(class="feedback-body")
+        p(class="feedback-text") {{item.comment}}
+        p(ng-class="setFeedback(item.feedback)") FEEDBACK
 
+  div(class="feedback-add")
+    form(name="postMessage")
+      div
+        textarea(ng-maxlength="100" ng-model="message" placeholder="Min 10 characters" ng-change="validate()"  )
 
-  textarea(maxlength="100" ng-model="test") 
-  p {{test}}
-  button(ng-click="load()") Click     
+      button(ng-click="load()" ng-init="state" ng-disabled="feedback_state") Click
+      input(type="radio" name="like" id='like' ng-model="feedback" ng-value="true" )
+      label(for='like' class="like"  ng-model='state' )
+        i(class="fa fa-thumbs-o-up fa-2x" aria-hidden="true")
+      input(type="radio" name="like" id='dis-like' ng-model="feedback" ng-value="false" )
+      label(for="dis-like" class="dis-like")
+        i(class="fa fa-thumbs-o-down fa-2x" aria-hidden="true") 
+      
+    
