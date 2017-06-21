@@ -152,6 +152,7 @@ Also read about sesisons, and store session objects
 # add better css layout to book page (with coments)
 # add posibility to delete coment in admin panel and add notification for admin if coment added
 # in admin panel change the 'delete user' to change password, because it is hard to delete foreign key, to delete user you must delete all info about user_id in all tables
+# add column LIKe to book_coments (quantity of likes) add LIKE functionality with angular AJAX
 */
 
 

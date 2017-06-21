@@ -3,20 +3,29 @@ include includes/navigation.pug
 -var book=data
 div( ng-app="app" ng-controller="user" ng-init="load()")
   p Title #{book.title}
+  
+  label(for="select") Order by:
+  select(id="select" ng-model="sort")
+      option(value="-cur_date") Date (latest)
+      option(value="cur_date") Date (Earliest)  
+      option(value="feedback") Feedback
+
+  
   ul(class="feedback")
-    li(ng-repeat="item in b" class="feedback-item")
+    li(ng-repeat="item in b | orderBy: sort" class="feedback-item" )
       div(class="feedback-header")
         p(class="feedback-name") {{item.name}}
         p(class="feedback-date") {{item.cur_date}}
       div(class="feedback-body")
         p(class="feedback-text") {{item.comment}}
         p(ng-class="setFeedback(item.feedback)") FEEDBACK
+        p
+          a(href="#") like
 
   div(class="feedback-add")
     form(name="postMessage")
       div
-        textarea(ng-maxlength="100" ng-model="message" placeholder="Min 10 characters" ng-change="validate()"  )
-
+        textarea(ng-maxlength="100" ng-model="message" placeholder="Min 10 characters" ng-change="validate()")
       button(ng-click="load()" ng-init="state" ng-disabled="feedback_state") Click
       input(type="radio" name="like" id='like' ng-model="feedback" ng-value="true" )
       label(for='like' class="like"  ng-model='state' )

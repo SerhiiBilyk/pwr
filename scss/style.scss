@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 @import 'header';
 @import 'login';
 @import 'search-input';
@@ -5,10 +11,6 @@
 @import 'sign-up';
 @import 'user';
 @import 'book';
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+
 
 /*navigation*/

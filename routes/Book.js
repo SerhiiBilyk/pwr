@@ -24,6 +24,9 @@ bookRouter.get('/:id', function(req, res) {
         })
     })
 });
+bookRouter.get('/:id/like', function(req, res) {
+
+});
 bookRouter.post('/:id', urlencodedParser, function(req, res) {
 
     if (req.body.coment.length > 10) {

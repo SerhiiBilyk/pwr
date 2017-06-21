@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
 header .navigation {
   overflow: hidden; }
   header .navigation-links {
@@ -278,28 +283,31 @@ textarea {
     outline: 1px solid red;
     background-color: rgba(255, 0, 0, 0.1); }
 
-.feedback-item {
-  border: 1px solid black;
-  margin: 10px; }
-
-.feedback-header {
-  width: 100%; }
-
-.feedback-name {
-  float: left; }
-
-.feedback-date {
-  float: right; }
-
-.feedback-body {
-  clear: left; }
-
-.feedback-add {
-  border: 1px solid black;
-  margin: 10px; }
-  .feedback-add textarea {
-    width: 70%;
+.feedback {
+  list-style-type: none;
+  width: 50%;
+  margin: 0 auto; }
+  .feedback-item {
+    border: 1px solid black;
+    margin: 10px;
+    width: 100%;
+    word-wrap: break-word;
+    background-color: #DADCDB;
+    margin: 10px auto; }
+  .feedback-header {
+    width: 100%; }
+  .feedback-name {
+    float: left; }
+  .feedback-date {
+    float: right; }
+  .feedback-body {
+    clear: left; }
+  .feedback-add {
+    border: 1px solid black;
     margin: 10px; }
+    .feedback-add textarea {
+      width: 70%;
+      margin: 10px; }
 
 label {
   color: gray; }
@@ -315,10 +323,5 @@ p.like {
 
 p.dislike {
   color: red; }
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box; }
 
 /*navigation*/

@@ -8,10 +8,19 @@ textarea{
 }
 
 .feedback{
+  list-style-type:none;
+  width:50%;
+  margin:0 auto;
 
   &-item{
     border:1px solid black;
     margin:10px;
+    width:100%;
+    word-wrap: break-word;
+    background-color: #DADCDB;
+
+
+    margin:10px auto;
   }
   &-header{
     width:100%;
