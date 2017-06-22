@@ -16,11 +16,25 @@ app.controller('user', function user($scope, $http, $log, $timeout, $location) {
       $log.log($scope.message)
 
         if ($scope.message.length > 10) {
+
             $scope.feedback_state = false;
-        } else {
+        } else if($scope.message.length < 10) {
             $scope.feedback_state = true;
         }
     }
+    $scope.like=function(id,like_type){
+
+
+      $http.post('http://localhost:8081/book/'+like_type+'/'+id,{
+        book_id: $location.absUrl().split('/').pop()
+      })
+      .then(function(response){
+        $scope.b = response.data;
+        $log.log(id,response);
+      })
+
+    }
+
 
 
 

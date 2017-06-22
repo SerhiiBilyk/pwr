@@ -13,14 +13,15 @@ textarea{
   margin:0 auto;
 
   &-item{
-    border:1px solid black;
-    margin:10px;
+
+    margin:20px;
     width:100%;
     word-wrap: break-word;
-    background-color: #DADCDB;
+    overflow:hidden;
 
 
-    margin:10px auto;
+
+    margin:20px auto;
   }
   &-header{
     width:100%;
@@ -28,12 +29,19 @@ textarea{
   }
   &-name{
     float:left;
+    border:1px solid black;
   }
   &-date{
     float:right;
+      border:1px solid black;
+      clear:right;
   }
   &-body{
     clear:left;
+  }
+  &-likes{
+    float:right;
+
   }
 
   &-add{
@@ -55,10 +63,10 @@ input[type="radio"]{
 label{
   color:gray;
 }
-input[type="radio"]:checked + label.like{
+input[type="radio"]:checked + label.like,i.like{
   color:green;
 }
-input[type="radio"]:checked + label.dis-like{
+input[type="radio"]:checked + label.dis-like,i.dislike{
   color:red;
 }
 p.like{
@@ -66,4 +74,7 @@ p.like{
 }
 p.dislike{
 color:red;
+}
+.quantity{
+  color:black;
 }

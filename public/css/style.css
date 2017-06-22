@@ -288,20 +288,24 @@ textarea {
   width: 50%;
   margin: 0 auto; }
   .feedback-item {
-    border: 1px solid black;
-    margin: 10px;
+    margin: 20px;
     width: 100%;
     word-wrap: break-word;
-    background-color: #DADCDB;
-    margin: 10px auto; }
+    overflow: hidden;
+    margin: 20px auto; }
   .feedback-header {
     width: 100%; }
   .feedback-name {
-    float: left; }
+    float: left;
+    border: 1px solid black; }
   .feedback-date {
-    float: right; }
+    float: right;
+    border: 1px solid black;
+    clear: right; }
   .feedback-body {
     clear: left; }
+  .feedback-likes {
+    float: right; }
   .feedback-add {
     border: 1px solid black;
     margin: 10px; }
@@ -312,10 +316,10 @@ textarea {
 label {
   color: gray; }
 
-input[type="radio"]:checked + label.like {
+input[type="radio"]:checked + label.like, i.like {
   color: green; }
 
-input[type="radio"]:checked + label.dis-like {
+input[type="radio"]:checked + label.dis-like, i.dislike {
   color: red; }
 
 p.like {
@@ -323,5 +327,8 @@ p.like {
 
 p.dislike {
   color: red; }
+
+.quantity {
+  color: black; }
 
 /*navigation*/

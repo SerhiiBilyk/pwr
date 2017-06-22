@@ -9,6 +9,8 @@ div( ng-app="app" ng-controller="user" ng-init="load()")
       option(value="-cur_date") Date (latest)
       option(value="cur_date") Date (Earliest)  
       option(value="feedback") Feedback
+      option(value="likes") Like
+      option(value="dislikes") Dislike
 
   
   ul(class="feedback")
@@ -19,13 +21,17 @@ div( ng-app="app" ng-controller="user" ng-init="load()")
       div(class="feedback-body")
         p(class="feedback-text") {{item.comment}}
         p(ng-class="setFeedback(item.feedback)") FEEDBACK
-        p
-          a(href="#") like
+      p(class="feedback-likes")       
+       i(class="fa fa-thumbs-o-up like " aria-hidden="true" ng-click="like(item.id,'like')")
+         span(class="quantity") {{item.likes}}
+       i(class="fa fa-thumbs-o-down dislike " aria-hidden="true" ng-click="like(item.id,'dislike')")
+         span(class="quantity") {{item.dislikes}}
+
 
   div(class="feedback-add")
     form(name="postMessage")
       div
-        textarea(ng-maxlength="100" ng-model="message" placeholder="Min 10 characters" ng-change="validate()")
+        textarea( ng-model="message" placeholder="Min 10 characters" ng-change="validate()")
       button(ng-click="load()" ng-init="state" ng-disabled="feedback_state") Click
       input(type="radio" name="like" id='like' ng-model="feedback" ng-value="true" )
       label(for='like' class="like"  ng-model='state' )
