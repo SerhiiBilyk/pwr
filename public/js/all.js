@@ -152,6 +152,7 @@ app.controller('user', function user($scope, $http, $log, $timeout, $location) {
     $scope.message = '';
     $scope.feedback = true;
     $scope.feedback_state =true;
+    $scope.authenticated=false;
     $scope.setFeedback = function(val) {
         if (val) {
             return 'like'
@@ -194,18 +195,23 @@ app.controller('user', function user($scope, $http, $log, $timeout, $location) {
         $log.log(x)
         $scope.x = false;
     }
-    $scope.load = function() {
-        $log.log('feedback: ' + $scope.feedback)
+    $scope.load = function(auth) {
+
         $scope.curBook = $location.absUrl().split('/').pop()
+        $log.log('feedback: ' + $scope.feedback,  $scope.curBook)
         $http.post('http://localhost:8081/book/' + $scope.curBook, {
             coment: $scope.message,
             feedback: $scope.feedback
         }).then(function(response) {
 
-            $scope.b = response.data;
-
-            $log.log(response.data[0])
+            $scope.b =response.data.data;
+$scope.authenticated=response.data.authenticated;
+            $log.log('response',response)
         })
+
+
+
+
     }
 
 
@@ -215,6 +221,40 @@ app.controller('user', function user($scope, $http, $log, $timeout, $location) {
 
 
 });
+
+'use strict';
+app.controller('admin', function admin($scope, $http, $log) {
+    $log.log('start')
+    $scope.data = "";
+    $scope.user={}
+    $scope.load = function(changePassword) {
+
+
+        $http.post('http://localhost:8081/home/user/admin', {
+          change:changePassword,
+          password: $scope.user.password,
+          id:$scope.user.id,
+        }).then(function(response) {
+
+            $log.log('response', response.data.data)
+            $scope.data = response.data.data;
+        })
+
+
+
+
+    }
+
+    $scope.changePass = function(item) {
+        item.password = item.password;
+        $scope.user={
+          password:item.password,
+          id:item.id
+        }
+        $log.log('password ' + item.password)
+        $scope.load(true)
+    }
+})
 
 app.factory('AppData',function(){
   return {

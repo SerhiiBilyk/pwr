@@ -6,6 +6,7 @@ var express = require('express'),
         extended: false
     }),
     user;
+
 bookRouter.use(bodyParser.json());
 
 bookRouter.use('/*', function(req, res, next) {
@@ -14,6 +15,13 @@ bookRouter.use('/*', function(req, res, next) {
         user = "guest"
     next()
 })
+function isLoggedIn(req, res, next) {
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated())
+        return next();
+    // if they aren't redirect them to the home page
+    res.redirect('/home');
+}
 
 bookRouter.get('/:id', function(req, res) {
     mysql(`select*from books where id=${req.params.id}`, function(err, results) {
@@ -25,7 +33,7 @@ bookRouter.get('/:id', function(req, res) {
     })
 });
 bookRouter.post('/like/:id', function(req, res) {
-  console.log('post request',req.params.id)
+
     mysql(`update book_coments set likes = likes + 1 where id=${req.params.id}`, function(err, results) {
       mysql(`select book_coments.id, book_coments.comment,book_coments.feedback, book_coments.likes,book_coments.dislikes,  date_format(book_coments.cur_date,'%d/%m/%Y') as cur_date, users.name from book_coments join users on book_coments.user_id=users.id and book_coments.book_id=${req.body.book_id};`, function(err, results) {
           res.end(JSON.stringify(results));
@@ -33,17 +41,18 @@ bookRouter.post('/like/:id', function(req, res) {
     })
 });
 bookRouter.post('/dislike/:id', function(req, res) {
-  console.log('post request',req.params.id)
+
     mysql(`update book_coments set dislikes = dislikes + 1 where id=${req.params.id}`, function(err, results) {
       mysql(`select book_coments.id, book_coments.comment,book_coments.feedback, book_coments.likes,book_coments.dislikes,  date_format(book_coments.cur_date,'%d/%m/%Y') as cur_date, users.name from book_coments join users on book_coments.user_id=users.id and book_coments.book_id=${req.body.book_id};`, function(err, results) {
           res.end(JSON.stringify(results));
       })
     })
 });
+
 bookRouter.post('/:id', urlencodedParser, function(req, res) {
 
     if (req.body.coment.length > 10) {
-        console.log('length more than 10')
+console.log('user id',req.session.passport.user)
         var values = {
 
             book_id: req.params.id,
@@ -54,13 +63,14 @@ bookRouter.post('/:id', urlencodedParser, function(req, res) {
         }
         console.dir(values)
         mysql("insert into book_coments set ?", values, function(err, results) {
-            console.log('inserted')
+
         })
     }
     mysql(`select book_coments.id, book_coments.comment,book_coments.feedback, book_coments.likes,book_coments.dislikes,  date_format(book_coments.cur_date,'%d/%m/%Y') as cur_date, users.name from book_coments join users on book_coments.user_id=users.id and book_coments.book_id=${req.params.id};`, function(err, results) {
 
 
-        res.end(JSON.stringify(results));
+        res.send({data:results,authenticated:req.isAuthenticated()});
+
     })
 });
 bookRouter.get('/add/:id', function(req, res) {

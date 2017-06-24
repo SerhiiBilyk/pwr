@@ -5,9 +5,57 @@ textarea {
     background-color: rgba(255, 0, 0, 0.1); }
 
 .feedback {
-  list-style-type: none;
+  e: none;
   width: 50%;
   margin: 0 auto; }
+  .feedback list-style-typtextarea {
+    resize: vertical; }
+    .feedback list-style-typtextarea:invalid {
+      outline: 1px solid red;
+      background-color: rgba(255, 0, 0, 0.1); }
+  .feedback .feedback {
+    list-style-type: none;
+    width: 50%;
+    margin: 0 auto; }
+    .feedback .feedback-item {
+      margin: 20px;
+      width: 100%;
+      word-wrap: break-word;
+      overflow: hidden;
+      margin: 20px auto; }
+    .feedback .feedback-header {
+      width: 100%; }
+    .feedback .feedback-name {
+      float: left;
+      border: 1px solid black; }
+    .feedback .feedback-date {
+      float: right;
+      border: 1px solid black;
+      clear: right; }
+    .feedback .feedback-body {
+      clear: left; }
+    .feedback .feedback-likes {
+      float: right; }
+    .feedback .feedback-add {
+      border: 1px solid black;
+      margin: 10px; }
+      .feedback .feedback-add textarea {
+        width: 70%;
+        margin: 10px; }
+  .feedback label {
+    color: gray; }
+  .feedback i.like,
+  .feedback input[type="radio"]:checked + label.like {
+    color: green; }
+  .feedback i.dislike,
+  .feedback input[type="radio"]:checked + label.dis-like {
+    color: red; }
+  .feedback p.like {
+    color: green; }
+  .feedback p.dislike {
+    color: red; }
+  .feedback .quantity {
+    color: black; }
   .feedback-item {
     margin: 20px;
     width: 100%;

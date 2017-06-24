@@ -8,7 +8,91 @@ textarea{
 }
 
 .feedback{
-  list-style-type:none;
+  list-style-typtextarea {
+    resize: vertical;
+
+    &:invalid {
+        outline: 1px solid red;
+        background-color: rgba(255,0,0,0.1);
+    }
+}
+
+.feedback {
+    list-style-type: none;
+    width: 50%;
+    margin: 0 auto;
+
+    &-item {
+        margin: 20px;
+        width: 100%;
+        word-wrap: break-word;
+        overflow: hidden;
+        margin: 20px auto;
+    }
+
+    &-header {
+        width: 100%;
+    }
+
+    &-name {
+        float: left;
+        border: 1px solid black;
+    }
+
+    &-date {
+        float: right;
+        border: 1px solid black;
+        clear: right;
+    }
+
+    &-body {
+        clear: left;
+    }
+
+    &-likes {
+        float: right;
+    }
+
+    &-add {
+        border: 1px solid black;
+        margin: 10px;
+
+        textarea {
+            width: 70%;
+            margin: 10px;
+        }
+    }
+}
+
+input[type="radio"] {
+    //display:none;
+}
+
+label {
+    color: gray;
+}
+
+i.like,
+input[type="radio"]:checked + label.like {
+    color: green;
+}
+
+i.dislike,
+input[type="radio"]:checked + label.dis-like {
+    color: red;
+}
+
+p.like {
+    color: green;
+}
+
+p.dislike {
+    color: red;
+}
+
+.quantity {
+    color: black;
+}e:none;
   width:50%;
   margin:0 auto;
 

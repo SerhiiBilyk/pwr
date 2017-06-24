@@ -71,7 +71,18 @@ function isLoggedIn(req, res, next) {
     // if they aren't redirect them to the home page
     res.redirect('/home');
 }
+function isAdministrator(req,res,next){
+  if(req.session.passport.user==1){
+    console.log('user is administrator')
+    next()
+  }else{
+    res.redirect('/home')
+  }
+
+
+}
 homeRouter.get('/user/:name', isLoggedIn, function(req, res, next) {
+  console.log(req.session.passport.user)
 
     mysql(`select*from users where name='${req.user.name}'`, function(err, profile) {
 
@@ -106,6 +117,7 @@ homeRouter.get('/user/:id/delete', urlencodedParser, function(req, res, next) {
 })
 /*this path only if user has category='administrator'*/
 homeRouter.get('/user/:name', isLoggedIn, function(req, res) {
+  console.log('user name')
     mysql(`select*from users where not(name='${req.user.name}')`, function(err, results) {
 
         res.render('admin.pug', {
@@ -114,6 +126,21 @@ homeRouter.get('/user/:name', isLoggedIn, function(req, res) {
         })
     })
 })
+homeRouter.post('/user/:name', isLoggedIn, isAdministrator, function(req, res) {
+
+  if(req.body.change){
+      console.log('change',req.body.change)
+    mysql(`update users set password = '${req.body.password}' where id=${req.body.id}`,function(err, results) {
+
+    })
+  }
+
+    mysql(`select*from users where not(name='${req.user.name}')`, function(err, results) {
+
+        res.send({data:results})
+    })
+})
+
 
 
 module.exports = homeRouter;

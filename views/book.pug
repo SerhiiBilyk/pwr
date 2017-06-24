@@ -1,7 +1,7 @@
 include includes/html_header.pug
 include includes/navigation.pug
 -var book=data
-div( ng-app="app" ng-controller="user" ng-init="load()")
+div( ng-app="app" ng-controller="user" ng-init="load(authenticated)")
   p Title #{book.title}
   
   label(for="select") Order by:
@@ -28,11 +28,16 @@ div( ng-app="app" ng-controller="user" ng-init="load()")
          span(class="quantity") {{item.dislikes}}
 
 
-  div(class="feedback-add")
+  div(class="feedback-add" )
     form(name="postMessage")
       div
         textarea( ng-model="message" placeholder="Min 10 characters" ng-change="validate()")
-      button(ng-click="load()" ng-init="state" ng-disabled="feedback_state") Click
+        p(class="error-message" ng-hide="authenticated")
+          span Please             
+            a(href='/auth/login')  sign-in
+            or 
+            a(href="/auth/signUp") register 
+      button(ng-click="load(false)" ng-show="authenticated"  ng-init="state" ng-disabled="feedback_state") Click
       input(type="radio" name="like" id='like' ng-model="feedback" ng-value="true" )
       label(for='like' class="like"  ng-model='state' )
         i(class="fa fa-thumbs-o-up fa-2x" aria-hidden="true")

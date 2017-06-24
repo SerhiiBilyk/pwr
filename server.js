@@ -146,12 +146,11 @@ Also read about sesisons, and store session objects
 //TO DO LIST
 
 # start with testing tools (JS,NODE)
-# try to optimize code
+
 #add more features to profile (foto, change password)
-# if user dont register and add coment redirect to sign in page
+
 # add better css layout to book page (with coments)
 # add posibility to delete coment in admin panel and add notification for admin if coment added
-# in admin panel change the 'delete user' to change password, because it is hard to delete foreign key, to delete user you must delete all info about user_id in all tables
 
 */
 
