@@ -35,9 +35,21 @@ create table user_books (
      id int(6) not null auto_increment,
      book_id int(6),
      user_id int(6),
-     comment varchar(255),
+     comment mediumtext,
      cur_date datetime,
+     feedback tinyint(1),
      primary key (id),
      foreign key (book_id) references books(id),
      foreign key (user_id) references users(id)
+   );
+   create table book_coments_like(
+     id_bcl int(6) not null auto_increment,
+     coment_id int(6),
+     user_id int(6),
+     likes tinyint(1) not null  default 0,
+     dislikes tinyint(1) not null  default 0,
+     primary key(id_bcl),
+     foreign key (coment_id) references book_coments(id),
+     foreign key (user_id) references book_coments(user_id)
+
    );

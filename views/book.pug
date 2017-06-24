@@ -22,10 +22,10 @@ div( ng-app="app" ng-controller="user" ng-init="load(authenticated)")
         p(class="feedback-text") {{item.comment}}
         p(ng-class="setFeedback(item.feedback)") FEEDBACK
       p(class="feedback-likes")       
-       i(class="fa fa-thumbs-o-up like " aria-hidden="true" ng-click="like(item.id,'like')")
-         span(class="quantity") {{item.likes}}
-       i(class="fa fa-thumbs-o-down dislike " aria-hidden="true" ng-click="like(item.id,'dislike')")
-         span(class="quantity") {{item.dislikes}}
+       i(class="fa fa-thumbs-o-up like " aria-hidden="true" ng-click="addLike('like',item.id)")
+         span(class="quantity") {{item.suma}}
+       i(class="fa fa-thumbs-o-down dislike " aria-hidden="true" ng-click="")
+         span(class="quantity") 
 
 
   div(class="feedback-add" )

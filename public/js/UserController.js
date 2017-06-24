@@ -23,18 +23,34 @@ app.controller('user', function user($scope, $http, $log, $timeout, $location) {
             $scope.feedback_state = true;
         }
     }
-    $scope.like = function(id, like_type) {
+    /*
+        $scope.like=function(id,like_type){
 
 
-        $http.post('http://localhost:8081/book/' + like_type + '/' + id, {
-                book_id: $location.absUrl().split('/').pop()
-            })
-            .then(function(response) {
-                $scope.b = response.data;
-                $log.log(id, response);
-            })
+          $http.post('http://localhost:8081/book/'+like_type+'/'+id,{
+            book_id: $location.absUrl().split('/').pop()
+          })
+          .then(function(response){
+            $scope.b = response.data;
+            $log.log(id,response);
+          })
 
-    }
+        }
+        */
+        $scope.addLike=function(like_type,id){
+$log.log('like added')
+
+          $http.post('http://localhost:8081/book/'+like_type+'/'+id,{
+            book_id: $location.absUrl().split('/').pop(),
+            coment_id:id
+          })
+          .then(function(response){
+            $scope.b = response.data;
+            $log.log('test,',response.data,$scope.b)
+            $log.log(id,response);
+          })
+
+        }
 
 
 
