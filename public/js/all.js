@@ -155,6 +155,7 @@ app.controller('user', function user($scope, $http, $log, $timeout, $location) {
     $scope.authenticated = false;
 
 
+
     $scope.setFeedback = function(val) {
         if (val) {
             return 'like'
@@ -163,8 +164,8 @@ app.controller('user', function user($scope, $http, $log, $timeout, $location) {
         }
     }
     $scope.validate = function() {
-        $log.log('validate')
-        $log.log($scope.message)
+
+
 
         if ($scope.message.length > 10) {
 
@@ -173,45 +174,31 @@ app.controller('user', function user($scope, $http, $log, $timeout, $location) {
             $scope.feedback_state = true;
         }
     }
-    /*
-        $scope.like=function(id,like_type){
 
+    $scope.addLike = function(like_type, id) {
+        if ($scope.authenticated) {
 
-          $http.post('http://localhost:8081/book/'+like_type+'/'+id,{
-            book_id: $location.absUrl().split('/').pop()
-          })
-          .then(function(response){
-            $scope.b = response.data;
-            $log.log(id,response);
-          })
+            $http.post('http://localhost:8081/book/comment/add/' + like_type + '/' + id, {
+                    book_id: $location.absUrl().split('/').pop(),
+                    coment_id: id
+                })
+                .then(function(response) {
+                    $scope.b = response.data;
+
+                })
 
         }
-        */
-    $scope.addLike = function(like_type, id) {
-if(  $scope.authenticated){
-
-        $http.post('http://localhost:8081/book/' + like_type + '/' + id, {
-                book_id: $location.absUrl().split('/').pop(),
-                coment_id: id
-            })
-            .then(function(response) {
-                $scope.b = response.data;
-                $log.log('test,', response.data, $scope.b)
-                $log.log('end like function', id, response);
-            })
-
-}
     }
-    $scope.showLikes = function(coment_id) {
-        $log.log('showLikes')
+    $scope.showLikes = function(like_type,coment_id) {
+
         $http({
-            url: 'http://localhost:8081/book/like/showLikes/' + coment_id,
+            url: 'http://localhost:8081/book/showLikes/'+like_type+'/'+ coment_id,
             method: 'GET'
         }).then(function(res) {
+$scope.likeNames ='';
+            $scope.likeNames = res.data.data;
+$scope.likes_state=true;
 
-            $scope.likeNames=res.data.data;
-
-              $log.log('likeNames',$scope.likeNames)
             //access returned res here
 
         }, function(error) {
@@ -220,24 +207,25 @@ if(  $scope.authenticated){
 
     }
     $scope.leave = function() {
+      $scope.likeNames='';
+$scope.likes_state=false;
 
-        $log.log('leave')
     }
 
 
 
     $scope.showPopUp = function() {
-        $log.log($scope.books)
+
     }
     $scope.hidePopUp = function() {
-        $log.log(x)
+
         $scope.x = false;
     }
     $scope.load = function(auth) {
 
         $scope.curBook = $location.absUrl().split('/').pop()
-        $log.log('feedback: ' + $scope.feedback, $scope.curBook)
-        $http.post('http://localhost:8081/book/' + $scope.curBook, {
+
+        $http.get('http://localhost:8081/book/comments/' + $scope.curBook, {
             /*
                         coment: $scope.message,
                         feedback: $scope.feedback
@@ -246,7 +234,7 @@ if(  $scope.authenticated){
 
             $scope.b = response.data.data;
             $scope.authenticated = response.data.authenticated;
-            $log.log('response', response)
+
         })
 
 
@@ -254,13 +242,13 @@ if(  $scope.authenticated){
 
     }
     $scope.addComment = function() {
-        $log.log('addComent')
+
         $scope.curBook = $location.absUrl().split('/').pop()
         $http.post('http://localhost:8081/book/add/comment/' + $scope.curBook, {
             coment: $scope.message,
             feedback: $scope.feedback
         }).then(function(response) {
-            $log.log('response from add', response)
+
             $scope.b = response.data.data;
 
         })

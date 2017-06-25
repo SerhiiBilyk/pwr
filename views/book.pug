@@ -6,29 +6,30 @@ div( ng-app="app" ng-controller="user" ng-init="load(authenticated)")
   p Title #{book.title}
   
   label(for="select") Order by:
-  select(id="select" ng-model="sort")
+
+
+  select(id="select" ng-init="sort=cur_date" ng-model="sort" )
       option(value="-cur_date") Date (latest)
       option(value="cur_date") Date (Earliest)  
       option(value="feedback") Feedback
-      option(value="likes") Like
-      option(value="dislikes") Dislike
+      option(value="suma") Like
+      option(value="suma2") Dislike
 
   
   ul(class="feedback")
     li(ng-repeat="item in b | orderBy: sort" class="feedback-item" )
       div(class="feedback-header")
-        p(class="feedback-name") {{item.user_id}}
-        p(class="feedback-date") {{item.cur_date}}
+        p(class="feedback-name") {{item.name}}
+        p(class="feedback-date") {{item.cur_date | date:'yyyy'}}
       div(class="feedback-body")
         p(class="feedback-text") {{item.comment}}
-        p(ng-class="setFeedback(item.feedback)") FEEDBACK
-      p(class="feedback-likes")       
-       i(class="fa fa-thumbs-o-up like " aria-hidden="true" ng-click="addLike('like',item.id)" ng-mouseleave="likes_state=!likes_state" ng-mouseenter="showLikes(item.id);likes_state=true")
+        p(ng-class="setFeedback(item.feedback)") FEEDBACK {{likes_state}}
+      p(class="feedback-likes" ng-init="likes_state=false")       
+       i(class="fa fa-thumbs-o-up like " aria-hidden="true" ng-click="addLike('likes',item.id)" ng-mouseleave="leave();likes_state=false" ng-mouseenter="showLikes('likes',item.id);likes_state=true")
          span(class="quantity") {{item.suma}}
-       i(class="fa fa-thumbs-o-down dislike " aria-hidden="true" ng-click="addLike('dislike',item.id)")
+       i(class="fa fa-thumbs-o-down dislike " aria-hidden="true" ng-click="addLike('dislikes',item.id)" ng-mouseleave="leave();likes_state=false" ng-mouseenter="showLikes('dislikes',item.id);likes_state=true")
          span(class="quantity") {{item.suma2}}
-       div(ng-init="likes_state=false" ng-hide="!likes_state" ng-class="{'feedback-likeNames':likes_state}")
-
+       div( ng-show="likes_state || likes_state " class='feedback-likeNames' )
          ul()
            li(ng-repeat="names in likeNames")
              p {{names.name}}
