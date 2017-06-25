@@ -2,6 +2,7 @@ include includes/html_header.pug
 include includes/navigation.pug
 -var book=data
 div( ng-app="app" ng-controller="user" ng-init="load(authenticated)")
+  p {{authenticated}}
   p Title #{book.title}
   
   label(for="select") Order by:
@@ -16,16 +17,23 @@ div( ng-app="app" ng-controller="user" ng-init="load(authenticated)")
   ul(class="feedback")
     li(ng-repeat="item in b | orderBy: sort" class="feedback-item" )
       div(class="feedback-header")
-        p(class="feedback-name") {{item.name}}
+        p(class="feedback-name") {{item.user_id}}
         p(class="feedback-date") {{item.cur_date}}
       div(class="feedback-body")
         p(class="feedback-text") {{item.comment}}
         p(ng-class="setFeedback(item.feedback)") FEEDBACK
       p(class="feedback-likes")       
-       i(class="fa fa-thumbs-o-up like " aria-hidden="true" ng-click="addLike('like',item.id)")
+       i(class="fa fa-thumbs-o-up like " aria-hidden="true" ng-click="addLike('like',item.id)" ng-mouseleave="likes_state=!likes_state" ng-mouseenter="showLikes(item.id);likes_state=true")
          span(class="quantity") {{item.suma}}
-       i(class="fa fa-thumbs-o-down dislike " aria-hidden="true" ng-click="")
-         span(class="quantity") 
+       i(class="fa fa-thumbs-o-down dislike " aria-hidden="true" ng-click="addLike('dislike',item.id)")
+         span(class="quantity") {{item.suma2}}
+       div(ng-init="likes_state=false" ng-hide="!likes_state" ng-class="{'feedback-likeNames':likes_state}")
+
+         ul()
+           li(ng-repeat="names in likeNames")
+             p {{names.name}}
+            
+
 
 
   div(class="feedback-add" )
@@ -37,7 +45,7 @@ div( ng-app="app" ng-controller="user" ng-init="load(authenticated)")
             a(href='/auth/login')  sign-in
             or 
             a(href="/auth/signUp") register 
-      button(ng-click="load(false)" ng-show="authenticated"  ng-init="state" ng-disabled="feedback_state") Click
+      button(ng-click="addComment()" ng-show="authenticated"  ng-init="state" ng-disabled="feedback_state") Click
       input(type="radio" name="like" id='like' ng-model="feedback" ng-value="true" )
       label(for='like' class="like"  ng-model='state' )
         i(class="fa fa-thumbs-o-up fa-2x" aria-hidden="true")

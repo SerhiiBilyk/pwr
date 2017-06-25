@@ -50,6 +50,6 @@ create table user_books (
      dislikes tinyint(1) not null  default 0,
      primary key(id_bcl),
      foreign key (coment_id) references book_coments(id),
-     foreign key (user_id) references book_coments(user_id)
+     foreign key (user_id) references users(id)
 
    );

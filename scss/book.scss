@@ -26,8 +26,9 @@ textarea{
         margin: 20px;
         width: 100%;
         word-wrap: break-word;
-        overflow: hidden;
+
         margin: 20px auto;
+        position:relative;
     }
 
     &-header {
@@ -47,10 +48,30 @@ textarea{
 
     &-body {
         clear: left;
+        position:relative;
     }
 
     &-likes {
         float: right;
+
+    }
+    &-likeNames{
+      ul{
+        list-style-type: none;
+      }
+      border:1px solid black;
+      display:block;
+      position:absolute;
+
+      margin:0;
+      padding:0;
+      right:0;
+      bottom:0;
+
+
+      max-height:100px;
+      overflow:auto;
+      background-color:white;
     }
 
     &-add {
@@ -101,7 +122,7 @@ p.dislike {
     margin:20px;
     width:100%;
     word-wrap: break-word;
-    overflow:hidden;
+
 
 
 

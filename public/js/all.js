@@ -153,6 +153,8 @@ app.controller('user', function user($scope, $http, $log, $timeout, $location) {
     $scope.feedback = true;
     $scope.feedback_state = true;
     $scope.authenticated = false;
+
+
     $scope.setFeedback = function(val) {
         if (val) {
             return 'like'
@@ -185,22 +187,42 @@ app.controller('user', function user($scope, $http, $log, $timeout, $location) {
 
         }
         */
-        $scope.addLike=function(like_type,id){
-$log.log('like added')
+    $scope.addLike = function(like_type, id) {
+if(  $scope.authenticated){
 
-          $http.post('http://localhost:8081/book/'+like_type+'/'+id,{
-            book_id: $location.absUrl().split('/').pop(),
-            coment_id:id
-          })
-          .then(function(response){
-            $scope.b = response.data;
-            $log.log('test,',response.data,$scope.b)
-            $log.log(id,response);
-          })
+        $http.post('http://localhost:8081/book/' + like_type + '/' + id, {
+                book_id: $location.absUrl().split('/').pop(),
+                coment_id: id
+            })
+            .then(function(response) {
+                $scope.b = response.data;
+                $log.log('test,', response.data, $scope.b)
+                $log.log('end like function', id, response);
+            })
 
-        }
+}
+    }
+    $scope.showLikes = function(coment_id) {
+        $log.log('showLikes')
+        $http({
+            url: 'http://localhost:8081/book/like/showLikes/' + coment_id,
+            method: 'GET'
+        }).then(function(res) {
 
+            $scope.likeNames=res.data.data;
 
+              $log.log('likeNames',$scope.likeNames)
+            //access returned res here
+
+        }, function(error) {
+            //handle error here
+        });
+
+    }
+    $scope.leave = function() {
+
+        $log.log('leave')
+    }
 
 
 
@@ -216,8 +238,10 @@ $log.log('like added')
         $scope.curBook = $location.absUrl().split('/').pop()
         $log.log('feedback: ' + $scope.feedback, $scope.curBook)
         $http.post('http://localhost:8081/book/' + $scope.curBook, {
-            coment: $scope.message,
-            feedback: $scope.feedback
+            /*
+                        coment: $scope.message,
+                        feedback: $scope.feedback
+                  */
         }).then(function(response) {
 
             $scope.b = response.data.data;
@@ -228,6 +252,18 @@ $log.log('like added')
 
 
 
+    }
+    $scope.addComment = function() {
+        $log.log('addComent')
+        $scope.curBook = $location.absUrl().split('/').pop()
+        $http.post('http://localhost:8081/book/add/comment/' + $scope.curBook, {
+            coment: $scope.message,
+            feedback: $scope.feedback
+        }).then(function(response) {
+            $log.log('response from add', response)
+            $scope.b = response.data.data;
+
+        })
     }
 
 

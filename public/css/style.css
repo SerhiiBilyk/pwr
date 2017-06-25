@@ -300,8 +300,8 @@ textarea {
       margin: 20px;
       width: 100%;
       word-wrap: break-word;
-      overflow: hidden;
-      margin: 20px auto; }
+      margin: 20px auto;
+      position: relative; }
     .feedback .feedback-header {
       width: 100%; }
     .feedback .feedback-name {
@@ -312,9 +312,23 @@ textarea {
       border: 1px solid black;
       clear: right; }
     .feedback .feedback-body {
-      clear: left; }
+      clear: left;
+      position: relative; }
     .feedback .feedback-likes {
       float: right; }
+    .feedback .feedback-likeNames {
+      border: 1px solid black;
+      display: block;
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      right: 0;
+      bottom: 0;
+      max-height: 100px;
+      overflow: auto;
+      background-color: white; }
+      .feedback .feedback-likeNames ul {
+        list-style-type: none; }
     .feedback .feedback-add {
       border: 1px solid black;
       margin: 10px; }
@@ -339,7 +353,6 @@ textarea {
     margin: 20px;
     width: 100%;
     word-wrap: break-word;
-    overflow: hidden;
     margin: 20px auto; }
   .feedback-header {
     width: 100%; }
