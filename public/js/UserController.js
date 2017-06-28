@@ -44,6 +44,7 @@ app.controller('user', function user($scope, $http, $log, $timeout, $location) {
         }
     }
     $scope.showLikes = function(like_type, coment_id, item) {
+      /*
         $log.log('item', item, like_type)
         if (like_type == 'likes' && item.suma < 1) {
             $log.log('like working state', 'state', $scope.likes_state)
@@ -51,7 +52,7 @@ app.controller('user', function user($scope, $http, $log, $timeout, $location) {
         } else if (like_type == 'dislikes' && item.suma2 < 1) {
             $log.log('dislike working state', 'state', $scope.likes_state)
             return false;
-        } else {
+        } else {*/
             $http({
                 url: 'http://localhost:8081/book/showLikes/' + like_type + '/' + coment_id,
                 method: 'GET'
@@ -65,7 +66,7 @@ app.controller('user', function user($scope, $http, $log, $timeout, $location) {
             }, function(error) {
                 //handle error here
             });
-        }
+      //  }
 
 
 
