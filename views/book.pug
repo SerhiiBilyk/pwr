@@ -1,8 +1,8 @@
 include includes/html_header.pug
 include includes/navigation.pug
 -var book=data
-div( ng-app="app" ng-controller="user" ng-init="load(authenticated)")
-  p {{authenticated}}
+div( ng-app="app" ng-controller="user" ng-init="load(authenticated)" class="feedback-wrapper")
+
   p Title #{book.title}
   
   label(for="select") Order by:
@@ -17,19 +17,19 @@ div( ng-app="app" ng-controller="user" ng-init="load(authenticated)")
 
   
   ul(class="feedback")
-    li(ng-repeat="item in b | orderBy: sort" class="feedback-item" )
-      div(class="feedback-header")
-        p(class="feedback-name") {{item.name}}
-        p(class="feedback-date") {{item.cur_date | date:'yyyy'}}
-      div(class="feedback-body")
-        p(class="feedback-text") {{item.comment}}
+    li(ng-repeat="item in b | orderBy: sort" class="feedback__item" )
+      div(class="feedback__header")
+        p(class="feedback__name") {{item.name}}, 
+        p(class="feedback__date") {{item.cur_date | date:'yyyy'}}
+      div(class="feedback__body")
+        p(class="feedback__text") {{item.comment}}
         p(ng-class="setFeedback(item.feedback)") FEEDBACK {{likes_state}}
-      p(class="feedback-likes" ng-init="likes_state=false")       
-       i(class="fa fa-thumbs-o-up like " aria-hidden="true" ng-click="addLike('likes',item.id)" ng-mouseleave="leave();likes_state=false" ng-mouseenter="showLikes('likes',item.id);likes_state=true")
+      p(class="feedback__likes" )       
+       i(class="fa fa-thumbs-o-up like " aria-hidden="true" ng-click="addLike('likes',item.id)" ng-mouseleave="leave();" ng-mouseenter="showLikes('likes',item.id,item);")
          span(class="quantity") {{item.suma}}
-       i(class="fa fa-thumbs-o-down dislike " aria-hidden="true" ng-click="addLike('dislikes',item.id)" ng-mouseleave="leave();likes_state=false" ng-mouseenter="showLikes('dislikes',item.id);likes_state=true")
+       i(class="fa fa-thumbs-o-down dislike " aria-hidden="true" ng-click="addLike('dislikes',item.id)" ng-mouseleave="leave();" ng-mouseenter=" showLikes('dislikes',item.id,item);")
          span(class="quantity") {{item.suma2}}
-       div( ng-show="likes_state || likes_state " class='feedback-likeNames' )
+       div( ng-show="likes_state || likes_state " class='feedback__likeNames' )
          ul()
            li(ng-repeat="names in likeNames")
              p {{names.name}}
@@ -37,7 +37,7 @@ div( ng-app="app" ng-controller="user" ng-init="load(authenticated)")
 
 
 
-  div(class="feedback-add" )
+  div(class="comment" )
     form(name="postMessage")
       div
         textarea( ng-model="message" placeholder="Min 10 characters" ng-change="validate()")

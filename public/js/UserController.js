@@ -5,6 +5,8 @@ app.controller('user', function user($scope, $http, $log, $timeout, $location) {
     $scope.feedback = true;
     $scope.feedback_state = true;
     $scope.authenticated = false;
+    $scope.likes_state = false;
+
 
 
 
@@ -41,26 +43,37 @@ app.controller('user', function user($scope, $http, $log, $timeout, $location) {
 
         }
     }
-    $scope.showLikes = function(like_type,coment_id) {
+    $scope.showLikes = function(like_type, coment_id, item) {
+        $log.log('item', item, like_type)
+        if (like_type == 'likes' && item.suma < 1) {
+            $log.log('like working state', 'state', $scope.likes_state)
+            return false;
+        } else if (like_type == 'dislikes' && item.suma2 < 1) {
+            $log.log('dislike working state', 'state', $scope.likes_state)
+            return false;
+        } else {
+            $http({
+                url: 'http://localhost:8081/book/showLikes/' + like_type + '/' + coment_id,
+                method: 'GET'
+            }).then(function(res) {
+                $scope.likeNames = '';
+                $scope.likeNames = res.data.data;
+                $scope.likes_state = true;
 
-        $http({
-            url: 'http://localhost:8081/book/showLikes/'+like_type+'/'+ coment_id,
-            method: 'GET'
-        }).then(function(res) {
-$scope.likeNames ='';
-            $scope.likeNames = res.data.data;
-$scope.likes_state=true;
+                //access returned res here
 
-            //access returned res here
+            }, function(error) {
+                //handle error here
+            });
+        }
 
-        }, function(error) {
-            //handle error here
-        });
+
+
 
     }
     $scope.leave = function() {
-      $scope.likeNames='';
-$scope.likes_state=false;
+        $scope.likeNames = '';
+        $scope.likes_state = false;
 
     }
 

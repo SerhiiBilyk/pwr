@@ -1,185 +1,55 @@
-textarea{
-  resize:vertical;
-
-  &:invalid{
-    outline:1px solid red;
-    background-color:rgba(255,0,0,0.1);
-  }
-}
-
-.feedback{
-  list-style-typtextarea {
-    resize: vertical;
-
-    &:invalid {
-        outline: 1px solid red;
-        background-color: rgba(255,0,0,0.1);
-    }
-}
-
-.feedback {
-    list-style-type: none;
-    width: 50%;
-    margin: 0 auto;
-
-    &-item {
-        margin: 20px;
-        width: 100%;
-        word-wrap: break-word;
-
-        margin: 20px auto;
-        position:relative;
-    }
-
-    &-header {
-        width: 100%;
-    }
-
-    &-name {
-        float: left;
-        border: 1px solid black;
-    }
-
-    &-date {
-        float: right;
-        border: 1px solid black;
-        clear: right;
-    }
-
-    &-body {
-        clear: left;
-        position:relative;
-    }
-
-    &-likes {
-        float: right;
-
-    }
-    &-likeNames{
-      ul{
+.feedback-wrapper {
+    .feedback {
+        $name-space: feedback;
+        width: 50%;
+        border: 1px solid red;
+        margin: 0 auto;
         list-style-type: none;
-      }
-      border:1px solid black;
-      display:block;
-      position:absolute;
 
-      margin:0;
-      padding:0;
-      right:0;
-      bottom:0;
-
-
-      max-height:100px;
-      overflow:auto;
-      background-color:white;
-    }
-
-    &-add {
-        border: 1px solid black;
-        margin: 10px;
-
-        textarea {
-            width: 70%;
-            margin: 10px;
+        &__item {
+            border: 1px solid black;
+            position: relative;
+            word-wrap: break-word;
         }
+
+        &__header {}
+
+        &__name {
+            display: inline-block;
+
+        }
+
+        &__date {
+            display: inline-block;
+        }
+        &__text{
+          padding-left:5%;
+        }
+        &__likes{
+          text-align:right;
+          .like{
+            color:green
+          }
+          .dislike{
+            color:red;
+          }
+        }
+        &__likeNames{
+          ul{
+              list-style-type:none;
+          }
+
+          position:absolute;
+          right:0;
+          bottom:20px;
+          border:1px solid black;
+          background-color:white;
+          padding:10px;
+          border-radius:5px;
+        }
+
     }
-}
-
-input[type="radio"] {
-    //display:none;
-}
-
-label {
-    color: gray;
-}
-
-i.like,
-input[type="radio"]:checked + label.like {
-    color: green;
-}
-
-i.dislike,
-input[type="radio"]:checked + label.dis-like {
-    color: red;
-}
-
-p.like {
-    color: green;
-}
-
-p.dislike {
-    color: red;
-}
-
-.quantity {
-    color: black;
-}e:none;
-  width:50%;
-  margin:0 auto;
-
-  &-item{
-
-    margin:20px;
-    width:100%;
-    word-wrap: break-word;
-
-
-
-
-    margin:20px auto;
-  }
-  &-header{
-    width:100%;
-
-  }
-  &-name{
-    float:left;
-    border:1px solid black;
-  }
-  &-date{
-    float:right;
+    .comment{
       border:1px solid black;
-      clear:right;
-  }
-  &-body{
-    clear:left;
-  }
-  &-likes{
-    float:right;
-
-  }
-
-  &-add{
-    border:1px solid black;
-
-    margin:10px;
-    textarea{
-      width:70%;
-      margin:10px;
     }
-  }
-
-
-}
-
-input[type="radio"]{
-  //display:none;
-}
-label{
-  color:gray;
-}
-input[type="radio"]:checked + label.like,i.like{
-  color:green;
-}
-input[type="radio"]:checked + label.dis-like,i.dislike{
-  color:red;
-}
-p.like{
-  color:green;
-}
-p.dislike{
-color:red;
-}
-.quantity{
-  color:black;
 }
