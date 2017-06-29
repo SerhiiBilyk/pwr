@@ -10,9 +10,44 @@ var express = require('express'),
     fs = require('fs');
 authRouter.use(bodyParser.json());
 
+
+
 authRouter.get('/', function(req, res) {
     res.render('empty.pug');
 });
+
+
+
+function category (role) {
+    return function (req, res, next) {
+        if (req.user && req.user.category === role) {
+            next();
+        } else {
+            res.send(403);
+        }
+    }
+}
+authRouter.get('/aaa',category('administrator'), function(req, res) {
+    res.send('administrator');
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 authRouter.get('/logout', function(req, res) {
     req.logout();
@@ -25,6 +60,7 @@ authRouter.get('/logout', function(req, res) {
  *so, we need always to store  only one value
  *
  */
+
 authRouter.get('/login', function(req, res) {
     var flash_message;
     req.session.flash ?
@@ -77,9 +113,21 @@ authRouter.post('/forgot', function(req, res) {
         }
     })
 })
-authRouter.get('/signUp', function(req, res) {
-    res.render('login/sign-up.pug')
+authRouter.get('/signUp', function(req, res, next) {
+    var checkAdmin = false;
+    req.hasOwnProperty('user') ?
+        req.user.category == 'administrator' ? checkAdmin = true : false :
+        false;
+    res.render('login/sign-up.pug', {
+        admin: checkAdmin
+    })
 })
+authRouter.get('/signUp', function(req, res, next) {
+
+
+})
+
+
 
 authRouter.post('/signUp', urlencodedParser, function(req, res) {
 
@@ -87,9 +135,11 @@ authRouter.post('/signUp', urlencodedParser, function(req, res) {
     var values = {
         name: req.body.username,
         surname: req.body.surname,
+        category: req.body.category,
         country: req.body.country,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+
     }
 
 
@@ -102,8 +152,7 @@ authRouter.post('/signUp', urlencodedParser, function(req, res) {
         to: req.body.email,
         subject: 'Hello',
         text: 'unknown',
-        html:
-        `<h1>Hello, ${req.body.username}.</h1>
+        html: `<h1>Hello, ${req.body.username}.</h1>
         <p>Thank you for your registration.</p>
         <p>Your password is ${req.body.password}</p>
         <p>Please don't answer on this email</p>`
@@ -118,22 +167,25 @@ authRouter.post('/signUp', urlencodedParser, function(req, res) {
         }
     });
 
-    res.render('login/login.pug',{name:req.body.username,password:req.body.password})
+    res.render('login/login.pug', {
+        name: req.body.username,
+        password: req.body.password
+    })
 });
 
 /**
-*@param {string} req.body.check type of checking credentials (name,email etc.)
-*@param {string} req.body.data form  input type value
-*/
+ *@param {string} req.body.check type of checking credentials (name,email etc.)
+ *@param {string} req.body.data form  input type value
+ */
 authRouter.post('/check', urlencodedParser, function(req, res) {
 
 
-    var query = "select*from users where "+req.body.check+"='"+req.body.data+"'";
+    var query = "select*from users where " + req.body.check + "='" + req.body.data + "'";
 
     mysql(query, function(err, results) {
 
         var state;
-        results.length  ?
+        results.length ?
             state = true :
             state = false
         res.end(JSON.stringify(results));

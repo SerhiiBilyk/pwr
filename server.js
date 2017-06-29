@@ -150,7 +150,12 @@ Also read about sesisons, and store session objects
 #add more features to profile (foto, change password)
 
 # add better css layout to book page (with coments)
-# add posibility to delete coment in admin panel and add notification for admin if coment added
+# add posibility to delete coment by manager in admin panel and add notification for admin if coment added
+# optimize funtion isAdministrator, whis is in auth and home routings
+# add permissions for manager
+# Nodejs ACL Poles and Permissions https://gist.github.com/facultymatt/6370903
+# very good article https://blog.nodeswat.com/implement-access-control-in-node-js-8567e7b484d1
+# Active routing - Auth.js
 
 */
 

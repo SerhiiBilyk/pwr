@@ -51,9 +51,9 @@ homeRouter.post('/create', urlencodedParser, function(req, res) {
  */
 homeRouter.post('/loadData', urlencodedParser, function(req, res) {
     var query;
-req.user?
-  query= `select * from books left outer join user_books on books.id=user_books.book_id and user_books.user_id=${req.session.passport.user} where books.title like '%${req.body.name}%'`:
-  query = "select*from Books where title like '%" + req.body.name + "%' order by rating desc ";
+    req.user ?
+        query = `select * from books left outer join user_books on books.id=user_books.book_id and user_books.user_id=${req.session.passport.user} where books.title like '%${req.body.name}%'` :
+        query = "select*from Books where title like '%" + req.body.name + "%' order by rating desc ";
 
 
     mysql(query, function(err, results) {
@@ -71,18 +71,20 @@ function isLoggedIn(req, res, next) {
     // if they aren't redirect them to the home page
     res.redirect('/home');
 }
-function isAdministrator(req,res,next){
-  if(req.session.passport.user==1){
-    console.log('user is administrator')
-    next()
-  }else{
-    res.redirect('/home')
-  }
 
+function isAdministrator(req, res, next) {
+    mysql(`select*from users where id='${req.session.passport.user}'`, function(err, results) {
+        console.log('administrator log', results)
+        if (results[0].category == 'administrator') {
+            next()
+        } else {
+            res.redirect('/home')
+        }
 
+    })
 }
 homeRouter.get('/user/:name', isLoggedIn, function(req, res, next) {
-  console.log(req.session.passport.user)
+    console.log(req.session.passport.user)
 
     mysql(`select*from users where name='${req.user.name}'`, function(err, profile) {
 
@@ -103,21 +105,21 @@ homeRouter.get('/user/:name', isLoggedIn, function(req, res, next) {
           }) */
     })
 })
-homeRouter.post('user/:name',isLoggedIn,function(req,res){
-   var results='done!';
+homeRouter.post('user/:name', isLoggedIn, function(req, res) {
+    var results = 'done!';
 
     res.end(JSON.stringify(results));
 })
 homeRouter.get('/user/:id/delete', urlencodedParser, function(req, res, next) {
     mysql(`delete from users where id=${req.params.id}`, function(err, results) {
-      console.log(       ' delete  '   )
+        console.log(' delete  ')
         res.redirect('/home/user/' + req.user.name)
     })
 
 })
 /*this path only if user has category='administrator'*/
 homeRouter.get('/user/:name', isLoggedIn, function(req, res) {
-  console.log('user name')
+    console.log('user name')
     mysql(`select*from users where not(name='${req.user.name}')`, function(err, results) {
 
         res.render('admin.pug', {
@@ -126,18 +128,14 @@ homeRouter.get('/user/:name', isLoggedIn, function(req, res) {
         })
     })
 })
-homeRouter.post('/user/:name', isLoggedIn, isAdministrator, function(req, res) {
+homeRouter.post('/user/:name', isAdministrator, function(req, res) {
 
-  if(req.body.change){
-      console.log('change',req.body.change)
-    mysql(`update users set password = '${req.body.password}' where id=${req.body.id}`,function(err, results) {
-
-    })
-  }
-
+    req.body.change &&
+        mysql(`update users set password = '${req.body.password}' where id=${req.body.id}`, function(err, results) {})
     mysql(`select*from users where not(name='${req.user.name}')`, function(err, results) {
-
-        res.send({data:results})
+        res.send({
+            data: results
+        })
     })
 })
 

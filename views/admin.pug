@@ -25,3 +25,5 @@ div(ng-app="app" ng-controller="admin" ng-init="load(false)")
         td {{item.options}} 
           button(ng-click="state=false" ng-show="state") Change password
           button(ng-click="state=!state;changePass(item)" ng-hide="state") Confirm
+  div(class="user-create")
+    a(href="/auth/signUp") Create new user
