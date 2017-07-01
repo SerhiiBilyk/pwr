@@ -21,8 +21,9 @@ div( ng-app="app" ng-controller="user" ng-init="load(authenticated)" class="feed
       div(class="feedback__header")
         p(class="feedback__name") {{item.name}}, 
         p(class="feedback__date") {{item.cur_date | date:'yyyy'}}
-      div(class="feedback__body")
-        p(class="feedback__text") {{item.comment}}
+      div(class="feedback__body")      
+        p(class="feedback__text" ng-if="item.checked==0") {{item.comment}}
+        p(class="feedback__text" ng-if="item.checked==1") This comment was deleted
         p(ng-class="setFeedback(item.feedback)") FEEDBACK {{likes_state}}
       p(class="feedback__likes" ng-init='likes_state=false' )       
        i(class="fa fa-thumbs-o-up like " aria-hidden="true" ng-click="addLike('likes',item.id)" ng-mouseleave="likes_state=false;leave();" ng-mouseenter="likes_state=true;showLikes('likes',item.id,item);")
@@ -41,7 +42,7 @@ div( ng-app="app" ng-controller="user" ng-init="load(authenticated)" class="feed
   div(class="comment" )
     form(name="postMessage")
       div
-        textarea( ng-model="message" placeholder="Min 10 characters" ng-change="validate()")
+        textarea( ng-model="message" placeholder="Min 10 characters" ng-change="validate(message)")
         p(class="error-message" ng-hide="authenticated")
           span Please             
             a(href='/auth/login')  sign-in

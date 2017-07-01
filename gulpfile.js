@@ -19,8 +19,16 @@ gulp.task('sass', function() {
     .pipe(gulp.dest('./public/css'))
 })
 
+gulp.task('sass2', function() {
 
-gulp.task('watch',['sass','scripts'], function(){
+  return gulp.src('./scss2/**/*.scss') // Gets all files ending with .scss in app/scss and children dirs
+    .pipe(sass())
+    .pipe(gulp.dest('./public/css'))
+})
+
+
+
+gulp.task('watch',['sass','sass2','scripts'], function(){
   gulp.watch('./scss/**/*.scss', ['sass']);
   // Other watchers
 })

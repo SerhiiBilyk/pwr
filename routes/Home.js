@@ -2,20 +2,16 @@ var express = require('express'),
     homeRouter = express.Router(),
     mysql = require('./../database.js'),
     bodyParser = require('body-parser'),
+    only = require('../settings/permission_verification'),
     urlencodedParser = bodyParser.urlencoded({
         extended: false
     }),
-    user;
+   app = express();
 homeRouter.use(bodyParser.json());
 /*
 every request checking for user name on navigation bar
 */
-homeRouter.use('/*', function(req, res, next) {
-    req.hasOwnProperty('user') ?
-        user = req.user.name :
-        user = "guest"
-    next()
-})
+
 
 /**
  *@param {user} if user exist, his name will apear on nav background-color
@@ -23,9 +19,7 @@ homeRouter.use('/*', function(req, res, next) {
  */
 homeRouter.get('/', function(req, res) {
 
-    res.render('home.pug', {
-        user: user
-    })
+    res.render('home.pug')
 })
 /**
  *@param {delete} {create} for future admin routing
@@ -74,7 +68,7 @@ function isLoggedIn(req, res, next) {
 
 function isAdministrator(req, res, next) {
     mysql(`select*from users where id='${req.session.passport.user}'`, function(err, results) {
-        console.log('administrator log', results)
+
         if (results[0].category == 'administrator') {
             next()
         } else {
@@ -84,17 +78,15 @@ function isAdministrator(req, res, next) {
     })
 }
 homeRouter.get('/user/:name', isLoggedIn, function(req, res, next) {
-    console.log(req.session.passport.user)
+console.log('get user name',req.user.name)
 
     mysql(`select*from users where name='${req.user.name}'`, function(err, profile) {
 
-        profile[0].category == 'administrator' ? next() :
             mysql(`select books.id, books.title,books.img_big,books.author,user_books.id_ub
           from books
           inner join user_books on books.id=user_books.book_id where user_books.user_id=${profile[0].id};`, function(err, results) {
 
                 res.render('user.pug', {
-                    user: user,
                     profile: profile[0],
                     data: results
                 })
@@ -110,29 +102,23 @@ homeRouter.post('user/:name', isLoggedIn, function(req, res) {
 
     res.end(JSON.stringify(results));
 })
-homeRouter.get('/user/:id/delete', urlencodedParser, function(req, res, next) {
-    mysql(`delete from users where id=${req.params.id}`, function(err, results) {
-        console.log(' delete  ')
-        res.redirect('/home/user/' + req.user.name)
-    })
 
-})
 /*this path only if user has category='administrator'*/
-homeRouter.get('/user/:name', isLoggedIn, function(req, res) {
-    console.log('user name')
+homeRouter.get('/administrator/:name', isLoggedIn, function(req, res) {
+
     mysql(`select*from users where not(name='${req.user.name}')`, function(err, results) {
 
         res.render('admin.pug', {
-            user: user,
             data: results
         })
     })
 })
-homeRouter.post('/user/:name', isAdministrator, function(req, res) {
-
+homeRouter.post('/administrator/:name', only(['administrator']), function(req, res) {
+console.log('administrator')
     req.body.change &&
         mysql(`update users set password = '${req.body.password}' where id=${req.body.id}`, function(err, results) {})
     mysql(`select*from users where not(name='${req.user.name}')`, function(err, results) {
+
         res.send({
             data: results
         })

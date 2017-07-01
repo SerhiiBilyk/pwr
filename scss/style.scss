@@ -4,13 +4,15 @@
     box-sizing: border-box;
 }
 
-@import 'header';
-@import 'login';
-@import 'search-input';
+@import 'layout/header';
+@import 'pages/book';
+@import 'pages/login';
+@import 'pages/search-input';
 @import 'global';
-@import 'sign-up';
-@import 'user';
-@import 'book';
+@import 'pages/sign-up';
+@import 'pages/user';
+@import 'pages/manager';
+
 
 
 /*navigation*/

@@ -1,5 +1,5 @@
 'use strict';
-app.controller('user', function user($scope, $http, $log, $timeout, $location) {
+app.controller('user', function user($scope, $http, $log, $timeout, $location, swearing) {
 
     $scope.message = '';
     $scope.feedback = true;
@@ -17,8 +17,28 @@ app.controller('user', function user($scope, $http, $log, $timeout, $location) {
             return 'dislike'
         }
     }
-    $scope.validate = function() {
 
+    $scope.validate = function(message) {
+
+      swearing.forEach(function(element){
+        var regexp=new RegExp(element,'gi')
+        $scope.message=$scope.message.replace(regexp,'[censored]')
+      })
+
+    /*
+      var str="hello world I am a human"
+      var str2=str.replace(/hello world/gi,'Hi')
+
+      function check(swearingArray,message){
+      	var result;
+      	swearingArray.forEach(function(element){
+      		var reg=new RegExp(element,'gi');
+      		message=message.replace(reg,'[censored]');
+      		console.log(message)
+      	})
+      }
+       check(swearing,str);
+*/
 
 
         if ($scope.message.length > 10) {

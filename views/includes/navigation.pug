@@ -7,9 +7,8 @@ header
       li
         a(href="#") Books
       li(class="user")
-        span
-          -var profile=user||'guest'
-            a(href="/home/user/"+profile) #{profile}
+        span              
+            a(href='/home/'+category+'/'+user) #{user} 
   
     div(class="navigation-block")
       ul
@@ -18,7 +17,7 @@ header
             input(type="text")
             button(type="submit")
               i(class="fa fa-search" aria-hidden="true")
-        if !profile||profile=='guest'    
+        if !user||user=='guest'
           li
             a(href="/auth/login") Sign in 
               i(class="fa fa-sign-in" aria-hidden="true") 

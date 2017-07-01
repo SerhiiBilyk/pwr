@@ -6,7 +6,7 @@ var express = require('express'),
         extended: false
     }),
     user;
-var query=`select book_coments.id,book_coments.feedback, DATE_FORMAT(book_coments.cur_date, '%d %M %Y, %H:%i ') as cur_date, book_coments.user_id,book_coments.book_id, book_coments.comment, second.coment_id,suma , suma2,users.name
+var query=`select book_coments.id,book_coments.feedback,book_coments.checked, DATE_FORMAT(book_coments.cur_date, '%d %M %Y, %H:%i ') as cur_date, book_coments.user_id,book_coments.book_id, book_coments.comment, second.coment_id,suma , suma2,users.name
 from book_coments left join users on book_coments.user_id=users.id
 left  join  (select coment_id, sum(likes) as suma, sum(dislikes) as suma2 from book_coments_like group by coment_id) second
 on book_coments.id=second.coment_id where book_coments.book_id=`;

@@ -6,40 +6,24 @@ var express = require('express'),
         extended: false
     }),
     transporter = require('../settings/mail'),
+    only=require('../settings/permission_verification'),
     app = express(),
     fs = require('fs');
 authRouter.use(bodyParser.json());
 
 
 
-authRouter.get('/', function(req, res) {
-    res.render('empty.pug');
-});
 
 
 
-function category (role) {
-    return function (req, res, next) {
-        if (req.user && req.user.category === role) {
-            next();
-        } else {
-            res.send(403);
-        }
-    }
-}
-authRouter.get('/aaa',category('administrator'), function(req, res) {
+
+authRouter.get('/aaa', only(['administrator']), function(req, res) {
     res.send('administrator');
 });
 
-
-
-
-
-
-
-
-
-
+authRouter.get('/aaaa', only(['admin']), function(req, res) {
+    res.send('admin');
+});
 
 
 
@@ -114,17 +98,10 @@ authRouter.post('/forgot', function(req, res) {
     })
 })
 authRouter.get('/signUp', function(req, res, next) {
-    var checkAdmin = false;
-    req.hasOwnProperty('user') ?
-        req.user.category == 'administrator' ? checkAdmin = true : false :
-        false;
-    res.render('login/sign-up.pug', {
-        admin: checkAdmin
-    })
-})
-authRouter.get('/signUp', function(req, res, next) {
 
 
+
+    res.render('login/sign-up.pug')
 })
 
 
@@ -167,10 +144,16 @@ authRouter.post('/signUp', urlencodedParser, function(req, res) {
         }
     });
 
-    res.render('login/login.pug', {
-        name: req.body.username,
-        password: req.body.password
-    })
+    if(req.user.category=='administrator'){
+      res.redirect('/home/administrator/'+res.locals.user)
+    }else{
+      res.render('login/login.pug', {
+          name: req.body.username,
+          password: req.body.password
+      })
+    }
+
+
 });
 
 /**

@@ -15,7 +15,8 @@ const express = require('express'),
     homeRouter = require('./routes/Home.js'),
     authRouter = require('./routes/Auth.js'),
     bookRouter = require('./routes/Book.js'),
-  //  adminRouter = require('./routes/Admin.js'),
+    managerRouter = require('./routes/Manager.js'),
+    //  adminRouter = require('./routes/Admin.js'),
     /*Database*/
     //  mysql = require('./database.js'),
     /*Authentication*/
@@ -26,6 +27,7 @@ const express = require('express'),
     flash = require('connect-flash'),
     /*Emails*/
     transporter = require('./settings/mail');
+
 
 /**
  *@param {username} name of input field views/login.pug
@@ -88,7 +90,7 @@ app.use(require('express-session')({
     saveUninitialized: false,
 
     cookie: {
-        maxAge: 60000*1000
+        maxAge: 60000 * 1000
     }
 }));
 app.use(flash());
@@ -101,7 +103,7 @@ app.post('/authentication',
         failureFlash: true
     }),
     function(req, res) {
-            res.redirect('/home');
+        res.redirect('/home');
     });
 
 function isLoggedIn(req, res, next) {
@@ -122,9 +124,25 @@ app.get('/profile',
         });
     });
 
+app.use('/*', function(req, res, next) {
+
+    if (req.hasOwnProperty('user')) {
+        res.locals.user = req.user.name
+        res.locals.category=req.user.category
+
+
+    } else {
+
+        res.locals.user = 'guest'
+        res.locals.category='user'
+
+    }
+    next()
+})
 app.use('/home', homeRouter);
 app.use('/auth', authRouter);
 app.use('/book', bookRouter);
+app.use('/home/manager', managerRouter);
 //app.use('/admin', authRouter);
 
 
@@ -156,6 +174,11 @@ Also read about sesisons, and store session objects
 # Nodejs ACL Poles and Permissions https://gist.github.com/facultymatt/6370903
 # very good article https://blog.nodeswat.com/implement-access-control-in-node-js-8567e7b484d1
 # Active routing - Auth.js
+# get layout from animated page from git hub and infinity slider and add to page, use convert from HTML to pug
+# good article about using variables in Node Js and Pug -> https://gist.github.com/joepie91/c0069ab0e0da40cc7b54b8c2203befe1
+# https://webapplog.com/jade/
+https://www.sitepoint.com/jade-tutorial-for-beginners/
+wrapp MySQL function in promise
 
 */
 
@@ -166,6 +189,11 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(bodyParser.json());
+
+
+
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('view engine', 'pug');

@@ -1,0 +1,37 @@
+@import 'layout/header';
+@import 'layout/row';
+@import 'layout/details';
+@import 'layout/logos';
+@import 'layout/content';
+@import 'helpers/buttons';
+
+
+*{
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+}
+body{
+	overflow-x:hidden;
+}
+.empty{
+	width:100%;
+	height:400px;
+	border:2px solid mediumpurple;
+	&:after{
+		content:'EMPTY SECTION';
+		position:relative;
+		font-size:90px;
+		color:mediumpurple;
+
+	}
+}
+@for $layer-index from 1 to 10{
+	.layer-#{$layer-index}{
+		z-index:$layer-index * 10;
+	}
+}
+.test{
+	//border:1px solid black;
+
+}

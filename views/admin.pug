@@ -1,10 +1,12 @@
 include includes/html_header.pug
 include includes/navigation.pug
+include includes/permissionMixins.pug
 -var users=data
 div(ng-app="app" ng-controller="admin" ng-init="load(false)")
   table
     theader
       th Id
+      th Category
       th Name
       th Surname 
       th Country 
@@ -14,6 +16,7 @@ div(ng-app="app" ng-controller="admin" ng-init="load(false)")
     tbody
       tr(ng-repeat="item in data" ng-init="state=true")
         td {{item.id}}
+        td {{item.category}}
         td {{item.name}}
         td {{item.surname}}
         td {{item.country}}
@@ -27,3 +30,5 @@ div(ng-app="app" ng-controller="admin" ng-init="load(false)")
           button(ng-click="state=!state;changePass(item)" ng-hide="state") Confirm
   div(class="user-create")
     a(href="/auth/signUp") Create new user
+  p Mixins #{user} #{category}
+  +#{user}(category)

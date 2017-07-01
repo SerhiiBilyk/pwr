@@ -1,98 +1,209 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<!doctype html>
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#">
 
 <head>
-    <title>Index</title>
-    <meta charset="utf-8" />
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+	<title>Nodes</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+	<meta property="og:title" content="Nodes" />
+	<meta property="og:type" content="css.anim" />
+	<meta property="og:url" content="http://localhost:8081/" />
+	<meta property="og:type" content="website" />
+	<meta property="og:description" content="This is my test CSS/JS project" />
+	<link rel="icon" type="image/png" href="./UA.png" sizes="16x16">
+
+	<script src="https://use.fontawesome.com/d6a1d46436.js"></script>
+	<link href="./css/style2.css" rel="stylesheet" />
 </head>
 
 <body>
-    <div ng-app="app">
-        <div ng-controller="ctrl">
-          <p>Service: {{myService}}</p>
-          <label for="book">Enter book{{myValue}}</label>
-          <input type="text" id="book" name="book" ng-model="myValue" />
-            <button ng-click="currentTpl='/tpl.html'" ng-disabled='true'>template</button>
-            <button onclick="PureJS.getData()">Pure JS AJAX</button>
-            <button ng-click="getData(1)">Angular AJAX</button>
-            <div id="tpl-content"  src="currentTpl"></div>
-            <form method="post" action="/hello">
 
-            </form>
-            <table>
-              <thead>
-                <th>id</th>
-                <th>title</th>
-                <th>author</th>
-                <th>rating</th>
-                <th>img Big</th>
-                <th>img Small</th>
-                <th>rating count</th>
+	<header class="header">
+		<nav class="nav test">
+			<div class="nav-item-img">
 
-              </thead>
-              <tbody>
-                <tr ng-repeat="item in myArray[i].search.results.work | orderBy: '-average_rating'">
-                  <td>id</td>
-                  <td>{{item.best_book.title}}</td>
-                  <td>{{item.best_book.author.name}}</td>
-                  <td>{{item.average_rating}}</td>
-                  <td>{{item.best_book.image_url}}</td>
-                  <td>{{item.best_book.small_image_url}}</td>
-                  <td>{{item.ratings_count._}}</td>
-                </tr>
-              </tbody>
+				<img src="https://dummyimage.com/168x24/751675/fff" />
 
-            </table>
+			</div>
+			<div class="nav-item-search">
+				<input type="text" id="search" name="search" />
+			</div>
+			<button class="nav-item button white">Log in</button>
+			<button class="nav-item button black">Get started</button>
+		</nav>
+		<div class="slider-container-big">
+			<ul class="slider layer-0">
+				<li class="img-1 item-1" data-index="0"></li>
+				<li class="img-1 item-2" data-index="1"></li>
+				<li class="img-1 item-3" data-index="2"></li>
+				<li class="img-1 item-4" data-index="3"></li>
+			</ul>
+			<div class="slider-front layer-2">
+				<div id="slider-video" class="slider-video">
 
-            <ul ng-init="i=0;">
-                <!--
-                <li ng-repeat="item <!--in myWelcome.books.book track by $index">
-                  <img ng-src="{{myWelcome.books.book[$index]['image_url']}}" />
-                  <span>{{myWelcome.books.book[$index]['title']}}</span>
-                </li>-->
-                <li  ng-repeat="item in myArray[i].search.results.work | orderBy: '-average_rating'  " >
-                  <!-- <img ng-src="image_url -->
-
-                    {{ item.best_book.title}},<span>{{ item.average_rating}}</span>
-                </li>
-            </ul>
-            <button ng-click="i=i+1">Next page{{i}}</button>
-              <button ng-click="i=i-1" ng-hide="i==0">Previous page{{i}}</button>
-
-        </div>
-        <!-- template -->
-        <div class="div"></div>
-        <form method="post" action="/myPost">
-        <div>
-        	<label>Username:</label>
-        	<input type="text" name="username"/><br/>
-        	</div>
-        	<div>
-        	<label>Password:</label>
-        	<input type="password" name="password"/>
-        	</div>
-        	<div>
-        	<input type="submit" value="Submit"/>
-        	</div>
-        </form>
-
-        <script type="text/ng-template" id="/tpl.html">
-            <p>Content of the template.{{temp}}
-                <p>
-        </script>
-    </div>
-    <!-- app end -->
-
-  <script type="text/javascript" src="js/app.js"></script>
-    <script type="text/javascript" src="js/CtrlController.js"></script>
-    <script type "text/javascript" src="js/ajax.js"></script>
-    <script type "text/javascript" src="js/service/CtrlService.js"></script>
-
-    <!--<script type="text/javascript" src="js/all.js"></script>-->
+					<div class="slider-video-text">
+						<div class="text-correct">
+							<p class="little">make your next move</p>
+							<p class="big">make your next website</p>
+							<p class="little">Free trial.No credit card required</p>
+							<button class="button">Get started</button>
+						</div>
+					</div>
 
 
+					<ul class="slider-video-img">
+						<li class="img-bind item-1" data-index="0"></li>
+						<li class="img-bind item-2" data-index="1"></li>
+						<li class="img-bind item-3" data-index="2"></li>
+						<li class="img-bind item-4" data-index="3"></li>
+					</ul>
+
+
+					<div class="wrapper">
+						<button class="button">Get started start</button>
+					</div>
+
+				</div>
+				<button class="control-button" id='prev'></button>
+				<button class="control-button" id='next'></button>
+			</div>
+			<div class="layer-3">
+				<div id="video-container" class="video-container">
+					<div id="player"></div>
+					<!--
+					<iframe id='iframe' width="200" height="200" src="https://www.youtube.com/embed/lqzJqeeOAlQ?controls=0&autoplay=0&showinfo=0&modestbranding=0" frameborder="0" allowfullscreen></iframe>
+	-->
+				</div>
+			</div>
+		</div>
+
+
+
+		</div>
+	</header>
+	<section class="row lazy">
+		<div id="wrapper" class="wrapper">
+			<div class="wrapper__item content">
+				<div class="slider-container-little">
+					<ul class="slider">
+						<li class="img-2 item-1" data-index="0"></li>
+						<li class="img-2 item-2" data-index="1"></li>
+						<li class="img-2 item-3" data-index="2"></li>
+						<li class="img-2 item-4" data-index="3"></li>
+					</ul>
+					<button class="control-button" id='prev-2'></button>
+					<button class="control-button" id='next-2'></button>
+					<button class="control-button view">Click</button>
+					<div></div>
+				</div>
+			</div>
+			<div class="wrapper__item text">
+				<div class="wrapper__text">
+					<p>AWARD-WINNING DESIGN</p>
+					<h2>LOOK LIKE AN EXPERT </h2>
+					<h2>RIGHT FROM THE START.</h2>
+					<p>Our award-winning templates are the most beautiful way to present your ideas online. Stand out with a professional website, portfolio, or online store.</p>
+					<button id="show-details" class="button white">learn more</button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="lazy">
+		<div class="logos">
+			<ul class="logos__list">
+				<li class="logos__item">
+					<a href="javascript: void">
+						<img class="logos__img" src=""  />
+					</a>
+				</li>
+				<li class="logos__item">
+					<a href="javascript: void">
+						<img class="logos__img" src=""  />
+					</a>
+				</li>
+				<li class="logos__item">
+					<a href="javascript: void">
+						<img class="logos__img" src=""  />
+					</a>
+				</li>
+				<li class="logos__item">
+					<a href="javascript: void">
+						<img class="logos__img" src=""  />
+					</a>
+				</li>
+				<li class="logos__item">
+					<a href="javascript: void">
+						<img class="logos__img" src=""  />
+					</a>
+				</li>
+				<li class="logos__item">
+					<a href="javascript: void">
+						<img class="logos__img" src=""  />
+					</a>
+				</li>
+				<li class="logos__item hide">
+					<a href="javascript: void">
+						<img class="logos__img" src=""  />
+					</a>
+				</li>
+				<li class="logos__item hide">
+					<a href="javascript: void">
+						<img class="logos__img" src=""  />
+					</a>
+				</li>
+			</ul>
+		</div>
+	</section>
+
+
+
+	<section id="details" class="details">
+		<div class="wrapper">
+			<div class="wrapper__row ">
+				<div class="wrapper__item lazy">
+					<div class="wrapper__text">
+						<p>DO-IT-YOURSELF</p>
+						<h2>CUSTOMIZABLE LAYOUTS </h2>
+						<p>Drag & drop images onto your site, and easily move, add, and delete sections of a page. Make your website unique with customizable settings, including fonts, colors, and page configurations.</p>
+						<button class="button white">learn more</button>
+					</div>
+				</div>
+				<div class="wrapper__item lazy">
+					<div class="wrapper__img">
+						<img src="https://static1.squarespace.com/static/ta/5134cbefe4b0c6fb04df8065/8976/assets/pages/home/features/design-templates-750w.jpg" />
+					</div>
+				</div>
+			</div>
+			<div class="wrapper__row">
+				<div class="wrapper__item lazy">
+					<div class="wrapper__img">
+						<img src="https://static1.squarespace.com/static/ta/5134cbefe4b0c6fb04df8065/8976/assets/pages/home/features/design-mobile-optimized-750w.jpg" />
+					</div>
+				</div>
+				<div class="wrapper__item lazy">
+					<div class="wrapper__text">
+						<p>AWARD-WINNING DESIGN</p>
+						<h2>LOOK LIKE AN EXPERT </h2>
+						<h2>RIGHT FROM THE START.</h2>
+						<p>Our award-winning templates are the most beautiful way to present your ideas online. Stand out with a professional website, portfolio, or online store.</p>
+						<button class="button white">learn more</button>
+						<button id="hide-details" class="button white">Hide details</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="content">
+
+	</div>
+
+	<div class="text"></div>
+
+
+
+	<script src="./js/script.js"></script>
 
 </body>
 
