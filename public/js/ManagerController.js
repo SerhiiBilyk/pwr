@@ -16,8 +16,8 @@ app.controller('manager', function manager($scope, $http, $log) {
             //handle error here
         });
     }
-    $scope.delete = function(id, checked) {
-        checked == 0 ? index = 1 : index = 0;
+    $scope.update = function(id, checked) {
+        checked == 0 || checked == 3 ? index = 1 : index = 0;
         $http.post('http://localhost:8081/home/manager/update/comment/' + id, {
             index: index
         }).then(function(response) {
@@ -26,7 +26,5 @@ app.controller('manager', function manager($scope, $http, $log) {
 
 
     }
-    $scope.update = function() {
 
-    }
 })

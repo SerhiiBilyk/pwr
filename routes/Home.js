@@ -109,7 +109,7 @@ homeRouter.get('/administrator/:name', isLoggedIn, function(req, res) {
     console.log('if administrator')
     mysql(`select*from users where not(name='${req.user.name}')`, function(err, results) {
         console.log('results', results)
-        res.render('admin.pug', {
+        res.render('administrator.pug', {
             data: results
         })
     })

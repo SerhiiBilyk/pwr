@@ -1,4 +1,10 @@
-.panel,.angular-component{
+.panel{
+
+}
+.panel{
   display:inline-block;
   float:left;
+  width:20%;
+  min-width:200px;
+  border:1px solid red;
 }

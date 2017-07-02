@@ -2,40 +2,73 @@ include includes/html_header.pug
 include includes/navigation.pug
 include includes/panel.pug
 
-div(ng-app="app" ng-controller="manager" ng-init="load()" class="manager")
+div(ng-app="app" ng-controller="manager" ng-init="load()" class="manager" )
   +panel(category,user)
-  div(class="angular-component")
-    select(id="select" ng-init="sort=cur_date" ng-model="sort" )
-      option(value="-cur_date") Date (latest)
-      option(value="cur_date") Date (Earliest)  
-    label(for="showDeleted" ng-show="showDeleted") Show approved comments
-    label(for="showDeleted" ng-show="!showDeleted") Show deleted comments
-    input(type="checkbox" id="showDeleted" ng-init="showDeleted=false" ng-model="showDeleted" name="showDeleted")
-    p {{showDeleted}}
+  div(class="angular-component" ng-init="comments=true")
+    div(class="nav-item" ng-click="comments=true") Comments 
+    div(class="nav-item" ng-click="comments=!comments") Books 
+  div(class="angular-component" ng-show="!comments")
+    form(method="post" action="/home/manager/upload" class="book" enctype="multipart/form-data")
+      div
+        label(for="title") Book title
+        input(type="text" id="title" name="title")
+      div
+        label(for="author") Book author
+        input(type="text" id="author" name="author")
+      div
+        label(for="category") Book category
+        input(type="text" id="category" name="category")
+      div
+        label(for="uploadFile")
+        input(type="file" id="uploadFile" name="uploadFile")
+      div
+        label(for="submit")
+        input(type="submit" id="submit" value="Upload")
+        
+      
+  div(class="angular-component" ng-show="comments")      
+      div(class="coment-filters" ng-init="commentsFilter=1")
+        select(id="select" ng-init="sort=cur_date" ng-model="sort" )
+          option(value="-cur_date") Date (latest)
+          option(value="cur_date") Date (Earliest)
+        label(for="approved") Show approved comments
+        input(type="radio" id="approved" ng-model="commentsFilter" value="0" name="commentsfilter")
+        label(for="deleted") Show deleted comments
+        input(type="radio" id="deleted" ng-model="commentsFilter" value="1" name="commentsfilter" )
+          
+        label(for="userAlert") Show user complained comments
+        input(type="radio" id="userAlert" ng-model="commentsFilter" value="3" name="commentsfilter" )
+        p {{commentsFilter}} 
+      div(class="table-container")
+        table(class="comments")
+          thead
+            th id
+            th user_id
+            th book_id
+            th comment
+            th date
+            th checked
+            th edit
+              
+          tbody
+            tr(ng-repeat="item in comments | orderBy: sort" class="comments__item"  ng-if="item.checked==commentsFilter")
+              td {{item.id}}
+              td {{item.user_id}}
+              td {{item.book_id}}
+              td {{item.comment}} 
+              td {{item.cur_date}}
+              td {{item.checked}}
+              td 
+                button(ng-click="update(item.id,item.checked)" ng-if="item.checked==0 ||item.checked==3") delete
+                button(ng-click="update(item.id,item.checked)" ng-if="item.checked==1") restore
+      
+    
+       
+    
   
           
-    table(class="comments")
-      thead
-        th id
-        th user_id
-        th book_id
-        th comment
-        th date
-        th checked
-        th edit
-          
-      tbody
-        tr(ng-repeat="item in comments | orderBy: sort" class="comments__item" ng-class="{approved:item.checked}" ng-if="item.checked==showDeleted")
-          td {{item.id}}
-          td {{item.user_id}}
-          td {{item.book_id}}
-          td {{item.comment}} 
-          td {{item.cur_date}}
-          td {{item.checked}}
-          td 
-            button(ng-click="delete(item.id,item.checked)" ng-if="item.checked==0") delete
-            button(ng-click="delete(item.id,item.checked)" ng-if="item.checked==1") restore
-    button(ng-click="update()") UPDATE
+    
+
   
   
   

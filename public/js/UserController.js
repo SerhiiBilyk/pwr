@@ -20,25 +20,10 @@ app.controller('user', function user($scope, $http, $log, $timeout, $location, s
 
     $scope.validate = function(message) {
 
-      swearing.forEach(function(element){
-        var regexp=new RegExp(element,'gi')
-        $scope.message=$scope.message.replace(regexp,'[censored]')
-      })
-
-    /*
-      var str="hello world I am a human"
-      var str2=str.replace(/hello world/gi,'Hi')
-
-      function check(swearingArray,message){
-      	var result;
-      	swearingArray.forEach(function(element){
-      		var reg=new RegExp(element,'gi');
-      		message=message.replace(reg,'[censored]');
-      		console.log(message)
-      	})
-      }
-       check(swearing,str);
-*/
+        swearing.forEach(function(element) {
+            var regexp = new RegExp(element, 'gi')
+            $scope.message = $scope.message.replace(regexp, '[censored]')
+        })
 
 
         if ($scope.message.length > 10) {
@@ -47,6 +32,16 @@ app.controller('user', function user($scope, $http, $log, $timeout, $location, s
         } else if ($scope.message.length < 10) {
             $scope.feedback_state = true;
         }
+    }
+    $scope.complain = function(user_id, comment_id) {
+      $log.log('complain')
+        $http.post('http://localhost:8081/book/comment/complain/', {
+            user_id: user_id,
+            comment_id: comment_id
+
+        }).then(function(response) {
+
+        })
     }
 
     $scope.addLike = function(like_type, id) {
@@ -64,29 +59,29 @@ app.controller('user', function user($scope, $http, $log, $timeout, $location, s
         }
     }
     $scope.showLikes = function(like_type, coment_id, item) {
-      /*
-        $log.log('item', item, like_type)
-        if (like_type == 'likes' && item.suma < 1) {
-            $log.log('like working state', 'state', $scope.likes_state)
-            return false;
-        } else if (like_type == 'dislikes' && item.suma2 < 1) {
-            $log.log('dislike working state', 'state', $scope.likes_state)
-            return false;
-        } else {*/
-            $http({
-                url: 'http://localhost:8081/book/showLikes/' + like_type + '/' + coment_id,
-                method: 'GET'
-            }).then(function(res) {
-                $scope.likeNames = '';
-                $scope.likeNames = res.data.data;
-                $scope.likes_state = true;
+        /*
+          $log.log('item', item, like_type)
+          if (like_type == 'likes' && item.suma < 1) {
+              $log.log('like working state', 'state', $scope.likes_state)
+              return false;
+          } else if (like_type == 'dislikes' && item.suma2 < 1) {
+              $log.log('dislike working state', 'state', $scope.likes_state)
+              return false;
+          } else {*/
+        $http({
+            url: 'http://localhost:8081/book/showLikes/' + like_type + '/' + coment_id,
+            method: 'GET'
+        }).then(function(res) {
+            $scope.likeNames = '';
+            $scope.likeNames = res.data.data;
+            $scope.likes_state = true;
 
-                //access returned res here
+            //access returned res here
 
-            }, function(error) {
-                //handle error here
-            });
-      //  }
+        }, function(error) {
+            //handle error here
+        });
+        //  }
 
 
 

@@ -24,6 +24,8 @@ div( ng-app="app" ng-controller="user" ng-init="load(authenticated)" class="feed
       div(class="feedback__body")      
         p(class="feedback__text" ng-if="item.checked==0") {{item.comment}}
         p(class="feedback__text" ng-if="item.checked==1") This comment was deleted
+        p
+          button(ng-click="complain(item.user_id,item.id)") Complain to the moderator
         p(ng-class="setFeedback(item.feedback)") FEEDBACK {{likes_state}}
       p(class="feedback__likes" ng-init='likes_state=false' )       
        i(class="fa fa-thumbs-o-up like " aria-hidden="true" ng-click="addLike('likes',item.id)" ng-mouseleave="likes_state=false;leave();" ng-mouseenter="likes_state=true;showLikes('likes',item.id,item);")

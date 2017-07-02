@@ -229,6 +229,8 @@ header .navigation {
           border-right: 15px solid transparent; }
       .container-search .book-list .container:hover {
         box-shadow: 2px 2px 2px #FF7C5E; }
+      .container-search .book-list .container-image img {
+        max-width: 50px; }
       .container-search .book-list .container-image, .container-search .book-list .container-text {
         display: inline-block;
         float: left; }
@@ -312,11 +314,27 @@ header {
       .book-wrapper .book-pop_up:hover {
         display: block; }
 
+.manager .angular-component {
+  width: 80%;
+  float: left; }
+  .manager .angular-component .nav-item {
+    width: 50%;
+    display: inline-block;
+    float: left;
+    border: 1px solid red;
+    text-align: center; }
+
+.manager .coment-filters {
+  display: inline-block; }
+
 .manager .approved {
   background-color: green; }
 
-.panel, .angular-component {
+.panel {
   display: inline-block;
-  float: left; }
+  float: left;
+  width: 20%;
+  min-width: 200px;
+  border: 1px solid red; }
 
 /*navigation*/

@@ -2,8 +2,10 @@ mixin panel(category,user)
   div(class="panel")
     ul(class="panel__container")
       li(class="panel__link")
-        a(href="/home/administrator/"+user) Users
+        a(href="/home/administrator/"+user) Admin panel
       li(class="panel__link")
-        a(href="#") Comments
+        a(href="/home/manager/"+user) Manager panel
+      li(class="panel__link")
+        a(href="/home/user/"+user) User panel
       
   

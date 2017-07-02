@@ -95,7 +95,7 @@
                 .item-#{$i} {
                     background: url(nth($slider-img-list-video,$i));
                     background-position: 50% 50%;
-                    background-size: 100% 100%;
+                    background-size:cover;
                     transition: all 1s ease;
                     opacity: 0;
                 }

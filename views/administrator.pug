@@ -1,0 +1,37 @@
+include includes/html_header.pug
+include includes/navigation.pug
+include includes/panel.pug
+-var users=data
+div(ng-app="app" ng-controller="admin" ng-init="load(false)")
+  +panel(category,user)
+  div(class="angular-component")
+    table
+      theader
+        th Id
+        th Category
+        th Name
+        th Surname 
+        th Country 
+        th Email 
+        th Password
+        th Options
+      tbody
+        tr(ng-repeat="item in data" ng-init="state=true")
+          td {{item.id}}
+          td {{item.category}}
+          td {{item.name}}
+          td {{item.surname}}
+          td {{item.country}}
+          td {{item.email}}
+          td 
+            div(ng-show="state") {{item.password}}
+            div(ng-hide="state")
+              input(type="text" name="pass" ng-model="item.password" ng-value="item.password")
+          td {{item.options}} 
+            button(ng-click="state=false" ng-show="state") Change password
+            button(ng-click="state=!state;changePass(item)" ng-hide="state") Confirm
+    if category=='administrator'
+      div(class="user-create")
+        a(href="/auth/signUp") Create new user
+      p Mixins #{user} #{category}        
+    

@@ -20,6 +20,10 @@ bookRouter.use('/*', function(req, res, next) {
         user = "guest"
     next()
 })
+bookRouter.post('/comment/complain',function(req,res){
+  mysql(`update book_coments set checked=3 where id=${req.body.comment_id}`,function(err,results){})
+
+})
 
 function isLoggedIn(req, res, next) {
     // if user is authenticated in the session, carry on
