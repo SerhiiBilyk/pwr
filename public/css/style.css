@@ -315,4 +315,8 @@ header {
 .manager .approved {
   background-color: green; }
 
+.panel, .angular-component {
+  display: inline-block;
+  float: left; }
+
 /*navigation*/

@@ -1,32 +1,48 @@
 include includes/html_header.pug
 include includes/navigation.pug
-div(ng-app="app" ng-controller="manager" ng-init="load()" class="manager")
-  select(id="select" ng-init="sort=checked" ng-model="sort" )
-    option(value="-cur_date") Date (latest)
-    option(value="cur_date") Date (Earliest)  
-    option(value="checked") Deleted
+include includes/panel.pug
 
-        
-  table(class="comments")
-    thead
-      th id
-      th user_id
-      th book_id
-      th comment
-      th date
-      th checked
-      th edit
-        
-    tbody
-      tr(ng-repeat="item in comments | orderBy: sort" class="comments__item" ng-class="{approved:item.checked}")
-        td {{item.id}}
-        td {{item.user_id}}
-        td {{item.book_id}}
-        td {{item.comment}} 
-        td {{item.cur_date}}
-        td {{item.checked}}
-        td 
-          button(ng-click="delete(item.id,item.checked)" ) delete
-  button(ng-click="update()") UPDATE
+div(ng-app="app" ng-controller="manager" ng-init="load()" class="manager")
+  +panel(category,user)
+  div(class="angular-component")
+    select(id="select" ng-init="sort=cur_date" ng-model="sort" )
+      option(value="-cur_date") Date (latest)
+      option(value="cur_date") Date (Earliest)  
+    label(for="showDeleted" ng-show="showDeleted") Show approved comments
+    label(for="showDeleted" ng-show="!showDeleted") Show deleted comments
+    input(type="checkbox" id="showDeleted" ng-init="showDeleted=false" ng-model="showDeleted" name="showDeleted")
+    p {{showDeleted}}
+  
+          
+    table(class="comments")
+      thead
+        th id
+        th user_id
+        th book_id
+        th comment
+        th date
+        th checked
+        th edit
+          
+      tbody
+        tr(ng-repeat="item in comments | orderBy: sort" class="comments__item" ng-class="{approved:item.checked}" ng-if="item.checked==showDeleted")
+          td {{item.id}}
+          td {{item.user_id}}
+          td {{item.book_id}}
+          td {{item.comment}} 
+          td {{item.cur_date}}
+          td {{item.checked}}
+          td 
+            button(ng-click="delete(item.id,item.checked)" ng-if="item.checked==0") delete
+            button(ng-click="delete(item.id,item.checked)" ng-if="item.checked==1") restore
+    button(ng-click="update()") UPDATE
+  
+  
+  
+  
+  
+  
+  
+
 
   

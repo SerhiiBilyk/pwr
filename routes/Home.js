@@ -6,7 +6,7 @@ var express = require('express'),
     urlencodedParser = bodyParser.urlencoded({
         extended: false
     }),
-   app = express();
+    app = express();
 homeRouter.use(bodyParser.json());
 /*
 every request checking for user name on navigation bar
@@ -68,8 +68,9 @@ function isLoggedIn(req, res, next) {
 
 function isAdministrator(req, res, next) {
     mysql(`select*from users where id='${req.session.passport.user}'`, function(err, results) {
+        console.log('Home.js, mysql results', results)
 
-        if (results[0].category == 'administrator') {
+        if (results[0].category == 'administrator' || results[0].category == 'manager') {
             next()
         } else {
             res.redirect('/home')
@@ -78,19 +79,19 @@ function isAdministrator(req, res, next) {
     })
 }
 homeRouter.get('/user/:name', isLoggedIn, function(req, res, next) {
-console.log('get user name',req.user.name)
+
 
     mysql(`select*from users where name='${req.user.name}'`, function(err, profile) {
 
-            mysql(`select books.id, books.title,books.img_big,books.author,user_books.id_ub
+        mysql(`select books.id, books.title,books.img_big,books.author,user_books.id_ub
           from books
           inner join user_books on books.id=user_books.book_id where user_books.user_id=${profile[0].id};`, function(err, results) {
 
-                res.render('user.pug', {
-                    profile: profile[0],
-                    data: results
-                })
+            res.render('user.pug', {
+                profile: profile[0],
+                data: results
             })
+        })
         /*  res.render('user.pug', {
               user: user,
               data: results[0]
@@ -105,16 +106,17 @@ homeRouter.post('user/:name', isLoggedIn, function(req, res) {
 
 /*this path only if user has category='administrator'*/
 homeRouter.get('/administrator/:name', isLoggedIn, function(req, res) {
-
+    console.log('if administrator')
     mysql(`select*from users where not(name='${req.user.name}')`, function(err, results) {
-
+        console.log('results', results)
         res.render('admin.pug', {
             data: results
         })
     })
 })
-homeRouter.post('/administrator/:name', only(['administrator']), function(req, res) {
-console.log('administrator')
+homeRouter.post('/administrator/:name', only(['administrator','manager']), function(req, res) {
+
+
     req.body.change &&
         mysql(`update users set password = '${req.body.password}' where id=${req.body.id}`, function(err, results) {})
     mysql(`select*from users where not(name='${req.user.name}')`, function(err, results) {
