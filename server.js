@@ -234,10 +234,14 @@ app.post('/hello', urlencodedParser, function(req, res) {
 });
 
 /*in future this path will redirect to /home*/
+/*
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html');
 });
-
+*/
+app.get('/', function(req, res) {
+    res.render('index.pug');
+});
 
 /*Goodreads start*/
 const myCredentials = {

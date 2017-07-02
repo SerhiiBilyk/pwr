@@ -1,0 +1,123 @@
+doctype html
+html(lang='en', xml:lang='en', xmlns='http://www.w3.org/1999/xhtml', prefix='og: http://ogp.me/ns#')
+  head
+    title Nodes
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no')
+    link(rel='icon', type='image/png', href='./UA.png', sizes='16x16')
+    script(src='https://use.fontawesome.com/d6a1d46436.js')
+    link(href='./css/style2.css', rel='stylesheet')
+  body
+    header.header
+      nav.nav.test
+        .nav-item-img
+          img(src='https://dummyimage.com/168x24/751675/fff')
+        .nav-item-search
+          input#search(type='text', name='search')
+        button.nav-item.button.white Log in
+        button.nav-item.button.black Get started
+      .slider-container-big
+        ul.slider.layer-0
+          li.img-1.item-1(data-index='0')
+          li.img-1.item-2(data-index='1')
+          li.img-1.item-3(data-index='2')
+          li.img-1.item-4(data-index='3')
+        .slider-front.layer-2
+          #slider-video.slider-video
+            .slider-video-text
+              .text-correct
+                p.little make your next move
+                p.big make your next website
+                p.little Free trial.No credit card required
+                button.button Get started
+            ul.slider-video-img
+              li.img-bind.item-1(data-index='0')
+              li.img-bind.item-2(data-index='1')
+              li.img-bind.item-3(data-index='2')
+              li.img-bind.item-4(data-index='3')
+            .wrapper
+              button.button Get started start
+          button#prev.control-button
+          button#next.control-button
+        .layer-3
+          #video-container.video-container
+            #player
+            //
+              <iframe id='iframe' width="200" height="200" src="https://www.youtube.com/embed/lqzJqeeOAlQ?controls=0&autoplay=0&showinfo=0&modestbranding=0" frameborder="0" allowfullscreen></iframe>
+    section.row.lazy
+      #wrapper.wrapper
+        .wrapper__item.content
+          .slider-container-little
+            ul.slider
+              li.img-2.item-1(data-index='0')
+              li.img-2.item-2(data-index='1')
+              li.img-2.item-3(data-index='2')
+              li.img-2.item-4(data-index='3')
+            button#prev-2.control-button
+            button#next-2.control-button
+            button.control-button.view Click
+            div
+        .wrapper__item.text
+          .wrapper__text
+            p AWARD-WINNING DESIGN
+            h2 LOOK LIKE AN EXPERT 
+            h2 RIGHT FROM THE START.
+            p
+              | Our award-winning templates are the most beautiful way to present your ideas online. Stand out with a professional website, portfolio, or online store.
+            button#show-details.button.white learn more
+    section.lazy
+      .logos
+        ul.logos__list
+          li.logos__item
+            a(href='javascript: void')
+              img.logos__img(src='')
+          li.logos__item
+            a(href='javascript: void')
+              img.logos__img(src='')
+          li.logos__item
+            a(href='javascript: void')
+              img.logos__img(src='')
+          li.logos__item
+            a(href='javascript: void')
+              img.logos__img(src='')
+          li.logos__item
+            a(href='javascript: void')
+              img.logos__img(src='')
+          li.logos__item
+            a(href='javascript: void')
+              img.logos__img(src='')
+          li.logos__item.hide
+            a(href='javascript: void')
+              img.logos__img(src='')
+          li.logos__item.hide
+            a(href='javascript: void')
+              img.logos__img(src='')
+    section#details.details
+      .wrapper
+        .wrapper__row
+          .wrapper__item.lazy
+            .wrapper__text
+              p DO-IT-YOURSELF
+              h2 CUSTOMIZABLE LAYOUTS 
+              p
+                | Drag & drop images onto your site, and easily move, add, and delete sections of a page. Make your website unique with customizable settings, including fonts, colors, and page configurations.
+              button.button.white learn more
+          .wrapper__item.lazy
+            .wrapper__img
+              img(src='https://static1.squarespace.com/static/ta/5134cbefe4b0c6fb04df8065/8976/assets/pages/home/features/design-templates-750w.jpg')
+        .wrapper__row
+          .wrapper__item.lazy
+            .wrapper__img
+              img(src='https://static1.squarespace.com/static/ta/5134cbefe4b0c6fb04df8065/8976/assets/pages/home/features/design-mobile-optimized-750w.jpg')
+          .wrapper__item.lazy
+            .wrapper__text
+              p AWARD-WINNING DESIGN
+              h2 LOOK LIKE AN EXPERT 
+              h2 RIGHT FROM THE START.
+              p
+                | Our award-winning templates are the most beautiful way to present your ideas online. Stand out with a professional website, portfolio, or online store.
+              button.button.white learn more
+              button#hide-details.button.white Hide details
+    section.blocks
+      .text
+      script(src='./separate/script.js')
