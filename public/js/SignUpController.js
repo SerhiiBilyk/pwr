@@ -1,5 +1,5 @@
 'use strict';
-app.controller('signUp', function search($scope, $http, $log) {
+app.controller('signUp', function signUp($scope, $http, $log) {
     $scope.state = {
         email: false,
         name: false

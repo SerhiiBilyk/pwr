@@ -4,10 +4,10 @@ include includes/panel.pug
 
 div(ng-app="app" ng-controller="manager" ng-init="load()" class="manager" )
   +panel(category,user)
-  div(class="angular-component" ng-init="comments=true")
-    div(class="nav-item" ng-click="comments=true") Comments 
-    div(class="nav-item" ng-click="comments=!comments") Books 
-  div(class="angular-component" ng-show="!comments")
+  div(class="angular-component" ng-init="comments_state=true")
+    div(class="nav-item" ng-click="comments_state=true") Comments 
+    div(class="nav-item" ng-click="comments_state=!comments_state") Books 
+  div(class="angular-component" ng-show="!comments_state")
     form(method="post" action="/home/manager/upload" class="book" enctype="multipart/form-data")
       div
         label(for="title") Book title
@@ -26,7 +26,7 @@ div(ng-app="app" ng-controller="manager" ng-init="load()" class="manager" )
         input(type="submit" id="submit" value="Upload")
         
       
-  div(class="angular-component" ng-show="comments")      
+  div(class="angular-component" ng-show="comments_state")      
       div(class="coment-filters" ng-init="commentsFilter=1")
         select(id="select" ng-init="sort=cur_date" ng-model="sort" )
           option(value="-cur_date") Date (latest)
@@ -48,8 +48,7 @@ div(ng-app="app" ng-controller="manager" ng-init="load()" class="manager" )
             th comment
             th date
             th checked
-            th edit
-              
+            th edit              
           tbody
             tr(ng-repeat="item in comments | orderBy: sort" class="comments__item"  ng-if="item.checked==commentsFilter")
               td {{item.id}}

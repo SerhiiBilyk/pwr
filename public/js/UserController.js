@@ -1,11 +1,13 @@
 'use strict';
-app.controller('user', function user($scope, $http, $log, $timeout, $location, swearing) {
+app.controller('user', function user($scope, $http, $log, $timeout, $location,) {
 
     $scope.message = '';
     $scope.feedback = true;
     $scope.feedback_state = true;
     $scope.authenticated = false;
     $scope.likes_state = false;
+
+    $scope.swearing=['ass','fuck','asshole','kurwa'];
 
 
 
@@ -20,7 +22,7 @@ app.controller('user', function user($scope, $http, $log, $timeout, $location, s
 
     $scope.validate = function(message) {
 
-        swearing.forEach(function(element) {
+        $scope.swearing.forEach(function(element) {
             var regexp = new RegExp(element, 'gi')
             $scope.message = $scope.message.replace(regexp, '[censored]')
         })
