@@ -6,7 +6,6 @@
   .nav > div {
     display: inline-block; }
   .nav-item-img {
-    border: 1px solid red;
     vertical-align: middle;
     font-size: 0; }
   .nav-item-search {
@@ -400,14 +399,11 @@
 
 .row {
   width: 100%;
-  border: 1px solid black;
   height: calc(30vw + 60px); }
   .row .wrapper {
     width: 100%;
-    border: 1px solid red;
     height: 100%; }
     .row .wrapper__item {
-      border: 2px solid purple;
       display: inline-block;
       float: left;
       height: 100%;
@@ -1043,7 +1039,6 @@
     margin: 0 auto; } }
 
 .details {
-  border: 1px solid black;
   overflow: hidden;
   display: none;
   transition: all 1s ease; }
@@ -1062,7 +1057,6 @@
     .details .wrapper__item {
       display: table-cell;
       margin: 10px 0;
-      border: 1px solid red;
       padding: 30px;
       vertical-align: middle; }
     .details .wrapper__text {
@@ -1088,8 +1082,7 @@
 .logos {
   font-size: 30px;
   width: 90%;
-  border: 1px solid red;
-  margin: 0 auto;
+  margin: 50px  auto;
   overflow: hidden; }
   .logos__item {
     display: inline-block;

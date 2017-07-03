@@ -14,16 +14,16 @@ $viewportHeight: 30vw;
     width: 100%;
 
     //  padding: 100px;
-    border:1px solid black;
+
     height: calc(#{$viewportHeight} + 60px);
     //float:left;
     .wrapper {
         width: 100%;
-        border: 1px solid red;
+
         height: 100%;
 
         &__item {
-            border: 2px solid purple;
+
             display: inline-block;
             float: left;
             height: 100%;

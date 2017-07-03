@@ -1,5 +1,5 @@
 .details {
-    border: 1px solid black;
+
     overflow: hidden;
     display: none;
     transition: all 1s ease;
@@ -27,7 +27,7 @@
         &__item {
             display: table-cell;
             margin: 10px 0;
-            border: 1px solid red;
+          
             padding: 30px;
             vertical-align: middle;
         }
