@@ -19,24 +19,31 @@ div( ng-app="app" ng-controller="user" ng-init="load(authenticated)" class="feed
   ul(class="feedback")
     li(ng-repeat="item in b | orderBy: sort" class="feedback__item" )
       div(class="feedback__header")
-        p(class="feedback__name") {{item.name}}, 
+        p(class="feedback__name") 
+          a(href='/home/user/{{item.name}}')  {{item.name}}, 
         p(class="feedback__date") {{item.cur_date | date:'yyyy'}}
-      div(class="feedback__body")      
-        p(class="feedback__text" ng-if="item.checked==0") {{item.comment}}
+      div(class="feedback__body" ng-class="setFeedback(item.feedback)")      
+        p(class="feedback__text"  ng-if="item.checked==0") {{item.comment}}
         p(class="feedback__text" ng-if="item.checked==1") This comment was deleted
-        p
-          button(ng-click="complain(item.user_id,item.id)") Complain to the moderator
-        p(ng-class="setFeedback(item.feedback)") FEEDBACK {{likes_state}}
-      p(class="feedback__likes" ng-init='likes_state=false' )       
-       i(class="fa fa-thumbs-o-up like " aria-hidden="true" ng-click="addLike('likes',item.id)" ng-mouseleave="likes_state=false;leave();" ng-mouseenter="likes_state=true;showLikes('likes',item.id,item);")
-         span(class="quantity") {{item.suma}}
-       i(class="fa fa-thumbs-o-down dislike " aria-hidden="true" ng-click="addLike('dislikes',item.id)" ng-mouseleave="likes_state=false;leave();" ng-mouseenter="likes_state=true; showLikes('dislikes',item.id,item);")
-         span(class="quantity") {{item.suma2}}
+          
+
+      div(class="feedback__likes" ng-init='likes_state=false' )
+        div(class="left")
+          button(class="moderator" ng-click="complain(item.user_id,item.id)") 
+            i(class="fa fa-bell" aria-hidden="true") Notify moderator 
+           
+        div(class="right")         
+          i(class="fa fa-thumbs-o-up like " aria-hidden="true" ng-click="addLike('likes',item.id)" ng-mouseleave="likes_state=false;leave();" ng-mouseenter="likes_state=true;showLikes('likes',item.id,item);")
+            span(class="quantity") {{item.suma}}
+          i(class="fa fa-thumbs-o-down dislike " aria-hidden="true" ng-click="addLike('dislikes',item.id)" ng-mouseleave="likes_state=false;leave();" ng-mouseenter="likes_state=true; showLikes('dislikes',item.id,item);")
+            span(class="quantity") {{item.suma2}}
+        
+          
          
-       div( ng-show="likes_state || likes_state " ng-class="{like:item.suma2}" class='feedback__likeNames' ng-if='item.suma2 > 0' )
-         ul()
-           li(ng-repeat="names in likeNames")
-             p {{names.name}}
+        div( ng-show="likes_state || likes_state " ng-class="{like:item.suma2}" class='feedback__likeNames' ng-if='item.suma2 > 0' )
+          ul()
+            li(ng-repeat="names in likeNames")
+              p {{names.name}}
             
 
 

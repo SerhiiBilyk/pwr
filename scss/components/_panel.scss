@@ -8,3 +8,38 @@
   min-width:200px;
   border:1px solid red;
 }
+@include media(0,399px){
+  .panel{
+    width:100%;
+    li{
+      width:100%;
+      border:1px solid red;
+      display:inline-block;
+      background-color:#F72100;
+      text-align:center;
+      a{
+        &:active,&:visited,&:link{
+          color:white;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+@include media(400px,900px){
+  .panel{
+    width:100%;
+    li{
+      width:33.333%;
+      border:1px solid red;
+      display:inline-block;
+      background-color:#F72100;
+      a{
+        &:active,&:visited,&:link{
+          color:white;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 @import '../helpers/_mixins';
 $slider-img-list: '../img/first.jpg','../img/second.jpg','../img/third.jpg','../img/fourth.jpg';
-$slider-img-list-video: '../img/third.jpg','../img/second.jpg','../img/first.jpg','../img/fourth.jpg';
+$slider-img-list-video: '../img/video-third.jpg','../img/video-second.jpg','../img/video-first.jpg','../img/video-fourth.jpg';
 @include slider(900px,20px,100%,100%,big);
 
 .video-container {

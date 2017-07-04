@@ -2,11 +2,42 @@ include includes/html_header.pug
 include includes/navigation.pug
 include includes/panel.pug
 -var users=data
-div(ng-app="app" ng-controller="admin" ng-init="load(false)")
+div(ng-app="app" ng-controller="admin" ng-init="load(false)" class="admin")
   +panel(category,user)
   div(class="angular-component")
-    table
-      theader
+    div(class="admin__users--mobile")
+      ul(class="device")
+        li(ng-repeat="device_item in data" ng-init="device_state=true" class="device__item")
+          p 
+            span.key Id: 
+            span.value {{device_item.id}}
+          p 
+            span.key Category:  
+            span.value {{device_item.category}} 
+          p 
+            span.key Name:  
+            span.value {{device_item.name}} 
+          p 
+            span.key Surname: 
+            span.value {{device_item.surname}} 
+          p 
+            span.key Country: 
+            span.value {{device_item.country}}
+          p 
+            span.key Email: 
+            span.value {{device_item.email}}
+          p 
+            p.key Password:
+              div(ng-show="device_state" class="password value") {{device_item.password}}
+              div(ng-hide="device_state" class="password value")
+                input(type="text" name="pass" ng-model="device_item.password" ng-value="device_item.password" ) 
+          p 
+            span.key Options: {{device_item.options}}
+            button(ng-click="device_state=false" ng-show="device_state") Change password
+            button(ng-click="device_state=!device_state;changePass(device_item)" ng-hide="device_state") Confirm
+                
+    table(class="admin__users")
+      thead
         th Id
         th Category
         th Name

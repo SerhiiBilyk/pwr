@@ -108,11 +108,11 @@ authRouter.get('/signUp', function(req, res, next) {
 
 authRouter.post('/signUp', urlencodedParser, function(req, res) {
 
-
+var category=req.body.category || "user";
     var values = {
         name: req.body.username,
         surname: req.body.surname,
-        category: req.body.category,
+        category: category,
         country: req.body.country,
         email: req.body.email,
         password: req.body.password,
@@ -144,7 +144,7 @@ authRouter.post('/signUp', urlencodedParser, function(req, res) {
         }
     });
 
-    if(req.user.category=='administrator'){
+    if(req.user &&req.user.category=='administrator'){
       res.redirect('/home/administrator/'+res.locals.user)
     }else{
       res.render('login/login.pug', {

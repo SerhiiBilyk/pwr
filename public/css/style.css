@@ -70,25 +70,41 @@ header .navigation {
 
 .feedback-wrapper .feedback {
   width: 50%;
-  border: 1px solid red;
   margin: 0 auto;
   list-style-type: none; }
   .feedback-wrapper .feedback__item {
-    border: 1px solid black;
     position: relative;
-    word-wrap: break-word; }
+    word-wrap: break-word;
+    margin: 20px;
+    box-shadow: 2px 2px 2px gray; }
+  .feedback-wrapper .feedback__header {
+    border-bottom: 1px solid gray; }
   .feedback-wrapper .feedback__name {
-    display: inline-block; }
+    display: inline-block;
+    width: 50%;
+    text-align: left; }
+  .feedback-wrapper .feedback__body.like {
+    background-color: rgba(189, 219, 99, 0.3); }
+  .feedback-wrapper .feedback__body.dislike {
+    background-color: rgba(240, 93, 94, 0.3); }
   .feedback-wrapper .feedback__date {
-    display: inline-block; }
+    display: inline-block;
+    width: 50%;
+    text-align: right; }
   .feedback-wrapper .feedback__text {
     padding-left: 5%; }
   .feedback-wrapper .feedback__likes {
     text-align: right; }
-    .feedback-wrapper .feedback__likes .like {
-      color: green; }
-    .feedback-wrapper .feedback__likes .dislike {
-      color: red; }
+    .feedback-wrapper .feedback__likes .moderator {
+      border: none;
+      background-color: white; }
+    .feedback-wrapper .feedback__likes .left, .feedback-wrapper .feedback__likes .right {
+      display: inline-block;
+      width: 50%; }
+    .feedback-wrapper .feedback__likes .left {
+      text-align: left; }
+    .feedback-wrapper .feedback__likes .right {
+      text-align: right; }
   .feedback-wrapper .feedback__likeNames {
     position: absolute;
     right: 0;
@@ -368,20 +384,150 @@ header {
     text-align: center; } }
 
 .manager .angular-component {
-  width: 80%;
-  float: left; }
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px; }
   .manager .angular-component .nav-item {
-    width: 50%;
+    width: 100%;
     display: inline-block;
     float: left;
-    border: 1px solid red;
-    text-align: center; }
+    border: none;
+    background-color: white;
+    border: 1px solid brown;
+    text-align: center;
+    padding: 10px; }
+  .manager .angular-component .book {
+    width: 50%;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px gray,inset 2px 2px 2px silver; }
+    .manager .angular-component .book-row {
+      margin: 10px; }
+      .manager .angular-component .book-row select {
+        width: 100%;
+        color: black; }
+    .manager .angular-component .book input,
+    .manager .angular-component .book label,
+    .manager .angular-component .book select {
+      display: block;
+      width: 100%;
+      font-size: 20px; }
+      .manager .angular-component .book input:focus,
+      .manager .angular-component .book label:focus,
+      .manager .angular-component .book select:focus {
+        outline: 1px solid purple; }
+    .manager .angular-component .book input[type='file'] {
+      display: none; }
+  .manager .angular-component .table-container {
+    font-family: 'Arial';
+    margin: 25px auto;
+    border-collapse: collapse;
+    border: 1px solid #eee;
+    border-bottom: 2px solid #00cccc;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.05), 0 20px 20px rgba(0, 0, 0, 0.05), 0 30px 20px rgba(0, 0, 0, 0.05); }
+    .manager .angular-component .table-container button {
+      background-color: white;
+      border: none; }
+    .manager .angular-component .table-container tr:hover {
+      background: #f4f4f4; }
+      .manager .angular-component .table-container tr:hover td {
+        color: #555; }
+    .manager .angular-component .table-container td,
+    .manager .angular-component .table-container th {
+      color: #999;
+      border: 1px solid #eee;
+      padding: 5px;
+      border-collapse: collapse; }
+    .manager .angular-component .table-container th {
+      background: #00cccc;
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 12px; }
+      .manager .angular-component .table-container th.last {
+        border-right: none; }
+    .manager .angular-component .table-container--mobile {
+      display: none; }
 
 .manager .coment-filters {
-  display: inline-block; }
+  float: left;
+  display: inline-block;
+  width: 100%; }
+  .manager .coment-filters label {
+    background-color: white;
+    box-shadow: 2px 2px 2px gray;
+    margin: 5px;
+    display: inline-block;
+    padding: 5px; }
+  .manager .coment-filters input {
+    display: none; }
+  .manager .coment-filters input:checked + label {
+    background-color: #084C61;
+    color: white; }
 
 .manager .approved {
   background-color: green; }
+
+@media all and (min-width: 0) and (max-width: 600px) {
+  .manager .angular-component .book {
+    width: 100%; } }
+
+.admin__users {
+  overflow-x: scroll;
+  font-family: 'Arial';
+  margin: 25px auto;
+  border-collapse: collapse;
+  border: 1px solid #eee;
+  border-bottom: 2px solid #00cccc;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.05), 0 20px 20px rgba(0, 0, 0, 0.05), 0 30px 20px rgba(0, 0, 0, 0.05); }
+  .admin__users tr:hover {
+    background: #f4f4f4; }
+    .admin__users tr:hover td {
+      color: #555; }
+  .admin__users td,
+  .admin__users th {
+    color: #999;
+    border: 1px solid #eee;
+    padding: 5px;
+    border-collapse: collapse; }
+  .admin__users th {
+    background: #00cccc;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 12px; }
+    .admin__users th.last {
+      border-right: none; }
+  .admin__users--mobile {
+    display: none; }
+
+@media all and (min-width: 0) and (max-width: 400px) {
+  .admin__users {
+    display: none; }
+    .admin__users td {
+      width: 100px; }
+    .admin__users--mobile {
+      display: block; }
+      .admin__users--mobile .device {
+        list-style-type: none; }
+        .admin__users--mobile .device__item {
+          border: 5px solid #119780; }
+          .admin__users--mobile .device__item button {
+            border: 1px solid black;
+            background-color: white; }
+          .admin__users--mobile .device__item .password {
+            display: inline-block; }
+          .admin__users--mobile .device__item .key {
+            background-color: #00cccc;
+            min-width: 100px;
+            display: inline-block;
+            color: white;
+            outline: 1px solid white;
+            padding: 3px;
+            box-shadow: 2px 2px 2px gray; }
+          .admin__users--mobile .device__item .value {
+            display: inline-block;
+            padding: 3px;
+            margin-left: 5px; } }
 
 .panel {
   display: inline-block;
@@ -389,5 +535,30 @@ header {
   width: 20%;
   min-width: 200px;
   border: 1px solid red; }
+
+@media all and (min-width: 0) and (max-width: 399px) {
+  .panel {
+    width: 100%; }
+    .panel li {
+      width: 100%;
+      border: 1px solid red;
+      display: inline-block;
+      background-color: #F72100;
+      text-align: center; }
+      .panel li a:active, .panel li a:visited, .panel li a:link {
+        color: white;
+        text-decoration: none; } }
+
+@media all and (min-width: 400px) and (max-width: 900px) {
+  .panel {
+    width: 100%; }
+    .panel li {
+      width: 33.333%;
+      border: 1px solid red;
+      display: inline-block;
+      background-color: #F72100; }
+      .panel li a:active, .panel li a:visited, .panel li a:link {
+        color: white;
+        text-decoration: none; } }
 
 /*navigation*/

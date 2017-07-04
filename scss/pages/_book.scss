@@ -2,37 +2,64 @@
     .feedback {
         $name-space: feedback;
         width: 50%;
-        border: 1px solid red;
+
         margin: 0 auto;
         list-style-type: none;
 
         &__item {
-            border: 1px solid black;
+
             position: relative;
             word-wrap: break-word;
+            margin:20px;
+            box-shadow:2px 2px 2px gray;
         }
 
-        &__header {}
+        &__header {
+          border-bottom:1px solid gray;
+        }
 
         &__name {
             display: inline-block;
+            width:50%;
+            text-align:left;
 
+        }
+        &__body{
+          &.like{
+            background-color:rgba(189,219,99,0.3);
+
+          }
+          &.dislike{
+            background-color:rgba(240,93,94,0.3);
+          }
         }
 
         &__date {
             display: inline-block;
+            width:50%;
+            text-align:right;
         }
         &__text{
           padding-left:5%;
+
         }
         &__likes{
           text-align:right;
-          .like{
-            color:green
+          .moderator{
+            border:none;
+            background-color:white;
           }
-          .dislike{
-            color:red;
+          .left,.right{
+            display:inline-block;
+            width:50%;
           }
+          .left{
+            text-align:left;
+          }
+          .right{
+            text-align:right;
+          }
+
         }
         &__likeNames{
           ul{

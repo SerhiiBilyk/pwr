@@ -3,63 +3,72 @@ include includes/navigation.pug
 include includes/panel.pug
 
 div(ng-app="app" ng-controller="manager" ng-init="load()" class="manager" )
-  +panel(category,user)
+  // +panel(category,user)
   div(class="angular-component" ng-init="comments_state=true")
-    div(class="nav-item" ng-click="comments_state=true") Comments 
-    div(class="nav-item" ng-click="comments_state=!comments_state") Books 
+    button(class="nav-item"  ng-click="comments_state=false;" ng-show="comments_state" ) Add book
+    button(class="nav-item" ng-click="comments_state=!comments_state" ng-show="!comments_state") Comment management
   div(class="angular-component" ng-show="!comments_state")
-    form(method="post" action="/home/manager/upload" class="book" enctype="multipart/form-data")
-      div
+    form(method="post" action="/home/manager/upload" class="book "  enctype="multipart/form-data")
+      div.book-row
         label(for="title") Book title
         input(type="text" id="title" name="title")
-      div
+      div.book-row
         label(for="author") Book author
         input(type="text" id="author" name="author")
-      div
-        label(for="category") Book category
-        input(type="text" id="category" name="category")
-      div
-        label(for="uploadFile")
-        input(type="file" id="uploadFile" name="uploadFile")
-      div
+      div.book-row
+        label(for="category") Book category    
+        select(id="category" name="category")
+          option(value="javascript") javaScript
+          option(value="php") PHP
+          option(value="java") Java
+          option(value="sass") SASS
+          option(value="css") CSS
+          option(value="phyton") Phyton
+          option(value="fortran")  Fortran
+      div.book-row
+        label(for="uploadFile") Choose book image
+        input(type="file" id="uploadFile" name="uploadFile" value="Choose image")
+      div.book-row
         label(for="submit")
         input(type="submit" id="submit" value="Upload")
         
       
-  div(class="angular-component" ng-show="comments_state")      
-      div(class="coment-filters" ng-init="commentsFilter=1")
-        select(id="select" ng-init="sort=cur_date" ng-model="sort" )
-          option(value="-cur_date") Date (latest)
-          option(value="cur_date") Date (Earliest)
-        label(for="approved") Show approved comments
-        input(type="radio" id="approved" ng-model="commentsFilter" value="0" name="commentsfilter")
-        label(for="deleted") Show deleted comments
-        input(type="radio" id="deleted" ng-model="commentsFilter" value="1" name="commentsfilter" )
-          
-        label(for="userAlert") Show user complained comments
-        input(type="radio" id="userAlert" ng-model="commentsFilter" value="3" name="commentsfilter" )
-        p {{commentsFilter}} 
-      div(class="table-container")
-        table(class="comments")
-          thead
-            th id
-            th user_id
-            th book_id
-            th comment
-            th date
-            th checked
-            th edit              
-          tbody
-            tr(ng-repeat="item in comments | orderBy: sort" class="comments__item"  ng-if="item.checked==commentsFilter")
-              td {{item.id}}
-              td {{item.user_id}}
-              td {{item.book_id}}
-              td {{item.comment}} 
-              td {{item.cur_date}}
-              td {{item.checked}}
-              td 
-                button(ng-click="update(item.id,item.checked)" ng-if="item.checked==0 ||item.checked==3") delete
-                button(ng-click="update(item.id,item.checked)" ng-if="item.checked==1") restore
+  div(class="angular-component" ng-show="comments_state")
+    div(class="coment-filters" ng-init="commentsFilter=1")
+      label(for="select") Sort by
+      select(id="select" ng-init="sort=cur_date" ng-model="sort" )
+        option(value="-cur_date") Date (latest)
+        option(value="cur_date") Date (Earliest)
+      input(type="radio" id="approved" ng-model="commentsFilter" value="0" name="commentsfilter")
+      label(for="approved") Active comments
+      input(type="radio" id="deleted" ng-model="commentsFilter" value="1" name="commentsfilter" )
+      label(for="deleted") Deleted comments
+      input(type="radio" id="userAlert" ng-model="commentsFilter" value="3" name="commentsfilter" )
+      label(for="userAlert") User's alerts
+      
+    
+    div(class="table-container")
+      table(class="comments")
+        thead
+          th id
+          th user_id
+          th book_id
+          th comment
+          th date
+          th checked
+          th edit              
+        tbody
+          tr(ng-repeat="item in comments | orderBy: sort" class="comments__item"  ng-if="item.checked==commentsFilter")
+            td {{item.id}}
+            td {{item.user_id}}
+            td {{item.book_id}}
+            td {{item.comment}} 
+            td {{item.cur_date}}
+            td {{item.checked}}
+            td 
+              button(ng-click="update(item.id,item.checked)" ng-if="item.checked==0 ||item.checked==3") delete
+              button(ng-click="update(item.id,item.checked)" ng-if="item.checked==1") restore
+      
       
     
        
