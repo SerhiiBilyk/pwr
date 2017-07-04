@@ -35,7 +35,7 @@ authRouter.get('/aaaa', only(['admin']), function(req, res) {
 
 authRouter.get('/logout', function(req, res) {
     req.logout();
-    res.redirect('/home');
+    res.redirect('/');
 });
 
 /**

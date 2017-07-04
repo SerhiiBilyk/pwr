@@ -7,15 +7,10 @@ html(lang='en', xml:lang='en', xmlns='http://www.w3.org/1999/xhtml', prefix='og:
     link(rel='icon', type='image/png', href='./UA.png', sizes='16x16')
     script(src='https://use.fontawesome.com/d6a1d46436.js')
     link(href='./css/style2.css', rel='stylesheet')
+    link(href='./css/style.css', rel='stylesheet')
   body
     header.header
-      nav.nav.test
-        .nav-item-img
-          img(src='https://dummyimage.com/168x24/751675/fff')
-        .nav-item-search
-          input#search(type='text', name='search')
-        button.nav-item.button.white Log in
-        button.nav-item.button.black Get started
+      include includes/navigation.pug
       .slider-container-big
         ul.slider.layer-0
           li.img-1.item-1(data-index='0')
@@ -42,8 +37,7 @@ html(lang='en', xml:lang='en', xmlns='http://www.w3.org/1999/xhtml', prefix='og:
         .layer-3
           #video-container.video-container
             #player
-            //
-              <iframe id='iframe' width="200" height="200" src="https://www.youtube.com/embed/lqzJqeeOAlQ?controls=0&autoplay=0&showinfo=0&modestbranding=0" frameborder="0" allowfullscreen></iframe>
+          
     section.row.lazy
       #wrapper.wrapper
         .wrapper__item.content
@@ -117,7 +111,5 @@ html(lang='en', xml:lang='en', xmlns='http://www.w3.org/1999/xhtml', prefix='og:
               p
                 | Our award-winning templates are the most beautiful way to present your ideas online. Stand out with a professional website, portfolio, or online store.
               button.button.white learn more
-              button#hide-details.button.white Hide details
-    section.blocks
-      .text
+              button#hide-details.button.white Hide details  
       script(src='./separate/script.js')

@@ -103,7 +103,7 @@ app.post('/authentication',
         failureFlash: true
     }),
     function(req, res) {
-        res.redirect('/home');
+        res.redirect('/');
     });
 
 function isLoggedIn(req, res, next) {
