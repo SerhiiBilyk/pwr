@@ -1,26 +1,50 @@
 include includes/html_header.pug
 include includes/navigation.pug
--var person=profile
-p #{person}
+
 -var books=data
 p My books
-div(class="book-filter")
-
-div(class="book-wrapper")  
-  ul(class="book" ng-app="app"  ng-controller="user" ng-init="loadData()")
-    each item in books
-      li(class="book-container")    
-        div(class="book-img" ng-click="popUp"+item.id+"=true" ng-mouseleave="popUp"+item.id+"=false")
-          a(href="/book/"+item.id ) {{p}}
-            img(src=item.img_big width="100" height="130")    
-          div(class="book-pop_up" ng-show="popUp"+item.id)
-            p=item.title
-            p=item.author         
-    
-        
-        
-
-        
-
-          
-        
+.user-books(ng-app="app"  ng-controller="user" ng-init="loadBooks();")
+    .book-filter(ng-init="customFilter='title'")
+      ul.filter
+        li.filter-header 
+          span Sort books by:          
+          ul.filter-container
+            li.filter-item
+              label(for="category") category
+              input(type="radio" id="category" ng-model="customFilter" value="category" name="filters")
+            li.filter-item
+              label(for="title") title
+              input(type="radio" id="title" value="title" name="filters" ng-model="customFilter")
+            li.filter-item
+              label(for="author") author
+              input(type="radio" id="author" value="author" name="filters" ng-model="customFilter")
+            li.filter-item
+              label(for="rating") rating
+              input(type="radio" id="rating" value="rating" name="filters" ng-model="customFilter")
+            li.filter-item
+              label(for="feedbacks") feedbacks
+              input(type="radio" id="feedbacks" value="rating_count" name="filters" ng-model="customFilter")
+      
+      ul.filter
+        li.filter-header
+        span Category legend
+        ul.filter-container          
+          li.filter-item.javascript javascript
+          li.filter-item.sass sass
+          li.filter-item.php php
+          li.filter-item.phyton phyton
+          li.filter-item.java java
+          li.filter-item.css css
+            
+            
+            
+         
+    .book-wrapper
+        ul(class="book"  )
+                li(class="book-container" ng-repeat="item in userBooks | orderBy:customFilter" )   
+                    div(class="book-img {{item.category}}")
+                        a(href="/book/{{item.id}}" class="book-link" ) 
+                            img(ng-src="{{item.img_big}}" width="100" height="130")
+                            span.book-title {{item[customFilter] }}  
+                               
+                            

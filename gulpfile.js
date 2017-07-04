@@ -1,7 +1,16 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
+var clean = require('gulp-clean');
+
+
 var concat = require('gulp-concat');/*https://www.npmjs.com/package/gulp-concat/*/
 
+gulp.task('clean', function () {
+  console.log('script deleted')
+    return gulp.src('.public/js/all.js', {read: false})
+        .pipe(clean());
+
+})
 gulp.task('scripts', function() {
   return gulp.src('./public/js/*.js')
     .pipe(concat('all.js'))
@@ -28,7 +37,8 @@ gulp.task('sass2', function() {
 
 
 
-gulp.task('watch',['sass','sass2','scripts'], function(){
+gulp.task('watch',['sass','sass2','clean','scripts'], function(){
   gulp.watch('./scss/**/*.scss', ['sass']);
+    gulp.watch('./public/js/*.js', ['clean','scripts']);
   // Other watchers
 })

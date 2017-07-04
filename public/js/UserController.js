@@ -1,5 +1,5 @@
 'use strict';
-app.controller('user', function user($scope, $http, $log, $timeout, $location,) {
+app.controller('user', function user($scope, $http, $log, $timeout, $location, ) {
 
     $scope.message = '';
     $scope.feedback = true;
@@ -7,7 +7,7 @@ app.controller('user', function user($scope, $http, $log, $timeout, $location,) 
     $scope.authenticated = false;
     $scope.likes_state = false;
 
-    $scope.swearing=['ass','fuck','asshole','kurwa'];
+    $scope.swearing = ['ass', 'fuck', 'asshole', 'kurwa'];
 
 
 
@@ -36,7 +36,7 @@ app.controller('user', function user($scope, $http, $log, $timeout, $location,) 
         }
     }
     $scope.complain = function(user_id, comment_id) {
-      $log.log('complain')
+        $log.log('complain')
         $http.post('http://localhost:8081/book/comment/complain/', {
             user_id: user_id,
             comment_id: comment_id
@@ -95,15 +95,27 @@ app.controller('user', function user($scope, $http, $log, $timeout, $location,) 
 
     }
 
+    $scope.loadBooks = function() {
+      $log.log('load books')
+        $http({
+            url: 'http://localhost:8081/home/user/load/books',
+            method: 'GET'
+        }).then(function(res) {
+          $log.log('books are loaded changed',res)
+
+            $scope.userBooks = res.data.data;
+            $log.log($scope.userBooks)
 
 
-    $scope.showPopUp = function() {
+        }, function(error) {
+            //handle error here
+        });
+
+
+
 
     }
-    $scope.hidePopUp = function() {
 
-        $scope.x = false;
-    }
     $scope.load = function(auth) {
 
         $scope.curBook = $location.absUrl().split('/').pop()

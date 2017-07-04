@@ -79,24 +79,28 @@ function isAdministrator(req, res, next) {
     })
 }
 homeRouter.get('/user/:name', isLoggedIn, function(req, res, next) {
+  console.log('user loaded')
 
+res.render('user.pug');
 
-    mysql(`select*from users where name='${req.user.name}'`, function(err, profile) {
+})
+homeRouter.get('/user/load/books',function(req,res){
+  console.log('start loading ')
+  mysql(`select*from users where name='${req.user.name}'`, function(err, profile) {
+      console.log('start loading ',req.user.name)
 
-        mysql(`select books.id, books.title,books.img_big,books.author,user_books.id_ub
-          from books
-          inner join user_books on books.id=user_books.book_id where user_books.user_id=${profile[0].id};`, function(err, results) {
+      mysql(`select *,user_books.id_ub
+        from books
+        inner join user_books on books.id=user_books.book_id where user_books.user_id=${profile[0].id};`, function(err, results) {
+console.log(results)
+          res.send({data: results})
+      })
+      /*  res.render('user.pug', {
+            user: user,
+            data: results[0]
+        }) */
+  })
 
-            res.render('user.pug', {
-                profile: profile[0],
-                data: results
-            })
-        })
-        /*  res.render('user.pug', {
-              user: user,
-              data: results[0]
-          }) */
-    })
 })
 homeRouter.post('user/:name', isLoggedIn, function(req, res) {
     var results = 'done!';

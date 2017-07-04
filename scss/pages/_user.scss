@@ -1,50 +1,121 @@
+$category:(
+javascript:#F6D600,
+phyton:#4f90c6,
+sass:#c6538c,
+css:blue,
+php:#777bb3,
+java:#eb2d2f,
+);
 
-.book-filter{
-  width:20%;
-  border:1px solid black;
-  display:inline-block;
-  height:300px;
-  float:left;
+@each $key,$value in $category{
+  .#{$key}{
+    border:10px solid $value;
+    margin:5px 0;
+
+  }
 }
+.legend{
 
-.book-wrapper {
+}
+.user-books{
+  width:100%;
+  overflow:hidden;
+
+  .book-filter{
+    width:25%;
+    min-width:200px;
+    border:1px solid black;
+    display:inline-block;
+    height:300px;
     float:left;
-    width:80%;
-    
-
-    .book {
-        border: 1px solid black;
-        display: inline-block;
-
-        &-container {
-            display: inline-block;
-            margin: 10px;
-            position: relative;
-            width: 100px;
-            height: 130px;
+    .filter{
+      &-header{
+        span{
+          background-color:white;
+          box-shadow:2px 2px 2px gray;
+          padding:4px;
         }
 
-        &-img {
-            a {
-                img {
-                    box-shadow: 2px 2px 2px gray;
-                }
-            }
+
+      }
+      &-item{
+        display:inline-block;
+        box-shadow:2px 2px 2px black;
+        margin:4px;
+        padding:4px;
+        input{
+          display:none;
+        }
+        &:hover{
+          box-shadow:1px 1px 1px black;
         }
 
-        &-pop_up {
-            position: absolute;
-            width: 300px;
-            height: 200px;
-            border: 2px solid brown;
-            top: 0;
-            left: 100px;
-            z-index: 10;
-            background-color: white;
-
-            &:hover {
-                display: block;
-            }
-        }
+      }
     }
+  }
+  .book-wrapper {
+      float:left;
+      width:75%;
+
+
+      .book {
+          border: 1px solid black;
+          display: inline-block;
+
+          &-container {
+              display: inline-block;
+              margin: 10px;
+              position: relative;
+              width: 100px;
+              height: 130px;
+
+          }
+
+          &-img {
+
+
+              a {
+                  img {
+                      box-shadow: 2px 2px 2px gray;
+                  }
+              }
+          }
+          &-link{
+            position:relative;
+            display:block;
+          }
+          &-title{
+            position:absolute;
+            background-color:white;
+            color:black;
+            box-shadow:2px 2px 2px gray;
+            top:0;
+            left:0;
+            height:1em;
+            overflow:hidden;
+            margin-top:10px;
+            transition:all 1s ease;
+
+            &:hover{
+              height:auto;
+
+            }
+
+          }
+
+      }
+  }
+}
+@include media(0,800px){
+  .user-books{
+    .book-filter{
+      width:100%;
+      height:auto;
+    }
+    .book-wrapper{
+      width:100%;
+      text-align:center;
+    }
+  }
+
 }

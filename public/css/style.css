@@ -281,38 +281,91 @@ header {
     .container-sign-up .sign-up-form-field .message-error {
       color: #f5a2a2; }
 
-.book-filter {
-  width: 20%;
-  border: 1px solid black;
-  display: inline-block;
-  height: 300px;
-  float: left; }
+.javascript {
+  border: 10px solid #F6D600;
+  margin: 5px 0; }
 
-.book-wrapper {
-  float: left;
-  width: 80%; }
-  .book-wrapper .book {
+.phyton {
+  border: 10px solid #4f90c6;
+  margin: 5px 0; }
+
+.sass {
+  border: 10px solid #c6538c;
+  margin: 5px 0; }
+
+.css {
+  border: 10px solid blue;
+  margin: 5px 0; }
+
+.php {
+  border: 10px solid #777bb3;
+  margin: 5px 0; }
+
+.java {
+  border: 10px solid #eb2d2f;
+  margin: 5px 0; }
+
+.user-books {
+  width: 100%;
+  overflow: hidden; }
+  .user-books .book-filter {
+    width: 25%;
+    min-width: 200px;
     border: 1px solid black;
-    display: inline-block; }
-    .book-wrapper .book-container {
+    display: inline-block;
+    height: 300px;
+    float: left; }
+    .user-books .book-filter .filter-header span {
+      background-color: white;
+      box-shadow: 2px 2px 2px gray;
+      padding: 4px; }
+    .user-books .book-filter .filter-item {
       display: inline-block;
-      margin: 10px;
-      position: relative;
-      width: 100px;
-      height: 130px; }
-    .book-wrapper .book-img a img {
-      box-shadow: 2px 2px 2px gray; }
-    .book-wrapper .book-pop_up {
-      position: absolute;
-      width: 300px;
-      height: 200px;
-      border: 2px solid brown;
-      top: 0;
-      left: 100px;
-      z-index: 10;
-      background-color: white; }
-      .book-wrapper .book-pop_up:hover {
+      box-shadow: 2px 2px 2px black;
+      margin: 4px;
+      padding: 4px; }
+      .user-books .book-filter .filter-item input {
+        display: none; }
+      .user-books .book-filter .filter-item:hover {
+        box-shadow: 1px 1px 1px black; }
+  .user-books .book-wrapper {
+    float: left;
+    width: 75%; }
+    .user-books .book-wrapper .book {
+      border: 1px solid black;
+      display: inline-block; }
+      .user-books .book-wrapper .book-container {
+        display: inline-block;
+        margin: 10px;
+        position: relative;
+        width: 100px;
+        height: 130px; }
+      .user-books .book-wrapper .book-img a img {
+        box-shadow: 2px 2px 2px gray; }
+      .user-books .book-wrapper .book-link {
+        position: relative;
         display: block; }
+      .user-books .book-wrapper .book-title {
+        position: absolute;
+        background-color: white;
+        color: black;
+        box-shadow: 2px 2px 2px gray;
+        top: 0;
+        left: 0;
+        height: 1em;
+        overflow: hidden;
+        margin-top: 10px;
+        transition: all 1s ease; }
+        .user-books .book-wrapper .book-title:hover {
+          height: auto; }
+
+@media all and (min-width: 0) and (max-width: 800px) {
+  .user-books .book-filter {
+    width: 100%;
+    height: auto; }
+  .user-books .book-wrapper {
+    width: 100%;
+    text-align: center; } }
 
 .manager .angular-component {
   width: 80%;
